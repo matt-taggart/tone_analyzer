@@ -1,0 +1,23 @@
+{
+  "name": "tone_analyzer",
+  "version": "1.0.0",
+  "description": "A single page web app in which users can drop in news articles and perform sentiment analysis utilizing the IBM Watson Developer Cloud",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matt-taggart/tone_analyzer.git"
+  },
+  "author": "ntekal, mtaggart, mrizvi, jshapiro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matt-taggart/tone_analyzer/issues"
+  },
+  "homepage": "https://github.com/matt-taggart/tone_analyzer#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
