@@ -40,68 +40,61 @@ var tone_analyzer = watson.tone_analyzer({
   version_date: '2016-02-11'
 });
 
-app.get('/texttone', function(req, res) {
+app.post('/texttone', function(req, res) {
 
-tone_analyzer.tone({ text: req.body.toneText },
-  function(err, tone) {
-    if (err)
-      console.log(err);
-    else
+  tone_analyzer.tone({ text: req.body.toneText },
+    function(err, tone) {
+      if (err)
+        console.log(err);
+      else
 
-    var emotionToneArray = []
-    var writingToneArray = []
-    var socialToneArray = []
+      var emotionToneArray = []
+      var writingToneArray = []
+      var socialToneArray = []
 
-    for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
-      emotionToneArray.push({
-        tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
-        tone_score: tone.document_tone.tone_categories[0].tones[i].score 
-      })
-    };
+      for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
+        emotionToneArray.push({
+          tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
+          tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+        })
+      };
 
-    for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
-      writingToneArray.push({
-        tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
-        tone_score: tone.document_tone.tone_categories[1].tones[i].score 
-      })
-    };
+      for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
+        writingToneArray.push({
+          tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
+          tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+        })
+      };
 
-    for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
-      socialToneArray.push({
-        tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
-        tone_score: tone.document_tone.tone_categories[2].tones[i].score 
-      })
-    };
-    
-  //Save to DB- put into a post request
-  var content = new ContentDB ({
-    content: req.body.toneText,
-    emotion_tone_data: emotionToneArray,
-    social_tone_data: socialToneArray,
-    writing_tone_data: writingToneArray
-  })
-  content.save(function(err, response){
-    if (err) {throw err}
-    return response
-  })
-});
+      for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
+        socialToneArray.push({
+          tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
+          tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+        })
+      };
+      
+    //Save to DB- put into a post request
+    var content = new ContentDB ({
+      content: req.body.toneText,
+      emotion_tone_data: emotionToneArray,
+      social_tone_data: socialToneArray,
+      writing_tone_data: writingToneArray
+    })
+    content.save(function(err, response){
+      if (err) {throw err}
+      return response
+    })
+  });
 
 
 })
 
-app.use('*', function(req, res) {
-  res.send('hello world!');
-});
+// app.use('*', function(req, res) {
+//   res.send('hello world!');
+// });
 
-app.post('/analyzetext', function(req, res) {
-  var userContent = new ContentDB({
-    emotion_tone_data:
-    writing_tone_data:
-    social_tone_data:
-  })
-  newTask.save(function(err, response) {
-    res.json(response)
-  })
+app.get('/demobox', function(req, res){
+  res.sendFile(__dirname+ '/public/input_demo.html')
 })
 
 app.listen(PORT, function() {
