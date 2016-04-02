@@ -2,6 +2,7 @@ var express = require('express');
 var logger = require('morgan');
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
 // var tonez = require('./tone_analyzer_intro.js')
 var app = express();
 
@@ -9,6 +10,8 @@ var PORT = process.env.PORT || 3000;
 
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/public'));
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 var db = 'mongodb://localhost/ToneDownForWhatDB'
 var ContentDB = require('./model/contentAnalysisModel.js')
@@ -37,15 +40,13 @@ var tone_analyzer = watson.tone_analyzer({
   version_date: '2016-02-11'
 });
 
-var toneText = 'One fish, two fish, red fish, blue fish'
+app.get('/texttone', function(req, res) {
 
-tone_analyzer.tone({ text: toneText },
+tone_analyzer.tone({ text: req.body.toneText },
   function(err, tone) {
     if (err)
       console.log(err);
     else
-      // console.log(JSON.stringify(tone.document_tone.tone_categories[0].tones, null, 2));
-      // console.log(tone.document_tone.tone_categories[1].tones)
 
     var emotionToneArray = []
     var writingToneArray = []
@@ -74,7 +75,7 @@ tone_analyzer.tone({ text: toneText },
     
   //Save to DB- put into a post request
   var content = new ContentDB ({
-    content: toneText,
+    content: req.body.toneText,
     emotion_tone_data: emotionToneArray,
     social_tone_data: socialToneArray,
     writing_tone_data: writingToneArray
@@ -85,9 +86,23 @@ tone_analyzer.tone({ text: toneText },
   })
 });
 
+
+})
+
 app.use('*', function(req, res) {
   res.send('hello world!');
 });
+
+app.post('/analyzetext', function(req, res) {
+  var userContent = new ContentDB({
+    emotion_tone_data:
+    writing_tone_data:
+    social_tone_data:
+  })
+  newTask.save(function(err, response) {
+    res.json(response)
+  })
+})
 
 app.listen(PORT, function() {
   console.log('Listening on PORT %s', PORT);

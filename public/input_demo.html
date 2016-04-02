@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="toneDown">
+<head>
+  <title>Tone Down For What</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!--   <link rel="stylesheet" type="text/css" href="css/styles.css"> -->
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+</head>
+<body>
+
+<div ng-controller="inputForm">
+  <textarea type='text' ng-model='toneText' name='toneText'></textarea>
+  <input type='submit' ng-click='analyzeTone()'>
+</div>
+
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--   <script type="text/javascript" src="server.js"></script> -->
+  <script type="text/javascript" src="./app.js"></script>
+</body>
+</html>

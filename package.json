@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/matt-taggart/tone_analyzer#readme",
   "dependencies": {
+    "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "mongoose": "^4.4.10",
     "morgan": "^1.7.0",
