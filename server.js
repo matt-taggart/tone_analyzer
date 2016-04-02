@@ -51,28 +51,26 @@ tone_analyzer.tone({ text: toneText },
     var writingToneArray = []
     var socialToneArray = []
 
-  for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
-    emotionToneArray.push({
-      tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
-      tone_score: tone.document_tone.tone_categories[0].tones[i].score 
-    })
-  };
+    for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
+      emotionToneArray.push({
+        tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
+        tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+      })
+    };
 
-  for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
-    writingToneArray.push({
-      tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
-      tone_score: tone.document_tone.tone_categories[1].tones[i].score 
-    })
-  };
+    for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
+      writingToneArray.push({
+        tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
+        tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+      })
+    };
 
-  for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
-    socialToneArray.push({
-      tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
-      tone_score: tone.document_tone.tone_categories[2].tones[i].score 
-    })
-  };
-      // console.log(tone.document_tone.tone_categories[0].tones[i].score)
-      // console.log(tone.document_tone.tone_categories[0].tones[i].tone_name)
+    for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
+      socialToneArray.push({
+        tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
+        tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+      })
+    };
     
   //Save to DB- put into a post request
   var content = new ContentDB ({
