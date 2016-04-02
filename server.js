@@ -53,7 +53,6 @@ app.post('/tonetext', function(req, res) {
         console.log(err);
       } else {
         console.log('hit api call')
-        console.log(tone)
       var emotionToneArray = []
       var writingToneArray = []
       var socialToneArray = []
@@ -81,7 +80,7 @@ app.post('/tonetext', function(req, res) {
       
     //Save to DB- put into a post request
     var content = new ContentDB ({
-      content: req.body.toneText,
+      content: req.body.content,
       emotion_tone_data: emotionToneArray,
       social_tone_data: socialToneArray,
       writing_tone_data: writingToneArray
