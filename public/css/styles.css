@@ -1,86 +1,5 @@
-.content {
-  text-align: center;
-  padding-top: 15%;
-  color: #fff;
-  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-               0px 8px 13px rgba(0,0,0,0.1),
-               0px 18px 23px rgba(0,0,0,0.1);
-}
-
-
-h1 {
-  font-weight: 700;
-  font-size: 5em;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-family: 'Lato', sans-serif;
-}
-
-a {
-  margin-top: 40px;
-
- }
-
-.startBtn {
-  background: transparent;
-  transition: background-color 0.5s ease;
-  border-radius: 0;
-  letter-spacing: .2em;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  padding: 20px;
-  color: #fff;
-  border: 2px solid #fff;
-  margin: 20px;
-  text-shadow: none;
-  cursor: pointer;
- }
-
-.btn:hover {
-  background-color: white;
-}
-
-button {
-  background: transparent;
-}
-
- /* Responsive Full Background Image Using CSS
- * Tutorial URL: http://sixrevisions.com/css/responsive-background-image/
-*/
-body {
-  /* Location of the image */
-  background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
-  
-  /* Image is centered vertically and horizontally at all times */
-  background-position: center center;
-  
-  /* Image doesn't repeat */
-  background-repeat: no-repeat;
-  
-  /* Makes the image fixed in the viewport so that it doesn't move when 
-     the content height is greater than the image height */
-  background-attachment: fixed;
-  
-  /* This is what makes the background image rescale based on its container's size */
-  background-size: cover;
-  
-  /* Pick a solid background color that will be displayed while the background image is loading */
-  background-color:#464646;
-  
-  /* SHORTHAND CSS NOTATION
-   * background: url(background-photo.jpg) center center cover no-repeat fixed;
-   */
-}
-
-/* For mobile devices */
-@media only screen and (max-width: 767px) {
-  body {
-    /* The file size of this background image is 93% smaller
-     * to improve page load speed on mobile internet connections */
-    background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
-  }
+#register-panel {
+  margin-top: 60px;
 }
 
 h3, h2 {
@@ -140,6 +59,9 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
+input::-webkit-input-placeholder {
+    color: #fff !important;
+}
 
 .form-signin input[type="password"]:hover {
   background-color: white;
@@ -169,4 +91,38 @@ h3, h2 {
   color: #fff;
 }
 
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; 
+}
 
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: #fff;
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+span, a {
+  color: #fff;
+}
