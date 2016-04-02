@@ -12,15 +12,16 @@
 </head>
 <body>
 
-<div ng-controller="inputForm">
-  <textarea type='text' ng-model='toneText' name='toneText'></textarea>
+<form ng-controller="inputForm">
+  <textarea name='toneText' type='text' ng-model='toneText'></textarea>
   <input type='submit' ng-click='analyzeTone()'>
-</div>
+</form>
 
+
+<input type='text' name='jeff'>
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<!--   <script type="text/javascript" src="server.js"></script> -->
   <script type="text/javascript" src="./app.js"></script>
 </body>
 </html>

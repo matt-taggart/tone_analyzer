@@ -1,9 +1,9 @@
 angular.module("toneDown", [])
   .controller('inputForm', function($scope, $http) {
-    
     $scope.analyzeTone = function(){
-      $http.post('/demobox/texttone', {
-        content: $scope.textTone
+      console.log($scope.toneText)
+      $http.post('/tonetext', {
+        content: $scope.toneText
       }).then(function(){
         $scope.textTone = '';
       })
