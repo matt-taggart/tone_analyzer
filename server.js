@@ -3,7 +3,7 @@ var logger = require('morgan');
 var watson = require('watson-developer-cloud');
 var app = express();
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 1738;
 
 app.use(logger('dev'));
 app.use(express.static(__dirname + '/public'));
