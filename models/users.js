@@ -46,11 +46,11 @@ var UserSchema = new Schema({
 
 });
 
-// UserSchema.pre('save', function(next) {
-//   var user = this;
-//   user.password = bcrypt.hashSync(user.password, 10);
-//   next();
-// });
+UserSchema.pre('save', function(next) {
+  var user = this;
+  user.password = bcrypt.hashSync(user.password, 10);
+  next();
+});
 
 
 var User = mongoose.model('User', UserSchema);
