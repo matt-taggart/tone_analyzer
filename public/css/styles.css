@@ -136,6 +136,19 @@ h3, h2 {
   color: #000;
 }
 
+.form-signin input[type="email"] {
+  margin-bottom: 10px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  transition: background-color 0.5s ease;
+}
+
+.form-signin input[type="email"]:hover {
+  background-color: white;
+  color: #000;
+}
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   background: transparent;
@@ -144,13 +157,13 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-input::-webkit-input-placeholder {
-    color: #fff !important;
-}
-
 .form-signin input[type="password"]:hover {
   background-color: white;
   color: #000;
+}
+
+input::-webkit-input-placeholder {
+    color: #fff !important;
 }
 
 .panel {
