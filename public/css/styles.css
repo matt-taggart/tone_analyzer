@@ -75,12 +75,16 @@ body {
 }
 
 /* For mobile devices */
-@media only screen and (max-width: 767px) {
+/*@media only screen and (max-width: 767px) {
   body {
-    /* The file size of this background image is 93% smaller
-     * to improve page load speed on mobile internet connections */
+     The file size of this background image is 93% smaller
+     * to improve page load speed on mobile internet connections 
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
+}*/
+
+#register-panel {
+  margin-top: 60px;
 }
 
 h3, h2 {
@@ -132,6 +136,20 @@ h3, h2 {
   color: #000;
 }
 
+.form-signin input[type="email"] {
+>>>>>>> 4e3061345f3bb45bbda053091cfadeb9160af663
+  margin-bottom: 10px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  transition: background-color 0.5s ease;
+}
+
+.form-signin input[type="email"]:hover {
+  background-color: white;
+  color: #000;
+}
+
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   background: transparent;
@@ -140,10 +158,13 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-
 .form-signin input[type="password"]:hover {
   background-color: white;
   color: #000;
+}
+
+input::-webkit-input-placeholder {
+    color: #fff !important;
 }
 
 .panel {
@@ -169,4 +190,38 @@ h3, h2 {
   color: #fff;
 }
 
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; 
+}
 
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: #fff;
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+span, a {
+  color: #fff;
+}
