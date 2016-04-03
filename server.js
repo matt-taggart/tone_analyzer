@@ -53,55 +53,60 @@ app.post('/tonetext', function(req, res) {
         console.log(err);
       } else {
         console.log('hit api call')
-      var emotionToneArray = []
-      var writingToneArray = []
-      var socialToneArray = []
+        var emotionToneArray = []
+        var writingToneArray = []
+        var socialToneArray = []
 
-      for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
-        emotionToneArray.push({
-          tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
-          tone_score: tone.document_tone.tone_categories[0].tones[i].score 
-        })
-      };
+        for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
+          emotionToneArray.push({
+            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+          })
+        };
 
-      for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
-        writingToneArray.push({
-          tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
-          tone_score: tone.document_tone.tone_categories[1].tones[i].score 
-        })
-      };
+        for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
+          writingToneArray.push({
+            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+          })
+        };
 
-      for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
-        socialToneArray.push({
-          tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
-          tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+        for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
+          socialToneArray.push({
+            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+          })
+        };
+        
+        //Save to DB- put into a post request
+        var content = new ContentDB ({
+          content: req.body.content,
+          emotion_tone_data: emotionToneArray,
+          social_tone_data: socialToneArray,
+          writing_tone_data: writingToneArray
         })
-      };
-      
-    //Save to DB- put into a post request
-    var content = new ContentDB ({
-      content: req.body.content,
-      emotion_tone_data: emotionToneArray,
-      social_tone_data: socialToneArray,
-      writing_tone_data: writingToneArray
-    })
-    content.save(function(err, response){
-      if (err) {throw err}
-      return response
-    })
-    }
+        content.save(function(err, response){
+          if (err) {throw err}
+          return response
+        })
+      }
   });
+})
 
+app.get('/demobox', function(req, res){
+  res.sendFile(__dirname+ '/public/input_demo.html')
+})
 
+app.get('/calldata', function(req, res){
+  ContentDB.find({}).exec().then(function(response) {
+    res.json(response);
+    console.log(response)
+  });
 })
 
 // app.use('*', function(req, res) {
 //   res.send('hello world!');
 // });
-
-app.get('/demobox', function(req, res){
-  res.sendFile(__dirname+ '/public/input_demo.html')
-})
 
 app.listen(PORT, function() {
   console.log('Listening on PORT %s', PORT);
