@@ -9,16 +9,18 @@ router.use(session({
   saveUninitialized: false
 }));
 
+router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
   extended: false
 }));
 
 router.post('/login', function(req, res) {
-
+  console.log(req.body);
+  res.json(req.body)
 });
 
 router.post('/register', function(req, res) {
-
+  console.log(req.body);
 });
 
 router.get('*', function(req, res) {
