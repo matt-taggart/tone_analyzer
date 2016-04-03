@@ -1,4 +1,4 @@
-angular.module('hey', ['ui.router'])
+angular.module('toneAnalyzer', ['ui.router'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/welcome');
 
