@@ -77,8 +77,7 @@ app.post('/tonetext', function(req, res) {
             tone_score: tone.document_tone.tone_categories[2].tones[i].score 
           })
         };
-        
-        //Save to DB- put into a post request
+        console.log('api call still good')
         var content = new ContentDB ({
           content: req.body.content,
           emotion_tone_data: emotionToneArray,
@@ -86,8 +85,13 @@ app.post('/tonetext', function(req, res) {
           writing_tone_data: writingToneArray
         })
         content.save(function(err, response){
-          if (err) {throw err}
-          return response
+          if (err) {
+            throw err
+          } else {
+            console.log('content saved into db')
+            return response
+          }
+          
         })
       }
   });
@@ -99,8 +103,9 @@ app.get('/demobox', function(req, res){
 
 app.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
-    res.json(response);
-    console.log(response)
+    // res.json(response);
+    // console.log(response)
+    return response
   });
 })
 
