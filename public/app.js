@@ -11,12 +11,6 @@ angular.module("toneDown", [])
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
-      })
-    }
-  })
-
-    // $http.post('/analyzetext', {
-      //   content: $scope.toneText,
-      // }).then(function(){
-      //   $scope.toneText = ''
-      // });
+      });
+    };
+  });

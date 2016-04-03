@@ -19,21 +19,6 @@ var db = 'mongodb://localhost/ToneDownForWhatDB'
 var ContentDB = require('./model/contentAnalysisModel.js')
 mongoose.connect(db)
 
-// var alchemy_language = watson.alchemy_language({
-//   api_key: '<api_key>'
-// });
- 
-// var params = {
-//   text: 'IBM Watson won the Jeopardy television show hosted by Alex Trebek'
-// };
- 
-// alchemy_language.sentiment(params, function (err, response) {
-//   if (err)
-//     console.log('error:', err);
-//   else
-//     console.log(JSON.stringify(response, null, 2));
-// });
-
 var tone_analyzer = watson.tone_analyzer({
   url: "https://gateway.watsonplatform.net/tone-analyzer-beta/api",
   password: "B0jj6n5i9NXZ",
@@ -43,15 +28,16 @@ var tone_analyzer = watson.tone_analyzer({
 });
 
 app.post('/tonetext', function(req, res) {
-  console.log(req.body.content)
 
   tone_analyzer.tone({ text: req.body.content },
     function(err, tone) {
+      console.log(tone)
       if (err) {
         console.log('hit error')
         console.log(err);
       } else {
         console.log('hit api call')
+
         var emotionToneArray = []
         var writingToneArray = []
         var socialToneArray = []
@@ -89,7 +75,6 @@ app.post('/tonetext', function(req, res) {
           } else {
             console.log('content saved into db')
             res.json(response);
-            console.log(response)
           }
         })
       }
@@ -103,16 +88,9 @@ app.get('/demobox', function(req, res){
 app.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
-    // console.log(response)
-    // return response
   });
 })
-
-// app.use('*', function(req, res) {
-//   res.send('hello world!');
-// });
 
 app.listen(PORT, function() {
   console.log('Listening on PORT %s', PORT);
 });
-
