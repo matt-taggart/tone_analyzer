@@ -4,7 +4,6 @@ var app = express();
 var bodyParser = require('body-parser')
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
-// var tonez = require('./tone_analyzer_intro.js')
 
 
 var PORT = process.env.PORT || 3000;
@@ -89,9 +88,9 @@ app.post('/tonetext', function(req, res) {
             throw err
           } else {
             console.log('content saved into db')
-            return response
+            res.json(response);
+            console.log(response)
           }
-          
         })
       }
   });
@@ -103,9 +102,9 @@ app.get('/demobox', function(req, res){
 
 app.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
-    // res.json(response);
+    res.json(response);
     // console.log(response)
-    return response
+    // return response
   });
 })
 
