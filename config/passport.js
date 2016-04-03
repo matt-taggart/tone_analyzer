@@ -17,7 +17,8 @@ module.exports = function(passport) {
   passport.use('register', new LocalStrategy ({
     passReqToCallback: true
   }, function(req, username, password, done) {
-      User.findOne({ username: username}).exec(function(err, userData) {
+
+      User.findOne({ username: username}, function(err, userData) {
 
         if (err) {
           return err;
@@ -41,7 +42,7 @@ module.exports = function(passport) {
   passport.use('login', new LocalStrategy ({
     passReqToCallback: true
   }, function(req, username, password, done) {
-      User.findOne({ username: username}).exec(function(err, userData) {
+      User.findOne({ username: username}, function(err, userData) {
 
         if (err) {
           return err
@@ -63,6 +64,7 @@ module.exports = function(passport) {
 
       });
   }));
+
 }
 
 
