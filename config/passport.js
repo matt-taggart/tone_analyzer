@@ -14,6 +14,29 @@ module.exports = function(passport) {
     });
   });
 
+  passport.use('register', LocalStrategy {
+    passReqToCallback: true
+  }, function(req, username, password, done) {
+    User.findOne({ username: username}).exec(function(err, userData) {
+      if (err) {
+        return err;
+      }
+
+      if (!userData) {
+        var newUser = new User(req.body);
+
+        User.save(function(err, userData) {
+          if (err) {
+            return err;
+          } else {
+            done(null, userData);
+          }
+        });
+      }
+
+    });
+  });
+
   passport.use('login', LocalStrategy {
     passReqToCallback: true
   }, function(req, username, password, done) {
@@ -35,6 +58,7 @@ module.exports = function(passport) {
           }
         });
       }
+      
     });
   });
 

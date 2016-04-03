@@ -19,13 +19,14 @@ require('../config/passport.js')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.post('/login', function(req, res) {
-  console.log(req.body);
-  res.json(req.body)
-});
-
 router.post('/register', function(req, res) {
   console.log(req.body);
+  console.log(req.user);
+});
+
+router.post('/login', function(req, res) {
+  console.log(req.body);
+  console.log(req.user);
 });
 
 router.get('*', function(req, res) {
