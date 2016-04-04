@@ -4,6 +4,7 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -24,12 +25,14 @@ router.use(session({
 require('../config/passport.js')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
+router.use(flash());
 
 router.post('/register', passport.authenticate('register'), function(req, res) {
   res.json(req.user);
 });
 
-router.post('/login', passport.authenticate('login'), function(req, res) {
+router.post('/login', passport.authenticate('login', { failureFlash: true }), function(req, res) {
+  console.log(req);
   res.json(req.user);
 });
 

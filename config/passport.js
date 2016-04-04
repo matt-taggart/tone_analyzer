@@ -17,7 +17,6 @@ module.exports = function(passport) {
   passport.use('register', new LocalStrategy({
     passReqToCallback: true
   }, function(req, username, password, done) {
-    console.log(req.session);
     User.findOne({ username: username }, function(err, userData) {
       if (err) {
         return err;
@@ -52,6 +51,8 @@ module.exports = function(passport) {
 
       if (!userData) {
         console.log(err);
+        console.log('this got hit');
+        console.log(req.session);
         done(null, false);
       } 
 
@@ -61,6 +62,9 @@ module.exports = function(passport) {
          done(null, userData);
         } else {
           console.log(err);
+          console.log('this hit');
+          console.log(req.session);
+          done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
         }
       });
      }
