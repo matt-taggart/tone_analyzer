@@ -35,9 +35,14 @@ router.post('/login', passport.authenticate('login'), function(req, res) {
   res.json(req.user);
 });
 
-// router.get('*', function(req, res) {
-//   res.sendFile(process.cwd() + '/public/views/index.html');
-// });
+router.post('/logout', function(req, res) {
+  req.logout();
+  res.json(req.isAuthenticated());
+});
+
+router.get('*', function(req, res) {
+  res.sendFile(process.cwd() + '/public/views/index.html');
+});
 
 
 module.exports = router;
