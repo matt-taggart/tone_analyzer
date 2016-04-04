@@ -24,14 +24,11 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 router.post('/register', passport.authenticate('register'), function(req, res) {
-  console.log(req.isAuthenticated());
-  console.log(req.user);
-  console.log(req.body);
+  res.json(req.user);
 });
 
 router.post('/login', passport.authenticate('login'), function(req, res) {
-  console.log(req.body);
-  console.log(req.user);
+  res.json(req.user);
 });
 
 router.get('*', function(req, res) {
