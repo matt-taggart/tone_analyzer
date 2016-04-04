@@ -23,6 +23,10 @@ require('../config/passport.js')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
 
+router.get('/welcome', function(req, res) {
+  res.sendFile(process.cwd() + '/public/views/index.html');
+});
+
 router.post('/register', passport.authenticate('register'), function(req, res) {
   res.json(req.user);
 });
@@ -31,9 +35,9 @@ router.post('/login', passport.authenticate('login'), function(req, res) {
   res.json(req.user);
 });
 
-router.get('*', function(req, res) {
-  res.sendFile(process.cwd() + '/public/views/index.html');
-});
+// router.get('*', function(req, res) {
+//   res.sendFile(process.cwd() + '/public/views/index.html');
+// });
 
 
 module.exports = router;
