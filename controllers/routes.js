@@ -1,8 +1,12 @@
 var express = require('express');
+var mongoose = require('mongoose');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var router = express.Router();
+
+var db = 'mongodb://localhost/users'
+mongoose.connect(db);
 
 router.use(session({
   secret: 'super secret',
@@ -19,12 +23,13 @@ require('../config/passport.js')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.post('/register', function(req, res) {
-  console.log(req.body);
+router.post('/register', passport.authenticate('register'), function(req, res) {
+  console.log(req.isAuthenticated());
   console.log(req.user);
+  console.log(req.body);
 });
 
-router.post('/login', function(req, res) {
+router.post('/login', passport.authenticate('login'), function(req, res) {
   console.log(req.body);
   console.log(req.user);
 });
