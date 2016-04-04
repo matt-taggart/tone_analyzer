@@ -16,18 +16,14 @@ mongoose.connect(db);
 
 router.use(session({
   secret: 'super secret',
-  resave: false,
-  saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection})
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 require('../config/passport.js')(passport);
 router.use(passport.initialize());
 router.use(passport.session());
-
-router.get('/welcome', function(req, res) {
-  res.sendFile(process.cwd() + '/public/views/index.html');
-});
 
 router.post('/register', passport.authenticate('register'), function(req, res) {
   res.json(req.user);
@@ -40,6 +36,10 @@ router.post('/login', passport.authenticate('login'), function(req, res) {
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
+});
+
+router.get('/user', function(req, res) {
+  res.json(req.user);
 });
 
 router.get('*', function(req, res) {

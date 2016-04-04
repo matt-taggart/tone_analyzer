@@ -36,4 +36,17 @@ angular.module('toneAnalyzer')
       });
     }
 
+    $http({
+      method: 'GET',
+      url: '/user'
+    }).then(function(result) {
+      if (result.data) {
+        $rootScope.isAuthenticated = true;
+        $rootScope.username = result.data.firstname
+        $location.path('welcome');
+      } else {
+        $rootScope.isAuthenticated = false;
+      }
+    });
+
   });
