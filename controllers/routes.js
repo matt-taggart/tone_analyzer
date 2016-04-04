@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var MongoStore = require('connect-mongo')(session);
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -16,7 +17,8 @@ mongoose.connect(db);
 router.use(session({
   secret: 'super secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection})
 }));
 
 require('../config/passport.js')(passport);
