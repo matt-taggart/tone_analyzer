@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
+var MongoStore = require('connect-mongo')(session);
 var router = express.Router();
 
 router.use(bodyParser.json());
@@ -15,8 +16,9 @@ mongoose.connect(db);
 
 router.use(session({
   secret: 'super secret',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 require('../config/passport.js')(passport);
@@ -28,6 +30,15 @@ router.post('/register', passport.authenticate('register'), function(req, res) {
 });
 
 router.post('/login', passport.authenticate('login'), function(req, res) {
+  res.json(req.user);
+});
+
+router.post('/logout', function(req, res) {
+  req.logout();
+  res.json(req.isAuthenticated());
+});
+
+router.get('/user', function(req, res) {
   res.json(req.user);
 });
 

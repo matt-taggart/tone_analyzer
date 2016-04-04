@@ -17,6 +17,7 @@ module.exports = function(passport) {
   passport.use('register', new LocalStrategy({
     passReqToCallback: true
   }, function(req, username, password, done) {
+    console.log(req.session);
     User.findOne({ username: username }, function(err, userData) {
       if (err) {
         return err;
