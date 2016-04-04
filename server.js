@@ -1,9 +1,10 @@
 var express = require('express');
 var logger = require('morgan');
-var app = express();
 var bodyParser = require('body-parser')
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
+var app = express();
+var highChart = require('./highchartspecs.js')
 
 var PORT = process.env.PORT || 3000;
 
@@ -24,10 +25,7 @@ var tone_analyzer = watson.tone_analyzer({
   username: "a52b4d31-5e94-4acb-bbbe-7de263677456",
   version: 'v3-beta',
   version_date: '2016-02-11'
-
-app.get('*', function(req, res) {
-  res.sendFile(process.cwd() + '/public/views/index.html');
-});
+})
 
 app.post('/tonetext', function(req, res) {
 
@@ -82,6 +80,10 @@ app.post('/tonetext', function(req, res) {
       }
   });
 })
+
+// app.get('*', function(req, res) {
+//   res.sendFile(process.cwd() + '/public/views/index.html');
+// });
 
 app.get('/demobox', function(req, res){
   res.sendFile(__dirname+ '/public/input_demo.html')
