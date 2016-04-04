@@ -3,7 +3,7 @@ angular.module('toneAnalyzer')
     $scope.register = function() {
       $http({
         method: 'POST',
-        url: '/login',
+        url: '/register',
         data: $scope.registration
       }).then(function(result) {
         console.log(result.data);
@@ -13,7 +13,7 @@ angular.module('toneAnalyzer')
     $scope.login = function() {
       $http({
         method: 'POST',
-        url: '/register',
+        url: '/login',
         data: $scope.user
       }).then(function(result) {
         console.log(result.data);

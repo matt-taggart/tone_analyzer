@@ -5,6 +5,11 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var router = express.Router();
 
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
+  extended: false
+}));
+
 var db = 'mongodb://localhost/users'
 mongoose.connect(db);
 
@@ -12,11 +17,6 @@ router.use(session({
   secret: 'super secret',
   resave: false,
   saveUninitialized: false
-}));
-
-router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({
-  extended: false
 }));
 
 require('../config/passport.js')(passport);
