@@ -29,8 +29,34 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
-router.post('/register', passport.authenticate('register'), function(req, res) {
-  res.json(req.user);
+// router.post('/register', passport.authenticate('register'), function(req, res) {
+//   res.json(req.user);
+// });
+
+
+router.post('/register', function(req, res, next) {
+  passport.authenticate('register', function(err, user, info) {
+
+    console.log(user);
+
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+    // Generate a JSON response reflecting authentication status
+    // if (!user) {
+    //   var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+    //   console.log(errorMessage);
+    //   return res.json({ authenticated: user, message: errorMessage });
+    // }
+
+    // req.login(user, function(err) {
+    //   if (err) {
+    //     return next(err);
+    //   }
+    //   return res.json({ authenticated : true, user : user });
+    // });
+
+  })(req, res, next);
 });
 
 router.post('/login', function(req, res, next) {
@@ -54,11 +80,6 @@ router.post('/login', function(req, res, next) {
     });      
   })(req, res, next);
 });
-
-// router.post('/login', passport.authenticate('login', { failureFlash: true }), function(req, res) {
-//   console.log(req.session.flash);
-//   res.json(req.user);
-// });
 
 router.post('/logout', function(req, res) {
   req.logout();
