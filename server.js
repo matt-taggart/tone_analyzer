@@ -4,7 +4,6 @@ var bodyParser = require('body-parser')
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
 var app = express();
-var highChart = require('./highchartspecs.js')
 
 var PORT = process.env.PORT || 3000;
 

@@ -11,39 +11,49 @@ angular.module("toneDown")
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
-        console.log($scope.toneDatas)
 
-        var toneDataHighChartToneType = [];
-        var toneDataHighChartToneScore = [];
+        var highChartToneData = [];
+
+        var idArray = []
 
         angular.forEach($scope.toneDatas, function(value, key) {
-          angular.forEach(value.social_tone_data, function(value, key) {
-            toneDataHighChartToneType.push(value.tone_type)
-            toneDataHighChartToneScore.push(value.tone_score) 
-          })
+
+          idArray.push(value._id)
+
+          for (var i = 0; i < idArray.length; i++) {
+            console.log(idArray[i])
+            console.log(idArray.length)
+          };
+
+            // angular.forEach(value.social_tone_data, function(value, key) {
+
+              // highChartToneType.push(value.tone_type)
+              // highChartToneScore.push(value.tone_score) 
+              // $("#" + value._id).highcharts({
+              //   chart: {
+              //       type: 'bar'
+              //   },
+              //   title: {
+              //       text: 'Fruit Consumption'
+              //   },
+              //   xAxis: {
+              //       categories: highChartToneType
+              //   },
+              //   yAxis: {
+              //       title: {
+              //           text: 'Fruit eaten'
+              //       }
+              //   },
+              //   series: [{
+              //       data: highChartToneScore
+              //   }]
+              // });
+            // })
+
+
         })
-
-        console.log('array printing')
-
-        $("#container").highcharts({
-        chart: {
-            type: 'bar'
-        },
-        title: {
-            text: 'Fruit Consumption'
-        },
-        xAxis: {
-            categories: toneDataHighChartToneType
-        },
-        yAxis: {
-            title: {
-                text: 'Fruit eaten'
-            }
-        },
-        series: [{
-            data: toneDataHighChartToneScore
-        }]
-    });
+// console.log(idArray)
+        
       });
     };
   });

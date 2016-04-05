@@ -22,11 +22,12 @@
       <li><strong>Text to be analyzed</strong> </li>
       <li> {{value.content}} </li>
       <li><strong>Social tone data</strong></li>
-      <li ng-repeat='(key, value) in value.social_tone_data track by $index' id="social_tone{{$index}}"> {{value.tone_type}} {{value.tone_score}} </li>
+      <li ng-repeat='(key, value) in value.social_tone_data track by $index'> {{value.tone_type}} {{value.tone_score}} </li>
       <li><strong>Emotional tone data</strong></li>
       <li ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
       <li><strong>Writing tone data</strong></li>
       <li ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
+      <div id="{{value._id}}"> </div>
     </ul>
   </div>
 
