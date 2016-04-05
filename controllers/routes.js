@@ -35,22 +35,22 @@ router.post('/register', passport.authenticate('register'), function(req, res) {
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('login', function(err, user, info) {
-    console.log(user);
-    console.log(req.session.flash);
 
     if (err) {
       return next(err); // will generate a 500 error
     }
     // Generate a JSON response reflecting authentication status
     if (!user) {
-      return res.json({ success : false, message : 'authentication failed' });
+      var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+      console.log(errorMessage);
+      return res.json({ authenticated: user, message: errorMessage });
     }
 
     req.login(user, function(err) {
       if (err) {
         return next(err);
       }
-      return res.json({ success : true, message : 'authentication succeeded' });
+      return res.json({ authenticated : true, user : user });
     });      
   })(req, res, next);
 });

@@ -52,7 +52,7 @@ module.exports = function(passport) {
 
       if (!userData) {
         console.log(err);
-        done(null, false);
+        done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
       } 
 
      if (userData) {
@@ -61,7 +61,6 @@ module.exports = function(passport) {
          done(null, userData);
         } else {
           console.log(err);
-          console.log('this hit');
           done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
         }
       });
