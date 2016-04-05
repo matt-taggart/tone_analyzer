@@ -48,6 +48,10 @@ router.post('/register', function(req, res, next) {
       return res.json({ authenticated: user, message: errorMessage });
     }
 
+    if (user) {
+      return res.json('success!');
+    }
+
   })(req, res, next);
 });
 
