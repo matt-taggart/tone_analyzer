@@ -29,9 +29,15 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
+// router.post('/register', passport.authenticate('register'), function(req, res) {
+//   res.json(req.user);
+// });
+
 
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
+
+    console.log(user);
 
     if (err) {
       return next(err); // will generate a 500 error
