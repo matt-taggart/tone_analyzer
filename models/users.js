@@ -29,7 +29,8 @@ var UserSchema = new Schema({
   password: {
     type: String,
     trim: true,
-    required: [true, "Must enter a password to register"]
+    required: [true, "Must enter a password to register"],
+    minlength: [6, 'Password must be at least 6 characters.']
   },
 
   email: {

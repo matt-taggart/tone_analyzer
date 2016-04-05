@@ -18,6 +18,7 @@ module.exports = function(passport) {
     passReqToCallback: true
   }, function(req, username, password, done) {
     User.findOne({ username: username }, function(err, userData) {
+
       if (err) {
         console.log(err);
         return err;
@@ -27,13 +28,17 @@ module.exports = function(passport) {
 
         var newUser = new User(req.body);
 
-        newUser.save(function(err, userData) {
-          if (err) {
-            console.log(err);
-          } else {
-            return done(null, userData);
-          }
+        newUser.validate(function(err) {
+          console.log(err);
         });
+
+        // newUser.save(function(err, userData) {
+        //   if (err) {
+        //     console.log(err);
+        //   } else {
+        //     return done(null, userData);
+        //   }
+        // });
 
       } else {
         return done(null, false, req.flash('registerMessage', 'Username already exists.'));
