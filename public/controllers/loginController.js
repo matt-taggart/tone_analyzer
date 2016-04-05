@@ -43,7 +43,7 @@ angular.module('toneAnalyzer')
     }).then(function(result) {
       if (result.data.authenticated) {
         $rootScope.isAuthenticated = true;
-        $rootScope.username = result.data.firstname
+        $rootScope.username = result.data.user.firstname;
         $location.path('welcome');
       } else {
         $rootScope.isAuthenticated = false;
