@@ -42,19 +42,12 @@ router.post('/register', function(req, res, next) {
     if (err) {
       return next(err); // will generate a 500 error
     }
-    // Generate a JSON response reflecting authentication status
-    // if (!user) {
-    //   var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
-    //   console.log(errorMessage);
-    //   return res.json({ authenticated: user, message: errorMessage });
-    // }
 
-    // req.login(user, function(err) {
-    //   if (err) {
-    //     return next(err);
-    //   }
-    //   return res.json({ authenticated : true, user : user });
-    // });
+    if (!user) {
+      var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
+      console.log(errorMessage);
+      return res.json({ authenticated: user, message: errorMessage });
+    }
 
   })(req, res, next);
 });

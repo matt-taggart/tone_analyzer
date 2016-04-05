@@ -6,6 +6,7 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
+        console.log(result);
         $location.path('welcome');
       });
     }
