@@ -27,18 +27,15 @@ module.exports = function(passport) {
       if (!userData) {
 
         var newUser = new User(req.body);
+        newUser.validateSync();
 
-        newUser.validate(function(err) {
-          console.log(err);
+        newUser.save(function(err, userData) {
+          if (err) {
+            return done(null, false, req.flash('registerMessage', err.errors));
+          } else {
+            return done(null, userData);
+          }
         });
-
-        // newUser.save(function(err, userData) {
-        //   if (err) {
-        //     console.log(err);
-        //   } else {
-        //     return done(null, userData);
-        //   }
-        // });
 
       } else {
         return done(null, false, req.flash('registerMessage', 'Username already exists.'));

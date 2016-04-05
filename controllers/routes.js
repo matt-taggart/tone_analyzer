@@ -39,7 +39,6 @@ router.post('/register', function(req, res, next) {
 
     if (!user) {
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
-      console.log(errorMessage);
       return res.json({ authenticated: user, message: errorMessage });
     }
 
@@ -55,7 +54,6 @@ router.post('/login', function(req, res, next) {
     // Generate a JSON response reflecting authentication status
     if (!user) {
       var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
-      console.log(errorMessage);
       return res.json({ authenticated: user, message: errorMessage });
     }
 
@@ -63,7 +61,8 @@ router.post('/login', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      return res.json({ authenticated : true, user : user });
+      console.log(req.isAuthenticated());
+      return res.json({ authenticated: true, user: user });
     });      
   })(req, res, next);
 });
@@ -74,7 +73,7 @@ router.post('/logout', function(req, res) {
 });
 
 router.get('/user', function(req, res) {
-  res.json(req.user);
+  res.json({ authenticated: req.isAuthenticated(), user: req.user });
 });
 
 router.get('*', function(req, res) {

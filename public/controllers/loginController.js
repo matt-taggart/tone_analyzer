@@ -6,7 +6,7 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
-        console.log(result);
+        console.log(result.data);
         $location.path('welcome');
       });
     }
@@ -17,7 +17,6 @@ angular.module('toneAnalyzer')
         url: '/login',
         data: $scope.user
       }).then(function(result) {
-        console.log(result.data);
         if (result.data.authenticated) {
           $rootScope.isAuthenticated = true;
           $rootScope.username = result.data.user.firstname;
@@ -42,7 +41,7 @@ angular.module('toneAnalyzer')
       method: 'GET',
       url: '/user'
     }).then(function(result) {
-      if (result.data) {
+      if (result.data.authenticated) {
         $rootScope.isAuthenticated = true;
         $rootScope.username = result.data.firstname
         $location.path('welcome');
