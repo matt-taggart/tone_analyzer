@@ -46,13 +46,12 @@ module.exports = function(passport) {
   }, function(req, username, password, done) {
     User.findOne({ username: username}, function(err, userData) {
       if (err) {
+        console.log(err);
         return err;
       }
 
       if (!userData) {
         console.log(err);
-        console.log('this got hit');
-        console.log(req.session);
         done(null, false);
       } 
 
@@ -63,7 +62,6 @@ module.exports = function(passport) {
         } else {
           console.log(err);
           console.log('this hit');
-          console.log(req.session);
           done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
         }
       });
