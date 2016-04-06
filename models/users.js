@@ -23,7 +23,8 @@ var UserSchema = new Schema({
     trim: true,
     lowercase: true,
     required: [true, "Must enter a username to register"],
-    unique: [true, "Sorry, that username has been taken"]
+    unique: [true, "Sorry, that username has been taken"],
+    minlength: [6, 'Username must be at least 5 characters.']
   },
 
   password: {

@@ -17,26 +17,27 @@ module.exports = function(passport) {
   passport.use('register', new LocalStrategy({
     passReqToCallback: true
   }, function(req, username, password, done) {
-    console.log(req.session);
     User.findOne({ username: username }, function(err, userData) {
       if (err) {
+        console.log(err);
         return err;
       }
 
       if (!userData) {
 
         var newUser = new User(req.body);
+        newUser.validateSync();
 
         newUser.save(function(err, userData) {
           if (err) {
-            console.log(err);
+            return done(null, false, req.flash('registerMessage', err.errors));
           } else {
             return done(null, userData);
           }
         });
 
       } else {
-        console.log('That user is already taken.');
+        return done(null, false, req.flash('registerMessage', 'Username already exists.'));
       }
 
     });
@@ -47,20 +48,22 @@ module.exports = function(passport) {
   }, function(req, username, password, done) {
     User.findOne({ username: username}, function(err, userData) {
       if (err) {
+        console.log(err);
         return err;
       }
 
       if (!userData) {
         console.log(err);
-        done(null, false);
+        return done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
       } 
 
      if (userData) {
       bcrypt.compare(password, userData.password, function(err, user) {
         if (user) {
-         done(null, userData);
+          return done(null, userData);
         } else {
           console.log(err);
+          return done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
         }
       });
      }

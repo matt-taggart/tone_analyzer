@@ -226,3 +226,6 @@ span, a {
 }
 
 
+.form-signin p {
+  background: red;
+}
