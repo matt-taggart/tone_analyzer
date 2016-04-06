@@ -16,12 +16,13 @@ angular.module('toneAnalyzer')
         url: '/login',
         data: $scope.user
       }).then(function(result) {
-        if (result.data) {
+        if (result.data.authenticated) {
           $rootScope.isAuthenticated = true;
-          $rootScope.username = result.data.firstname;
+          $rootScope.username = result.data.user.firstname;
           $location.path('welcome');
         } else {
           $rootScope.isAuthenticated = false;
+          $scope.error = result.data.message;
         }
       });
     }
@@ -47,9 +48,9 @@ angular.module('toneAnalyzer')
       method: 'GET',
       url: '/user'
     }).then(function(result) {
-      if (result.data) {
+      if (result.data.authenticated) {
         $rootScope.isAuthenticated = true;
-        $rootScope.username = result.data.firstname
+        $rootScope.username = result.data.user.firstname;
         $location.path('welcome');
       } else {
         $rootScope.isAuthenticated = false;
