@@ -33,6 +33,8 @@ router.post('/login', passport.authenticate('login'), function(req, res) {
   res.json(req.user);
 });
 
+router.post()
+
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());

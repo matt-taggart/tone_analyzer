@@ -26,6 +26,13 @@ angular.module('toneAnalyzer')
       });
     }
 
+    $scope.googleLogin = function() {
+      $http({
+        method: 'POST',
+        url: '/'
+      })
+    }
+
     $scope.logout = function() {
       $http({
         method: 'POST',
