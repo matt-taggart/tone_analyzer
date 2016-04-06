@@ -163,7 +163,10 @@ h3, h2 {
 }
 
 input::-webkit-input-placeholder {
-    color: #fff !important;
+  color: #fff !important;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
 }
 
 .panel {
@@ -177,6 +180,9 @@ input::-webkit-input-placeholder {
   background: transparent;
   color: #fff;
   border: 2px solid #fff;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
   transition: background-color 0.5s ease;
 }
 
@@ -227,5 +233,12 @@ span, a {
 
 
 .form-signin p {
-  background: red;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+               0px 8px 13px rgba(0,0,0,0.1),
+               0px 18px 23px rgba(0,0,0,0.1);
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
+
 }
