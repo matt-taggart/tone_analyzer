@@ -70,7 +70,8 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.post('/auth/google', passport.authenticate('google-auth', { scope: ['profile, email'] }))
+router.post('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login',
+    , 'https://www.googleapis.com/auth/plus.profile.emails.read'] }))
 
 router.post('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
