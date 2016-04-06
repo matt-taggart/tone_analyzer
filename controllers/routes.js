@@ -29,11 +29,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
-// router.post('/register', passport.authenticate('register'), function(req, res) {
-//   res.json(req.user);
-// });
-
-
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -75,7 +70,21 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.post()
+router.post('/auth/google', passport.authenticate('google-auth', { scope: ['profile, email'] }))
+
+router.post('/auth/google/callback', function(req, res, next) {
+  passport.authenticate('google-auth', function(err, user, info) {
+
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+
+    console.log(user);
+    console.log(info);
+
+  })(req, res, next);
+});
+
 
 router.post('/logout', function(req, res) {
   req.logout();

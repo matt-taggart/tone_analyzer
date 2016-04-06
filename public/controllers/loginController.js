@@ -27,12 +27,14 @@ angular.module('toneAnalyzer')
       });
     }
 
-    $scope.googleLogin = function() {
-      $http({
-        method: 'POST',
-        url: '/'
-      })
-    }
+    // $scope.googleLogin = function() {
+    //   $http({
+    //     method: 'POST',
+    //     url: '/auth/google'
+    //   }).then(function(result) {
+    //     console.log(result);
+    //   });
+    // }
 
     $scope.logout = function() {
       $http({
