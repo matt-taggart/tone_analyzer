@@ -37,8 +37,6 @@ require('../config/passport.js')(passport);
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
-    console.log(user);
-
     if (err) {
       return next(err); // will generate a 500 error
     }

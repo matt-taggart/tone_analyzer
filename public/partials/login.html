@@ -3,11 +3,12 @@
     <div class="panel panel-default" ng-controller="loginController">
       <div class="panel-body">
         <div class="row">
-          <form ng-submit="login()" class="form-signin" autocomplete="off" ng-show="!isAuthenticated">       
+          <form ng-submit="login()" class="form-signin" autocomplete="off" ng-show="!isAuthenticated">
+            <p>{{ error }}</p>
             <h2 class="form-signin-heading">Log In</h2>
               <input type="text" class="form-control" ng-model="user.username" placeholder="Username" class="validate"/>
               <br>
-              <input type="password" class="form-control" ng-model="user.password" placeholder="Password" class="validate"/>     
+              <input type="password" class="form-control" ng-model="user.password" placeholder="Password" class="validate"/>
               <button class="btn btn-lg login-button btn-block" type="submit">Login</button>  
               <a href="register">Not registered?</a> 
           </form>

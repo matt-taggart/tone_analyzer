@@ -6,7 +6,6 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
-        console.log(result.data);
         $location.path('welcome');
       });
     }
@@ -23,6 +22,7 @@ angular.module('toneAnalyzer')
           $location.path('welcome');
         } else {
           $rootScope.isAuthenticated = false;
+          $scope.error = result.data.message;
         }
       });
     }
