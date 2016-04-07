@@ -1,6 +1,6 @@
 var googleCredentials = {
-  clientId:  '138716791581-csqro8n6ov7haaic420u3r7t41lja48q.apps.googleusercontent.com',
-  clientSecret: 'H0XCSwJoxxaYUBTw-e0jecNn',
+  clientId:  '138716791581-rsa9oacosg4e45opmcqj08qi3bp68m56.apps.googleusercontent.com',
+  clientSecret: 'zcnta7G9yOC8lwFXMt3ST5vm',
   callbackURL: 'http://localhost:3000/auth/google/callback'
 }
 

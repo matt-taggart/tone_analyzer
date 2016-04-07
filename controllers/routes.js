@@ -73,18 +73,24 @@ router.post('/login', function(req, res, next) {
 router.post('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login',
     , 'https://www.googleapis.com/auth/plus.profile.emails.read'] }))
 
-router.post('/auth/google/callback', function(req, res, next) {
-  passport.authenticate('google-auth', function(err, user, info) {
+// router.post('/auth/google/callback', function(req, res, next) {
+//   passport.authenticate('google-auth', function(err, user, info) {
 
-    if (err) {
-      return next(err); // will generate a 500 error
-    }
+//     if (err) {
+//       return next(err); // will generate a 500 error
+//     }
 
-    console.log(user);
-    console.log(info);
+//     console.log(user);
+//     console.log(info);
 
-  })(req, res, next);
-});
+//   })(req, res, next);
+// });
+
+router.get( '/auth/google/callback', 
+  passport.authenticate( 'google-auth', { 
+    successRedirect: '/auth/google/success',
+    failureRedirect: '/auth/google/failure'
+}));
 
 
 router.post('/logout', function(req, res) {
