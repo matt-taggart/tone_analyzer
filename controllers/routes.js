@@ -70,7 +70,7 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.post('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login',
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login',
     , 'https://www.googleapis.com/auth/plus.profile.emails.read'] }))
 
 // router.post('/auth/google/callback', function(req, res, next) {
@@ -92,6 +92,13 @@ router.get( '/auth/google/callback',
     failureRedirect: '/auth/google/failure'
 }));
 
+router.get('/auth/google/success', function(req, res) {
+  res.json('Great success!');
+});
+
+router.get('/auth/google/failure', function(req, res) {
+  res.json('Complete and utter failure');
+});
 
 router.post('/logout', function(req, res) {
   req.logout();
@@ -105,6 +112,5 @@ router.get('/user', function(req, res) {
 router.get('*', function(req, res) {
   res.sendFile(process.cwd() + '/public/views/index.html');
 });
-
 
 module.exports = router;

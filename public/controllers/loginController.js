@@ -27,15 +27,15 @@ angular.module('toneAnalyzer')
       });
     }
 
-    $scope.googleLogin = function() {
-      console.log('this clicked');
-      $http({
-        method: 'POST',
-        url: '/auth/google'
-      }).then(function(result) {
-        console.log(result);
-      });
-    }
+    // $scope.googleLogin = function() {
+    //   console.log('this clicked');
+    //   $http({
+    //     method: 'GET',
+    //     url: '/auth/google'
+    //   }).then(function(result) {
+    //     console.log(result);
+    //   });
+    // }
 
     $scope.logout = function() {
       $http({
@@ -59,5 +59,19 @@ angular.module('toneAnalyzer')
         $rootScope.isAuthenticated = false;
       }
     });
+
+    $http({
+      method: 'GET',
+      url: 'auth/google/success'
+    }).then(function(result) {
+      console.log(result);
+    });
+
+    $http({
+      method: 'GET',
+      url: 'auth/google/failure'
+    }).then(function(result) {
+      console.lo(result);
+    })
 
   });

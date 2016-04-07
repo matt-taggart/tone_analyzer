@@ -3,9 +3,9 @@
     <div class="panel panel-default" id="register-panel" ng-controller="loginController">
       <div class="panel-body">
         <div class="row">
-          <div class="form-signin" ng-click="googleLogin()">
+          <div class="form-signin">
             <h2 class="form-signin-heading">Sign Up</h2>
-            <button class="btn btn-lg login-button btn-block">Login With Gmail</button>  
+            <a href="auth/google" target="_self" class="btn btn-lg login-button btn-block">Login With Gmail</a>  
           </div> 
           <form ng-submit="register()" class="form-signin" autocomplete="off"> 
             <div class="strike">
