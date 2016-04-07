@@ -29,6 +29,9 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
+var googleUrl = require('./googleOAuth.js');
+console.log(googleUrl);
+
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -74,6 +77,14 @@ router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
 });
+
+// router.get('/auth/', function(req, res) {
+//   res.redirect('/auth/' + googleUrl);
+// });
+
+// router.get('/auth/:url', function(req, res) {
+//   console.log(req.params);
+// });
 
 router.get('/user', function(req, res) {
   res.json({ authenticated: req.isAuthenticated(), user: req.user });

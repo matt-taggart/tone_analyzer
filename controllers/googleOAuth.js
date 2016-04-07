@@ -13,4 +13,4 @@ var url = oauth2Client.generateAuthUrl({
   scope: scopes
 });
 
-console.log(url);
+module.exports = url;

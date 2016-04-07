@@ -1,6 +1,6 @@
 var googleCredentials = {
-  clientId:  '138716791581-csqro8n6ov7haaic420u3r7t41lja48q.apps.googleusercontent.com',
-  clientSecret: 'FS8m0OxlXO3RC_XESSACAUW1',
+  clientId:  '138716791581-rsa9oacosg4e45opmcqj08qi3bp68m56.apps.googleusercontent.com',
+  clientSecret: '2xUX-6XXjh6qIlGSK7oqR8Xx',
   callbackURL: 'http://toneanalyzer.dev:3000/auth/google/callback'
 }
 
