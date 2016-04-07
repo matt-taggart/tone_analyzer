@@ -17,7 +17,7 @@
     <input type='submit' ng-click='analyzeTone()'>
   </form>
 
-  <div ng-init='retrieveData()'>
+  <div>
     <ul ng-repeat='(key, value) in toneDatas'>
       <li><strong>Text to be analyzed</strong> </li>
       <li> {{value.content}} </li>
@@ -27,11 +27,11 @@
       <li ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
       <li><strong>Writing tone data</strong></li>
       <li ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-      <div id="{{value._id}}"> </div>
+      <div id="{{value._id}}" style="width:100%; height:400px;"></div>
     </ul>
   </div>
 
-  <div id="container" ng-model='highchart' style="width:100%; height:400px;" ng-init='chartGenerate()'></div>
+  <!-- <div id="container" ng-model='highchart' style="width:100%; height:400px;" ng-init='chartGenerate()'></div> -->
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
