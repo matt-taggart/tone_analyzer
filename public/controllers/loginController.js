@@ -60,18 +60,18 @@ angular.module('toneAnalyzer')
       }
     });
 
-    $http({
-      method: 'GET',
-      url: 'auth/google/success'
-    }).then(function(result) {
-      console.log(result);
-    });
+    // $http({
+    //   method: 'GET',
+    //   url: 'auth/google/success'
+    // }).then(function(result) {
+    //   console.log(result);
+    // });
 
-    $http({
-      method: 'GET',
-      url: 'auth/google/failure'
-    }).then(function(result) {
-      console.lo(result);
-    })
+    // $http({
+    //   method: 'GET',
+    //   url: 'auth/google/failure'
+    // }).then(function(result) {
+    //   console.log(result);
+    // });
 
   });
