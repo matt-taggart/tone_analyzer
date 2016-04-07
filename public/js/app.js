@@ -3,22 +3,28 @@ angular.module('toneAnalyzer', ['ui.router'])
   $urlRouterProvider.otherwise('/welcome');
 
   $stateProvider
-    //The Welcome Cards are Displayed
+    //Welcome Page
     .state('welcome', {
       url: '/welcome',
       templateUrl: 'partials/welcome.html'
     })
 
-    //the login display
+    //Login Page
     .state('login', {
       url: '/login',
       templateUrl: 'partials/login.html'
     })
 
-    //the signup display
+    //Register Page
     .state('register', {
       url: '/register',
       templateUrl: 'partials/register.html'
+    })
+
+    //Main Page
+    .state('main_page', {
+      url: '/main_page',
+      templateUrl: 'views/main_page.html'
     })
 
   $locationProvider.html5Mode({

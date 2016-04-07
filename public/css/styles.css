@@ -46,39 +46,23 @@ button {
   background: transparent;
 }
 
- /* Responsive Full Background Image Using CSS
- * Tutorial URL: http://sixrevisions.com/css/responsive-background-image/
-*/
 body {
-  /* Location of the image */
   background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
-  
-  /* Image is centered vertically and horizontally at all times */
   background-position: center center;
-  
-  /* Image doesn't repeat */
   background-repeat: no-repeat;
-  
-  /* Makes the image fixed in the viewport so that it doesn't move when 
-     the content height is greater than the image height */
   background-attachment: fixed;
-  
-  /* This is what makes the background image rescale based on its container's size */
   background-size: cover;
-  
-  /* Pick a solid background color that will be displayed while the background image is loading */
   background-color:#464646;
   
-  /* SHORTHAND CSS NOTATION
-   * background: url(background-photo.jpg) center center cover no-repeat fixed;
+  /* SHORTHAND CSS NOTATION some reason not working
+   * background: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95) center center cover no-repeat fixed;
    */
 }
+
 
 /* For mobile devices */
 /*@media only screen and (max-width: 767px) {
   body {
-     The file size of this background image is 93% smaller
-     * to improve page load speed on mobile internet connections 
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
 }*/
@@ -131,7 +115,7 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="text"]:hover {
+.form-signin input[type="text"]:focus{
   background-color: white;
   color: #000;
 }
@@ -144,7 +128,7 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="email"]:hover {
+.form-signin input[type="email"]:focus{
   background-color: white;
   color: #000;
 }
@@ -157,7 +141,7 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="password"]:hover {
+.form-signin input[type="password"]:focus{
   background-color: white;
   color: #000;
 }
@@ -175,7 +159,7 @@ input::-webkit-input-placeholder {
   border: 5px solid #fff;
 }
 
-.login-button {
+.login_signup-button {
   margin-bottom: 10px;
   background: transparent;
   color: #fff;
@@ -186,14 +170,22 @@ input::-webkit-input-placeholder {
   transition: background-color 0.5s ease;
 }
 
-.login-button:hover {
+.login_signup-button:hover {
   background-color: white;
   color: #000;
 }
 
-.form-control {
-  color: #fff;
+.login_signup-button:focus {
+  background-color: white;
+  color: #000;
+  outline: none;
+  border: none;
 }
+
+
+.form-control {
+/*  color: #fff;
+*/}
 
 .strike {
     display: block;
