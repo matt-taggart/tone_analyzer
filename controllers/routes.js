@@ -80,8 +80,25 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     console.log(user);
-    console.log(info);
-    // console.log(user._json.emails);
+
+    // Generate a JSON response reflecting authentication status
+    // if (!user) {
+    //   var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+    //   return res.json({ authenticated: user, message: errorMessage });
+    // }
+
+    if (!user) {
+      console.log(err);
+    }
+
+    // req.login(user, function(err) {
+    //   if (err) {
+    //     return next(err);
+    //   }
+    //   console.log(req.isAuthenticated());
+    //   return res.json({ authenticated: true, user: user });
+    // });  
+
 
   })(req, res, next);
 });

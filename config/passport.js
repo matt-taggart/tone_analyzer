@@ -80,7 +80,6 @@ module.exports = function(passport) {
     callbackURL: googleCredentials.callbackURL,
     passReqToCallback: true
   }, function(request, accessToken, refreshToken, profile, done) {
-    console.log(profile);
     User.findOne({ googleId: profile.id }, function(err, user) {
       if (err) {
         return err;
@@ -89,19 +88,24 @@ module.exports = function(passport) {
       if (user) {
         return done(null, user);
       } else {
-
-        var newGoogleUser = new googleUser({
+        console.log('this hit')
+        console.log(accessToken);
+        var newUser = new User({
           googleId: profile.id,
-          googleToken: request,
+          googleToken: accessToken,
           googleName: profile.displayName,
-          googleEmail: profile.emails.value
+          googleEmail: profile.emails[0].value
         });
 
-        newGoogleUser.save(function(err) {
+        newUser.save(function(err, userData) {
           if (err) {
+            console.log(err);
+            console.log('this hit 2');
             return err;
           } else {
-            return done(null, newGoogleUser)
+            console.log('this hit 3');
+            console.log(userData);
+            return done(null, userData)
           }
         });
       }
