@@ -65,7 +65,7 @@ router.post('/login', function(req, res, next) {
         return next(err);
       }
       console.log(req.isAuthenticated());
-      return res.json({ authenticated: true, user: user });
+      return res.json({ authenticated: req.isAuthenticated(), user: user });
     });      
   })(req, res, next);
 });
@@ -79,7 +79,6 @@ router.get('/auth/google/callback', function(req, res, next) {
       return next(err); // will generate a 500 error
     }
 
-    console.log(user);
 
     // Generate a JSON response reflecting authentication status
     // if (!user) {
@@ -91,13 +90,12 @@ router.get('/auth/google/callback', function(req, res, next) {
       console.log(err);
     }
 
-    // req.login(user, function(err) {
-    //   if (err) {
-    //     return next(err);
-    //   }
-    //   console.log(req.isAuthenticated());
-    //   return res.json({ authenticated: true, user: user });
-    // });  
+    req.login(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      return res.json({ authenticated: req.isAuthenticated(), user: user });
+    });  
 
 
   })(req, res, next);

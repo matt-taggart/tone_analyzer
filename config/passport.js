@@ -88,8 +88,6 @@ module.exports = function(passport) {
       if (user) {
         return done(null, user);
       } else {
-        console.log('this hit')
-        console.log(accessToken);
         var newUser = new User({
           googleId: profile.id,
           googleToken: accessToken,
@@ -99,12 +97,8 @@ module.exports = function(passport) {
 
         newUser.save(function(err, userData) {
           if (err) {
-            console.log(err);
-            console.log('this hit 2');
             return err;
           } else {
-            console.log('this hit 3');
-            console.log(userData);
             return done(null, userData)
           }
         });

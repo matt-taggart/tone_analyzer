@@ -26,17 +26,6 @@ angular.module('toneAnalyzer')
         }
       });
     }
-
-    // $scope.googleLogin = function() {
-    //   console.log('this clicked');
-    //   $http({
-    //     method: 'GET',
-    //     url: '/auth/google'
-    //   }).then(function(result) {
-    //     console.log(result);
-    //   });
-    // }
-
     $scope.logout = function() {
       $http({
         method: 'POST',
@@ -62,16 +51,16 @@ angular.module('toneAnalyzer')
 
     // $http({
     //   method: 'GET',
-    //   url: 'auth/google/success'
+    //   url: '/auth/google/callback'
     // }).then(function(result) {
-    //   console.log(result);
-    // });
-
-    // $http({
-    //   method: 'GET',
-    //   url: 'auth/google/failure'
-    // }).then(function(result) {
-    //   console.log(result);
+    //   console.log(result.data.user.googleName);
+    //   // if (result.data.authenticated) {
+    //   //   $rootScope.isAuthenticated = true;
+    //   //   $rootScope.username = result.data.user.firstname;
+    //   //   $location.path('welcome');
+    //   // } else {
+    //   //   $rootScope.isAuthenticated = false;
+    //   // }
     // });
 
   });
