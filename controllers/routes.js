@@ -5,8 +5,23 @@ var session = require('express-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
+
 var flash = require('connect-flash');
 var router = express.Router();
+
+var google = require('googleapis');
+var googleCredentials = require('../config/google-credentials.js')
+var OAuth2 = google.auth.OAuth2;
+
+var oauth2Client = new OAuth2(googleCredentials.clientId, googleCredentials.clientSecret, googleCredentials.callbackURL);
+var scopes = [
+  'https://www.googleapis.com/auth/gmail.readonly'
+];
+
+var url = oauth2Client.generateAuthUrl({
+  access_type: 'online',
+  scope: scopes
+});
 
 router.use(cookieParser());
 router.use(bodyParser.json());
@@ -78,16 +93,25 @@ router.post('/logout', function(req, res) {
   res.json(req.isAuthenticated());
 });
 
-// router.get('/auth/', function(req, res) {
-//   res.redirect('/auth/' + googleUrl);
-// });
-
-// router.get('/auth/:url', function(req, res) {
-//   console.log(req.params);
-// });
-
 router.get('/user', function(req, res) {
   res.json({ authenticated: req.isAuthenticated(), user: req.user });
+});
+
+router.get('/auth/google/:url', function(req, res) {
+  oauth2Client.getToken(req.query.code, function(err, tokens) {
+    // Now tokens contains an access_token and an optional refresh_token. Save them.
+    console.log(req.query.code);
+    console.log(tokens);
+    console.log(err);
+    if(!err) {
+      oauth2Client.setCredentials(tokens);
+      gmail.users.messages.get({ userId: 'tone.analyzer@gmail.com'}, function(err, data) {
+        if (!err) {
+          console.log(data);
+        }
+      });
+    }
+  });
 });
 
 router.get('*', function(req, res) {
