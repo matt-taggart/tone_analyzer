@@ -10,6 +10,8 @@ var flash = require('connect-flash');
 var router = express.Router();
 
 var google = require('googleapis');
+var googleAuth = require('google-auth-library');
+var auth = new googleAuth();
 var googleCredentials = require('../config/google-credentials.js')
 var OAuth2 = google.auth.OAuth2;
 
@@ -105,10 +107,12 @@ router.get('/auth/google/:url', function(req, res) {
     console.log(err);
     if(!err) {
       oauth2Client.setCredentials(tokens);
-      gmail.users.messages.get({ userId: 'tone.analyzer@gmail.com'}, function(err, data) {
-        if (!err) {
-          console.log(data);
-        }
+      var gmail = google.gmail('v1');
+      gmail.users.messages.list({ userId: 'me', auth: oauth2Client }, function(err, data) {
+          console.log(data.messages[0].id);
+          gmail.users.messages.get({ userId: 'me', id: '153ccde674f7eb07', auth: oauth2Client}, function(err, messages) {
+            console.log(messages);
+          });
       });
     }
   });
