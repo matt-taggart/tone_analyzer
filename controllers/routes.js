@@ -46,9 +46,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
-var googleUrl = require('./googleOAuth.js');
-console.log(googleUrl);
-
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -102,20 +99,21 @@ router.get('/user', function(req, res) {
 router.get('/auth/google/:url', function(req, res) {
   oauth2Client.getToken(req.query.code, function(err, tokens) {
     // Now tokens contains an access_token and an optional refresh_token. Save them.
-    console.log(req.query.code);
-    console.log(tokens);
-    console.log(err);
     if(!err) {
       oauth2Client.setCredentials(tokens);
       var gmail = google.gmail('v1');
       gmail.users.messages.list({ userId: 'me', auth: oauth2Client }, function(err, data) {
-          console.log(data.messages[0].id);
-          gmail.users.messages.get({ userId: 'me', id: '153ccde674f7eb07', auth: oauth2Client}, function(err, messages) {
-            console.log(messages);
+          gmail.users.messages.get({ userId: 'me', id: '153f1829ba65eda1', auth: oauth2Client}, function(err, messages) {
+            console.log(messages.snippet);
+            // res.redirect('/emails?data=' + messages.data);
           });
       });
     }
   });
+});
+
+router.get('/emails', function(req, res) {
+  console.log(req.query);
 });
 
 router.get('*', function(req, res) {

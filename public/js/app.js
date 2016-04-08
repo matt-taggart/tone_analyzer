@@ -1,6 +1,6 @@
 angular.module('toneAnalyzer', ['ui.router'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
-  // $urlRouterProvider.otherwise('/welcome');
+  $urlRouterProvider.otherwise('/welcome');
 
   $stateProvider
     //The Welcome Cards are Displayed

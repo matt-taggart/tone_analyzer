@@ -50,4 +50,11 @@ angular.module('toneAnalyzer')
       }
     });
 
+    // $http({
+    //   method: 'GET',
+    //   url: '/emails'
+    // }).then(function(result) {
+    //   console.log(result);
+    // });
+
   });
