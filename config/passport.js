@@ -89,11 +89,12 @@ module.exports = function(passport) {
       if (user) {
         return done(null, user);
       } else {
+
         var newGoogleUser = new googleUser({
           googleId: profile.id,
           googleToken: request,
           googleName: profile.displayName,
-          googleEmail: profile.emails[0].value
+          googleEmail: profile.emails.value
         });
 
         newGoogleUser.save(function(err) {

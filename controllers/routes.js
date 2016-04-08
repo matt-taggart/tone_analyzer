@@ -70,8 +70,7 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/gmail.readonly',
-    , 'https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/gmail.compose'] }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
@@ -80,6 +79,8 @@ router.get('/auth/google/callback', function(req, res, next) {
       return next(err); // will generate a 500 error
     }
 
+    console.log(user);
+    console.log(info);
     // console.log(user._json.emails);
 
   })(req, res, next);
