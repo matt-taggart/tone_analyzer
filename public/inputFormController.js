@@ -11,23 +11,10 @@ angular.module("toneDown")
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
-
-        var idArray = []
-
+        $scope.idArray = []
         angular.forEach($scope.toneDatas, function(value, key) {
           $scope.value = value._id
-          idArray.push({id: value._id, social_tone_data: value.social_tone_data})
-          for (var i = 0; i < idArray.length; i++) {
-            if (idArray[i].id === value._id) {
-              console.log(idArray[i].id)
-              $scope.socialToneName = []
-              $scope.socialToneScore = []
-              angular.forEach(value.social_tone_data, function(value, key) {
-                $scope.socialToneScore.push(value.tone_score)
-                $scope.socialToneName.push(value.tone_type)
-              });
-            }
-          }
+          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data})
         });
       });
     }
@@ -36,33 +23,40 @@ angular.module("toneDown")
     return {
       restrict: 'EA',
       templateUrl: 'chartRender.html',
-      link: function(scope, element, attrs){
-        console.log(scope)
-        console.log(element)
-        console.log(attrs)
-        console.log('in directive ' +scope.value._id)
-          $(element).highcharts({
-            chart: {
-                type: 'bar',
-            },
-            title: {
-                text: 'Tone Data'
-            },
-            xAxis: {
-                categories: scope.socialToneName
-            },
-            yAxis: {
-                title: {
-                    text: 'Social Tone Score'
-                }
-            },
-            series: [{
-                data: scope.socialToneScore
-            }]
-          });
+      link: function (scope, element, attrs){
+
+        var socialToneName = [];
+        var socialToneScore = [];
+
+        angular.forEach(scope.idArray, function(value, key) {
+          console.log(value.social_tone_data)
+          angular.forEach(value.social_tone_data, function(value, key) {
+            // console.log(value.tone_type)
+            // console.log(value.tone_score)
+            socialToneName.push(value.tone_type)
+            socialToneScore.push(value.tone_score)
+
+            $(element).highcharts({
+              chart: {
+                  type: 'bar',
+              },
+              title: {
+                  text: 'Tone Data'
+              },
+              xAxis: {
+                  categories: socialToneName
+              },
+              yAxis: {
+                  title: {
+                      text: 'Social Tone Score'
+                  }
+              },
+              series: [{
+                  data: socialToneScore
+              }]
+            });
+          })
+        })
         }
       }
-  })
-
-
-// var chart = new Highcharts.chart(chartInfo)
+  });
