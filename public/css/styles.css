@@ -21,6 +21,8 @@ a {
 
  }
 
+
+
 .startBtn {
   background: transparent;
   transition: background-color 0.5s ease;
@@ -46,8 +48,8 @@ button {
   background: transparent;
 }
 
-html, body {
-  height:100%;
+html, body, .container {
+  height: 100%;
 }
 
 .space {
@@ -73,7 +75,6 @@ html, body {
 }*/
 
 .side-panel {
-  position: fixed;
   height: 100%;
   background-color: #01579b ;
 }
@@ -202,17 +203,40 @@ input::-webkit-input-placeholder {
   border: none;
 }
 
-
 .tone_textarea, .tone_textarea:focus {
-  margin-top: 30px;
   border: 1px solid #fff !important;
   border-radius: 0px !important;
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   width: 90%;
-  margin-left: 20%;
-  
+}
+
+.container
+{
+    display:table;
+    width: 100%;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.row
+{
+    height: 100%;
+    display: table-row;
+}
+.col-xs-3.no-float, .col-xs-9.no-float {
+    float: none;
+}
+.col-xs-3
+{
+    display: table-cell;
+}
+.col-xs-9
+{
+    display: table-cell;
+      float: none;
 }
 
 .strike {
