@@ -60,7 +60,7 @@ a {
  /* margin-left: 450px;*/
   text-shadow: none;
   cursor: pointer;
- /*  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+ /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
  }
@@ -125,6 +125,7 @@ h3, h2 {
   letter-spacing: 0.2em;
   font-family: 'Lato', sans-serif;
 }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -236,7 +237,7 @@ input::-webkit-input-placeholder {
   margin-top: 5%
 }
 
-.container
+.nav-container
 {
     display:table;
     width: 100%;
@@ -245,7 +246,7 @@ input::-webkit-input-placeholder {
     box-sizing: border-box;
 }
 
-.row
+.nav-row
 {
     height: 100%;
     display: table-row;
