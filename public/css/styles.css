@@ -73,9 +73,18 @@ html, body {
 }*/
 
 .side-panel {
-  background-color: blue;
-  width: 20%;
+  position: fixed;
   height: 100%;
+  background-color: #01579b ;
+}
+
+.main_page_bkgrd {
+  background-color: #eceff1;
+  height: 100%;
+}
+
+.mainpge-title {
+  margin-left: 33%;
 }
 
 #register-panel {
@@ -195,12 +204,14 @@ input::-webkit-input-placeholder {
 
 
 .tone_textarea, .tone_textarea:focus {
-  margin-top: 60px;
+  margin-top: 30px;
   border: 1px solid #fff !important;
   border-radius: 0px !important;
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  width: 90%;
+  margin-left: 20%;
   
 }
 
