@@ -38,6 +38,20 @@ angular.module('toneAnalyzer')
 
     $http({
       method: 'GET',
+      url: '/auth/google/success'
+    }).then(function(result) {
+      if (result.data.authenticated) {
+        $rootScope.isAuthenticated = true;
+        $rootScope.username = result.data.user.firstname;
+        $location.path('welcome');
+      } else {
+        $rootScope.isAuthenticated = false;
+        $scope.error = result.data.message;
+      }
+    });
+
+    $http({
+      method: 'GET',
       url: '/user'
     }).then(function(result) {
       if (result.data.authenticated) {
@@ -48,19 +62,5 @@ angular.module('toneAnalyzer')
         $rootScope.isAuthenticated = false;
       }
     });
-
-    // $http({
-    //   method: 'GET',
-    //   url: '/auth/google/callback'
-    // }).then(function(result) {
-    //   console.log(result.data.user.googleName);
-    //   // if (result.data.authenticated) {
-    //   //   $rootScope.isAuthenticated = true;
-    //   //   $rootScope.username = result.data.user.firstname;
-    //   //   $location.path('welcome');
-    //   // } else {
-    //   //   $rootScope.isAuthenticated = false;
-    //   // }
-    // });
 
   });

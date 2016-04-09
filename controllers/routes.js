@@ -94,21 +94,17 @@ router.get('/auth/google/callback', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      return res.json({ authenticated: req.isAuthenticated(), user: user });
+      var firstName = user.googleName;
+      req.session.userData = { authenticated: req.isAuthenticated(), user: firstName };
+      res.redirect('/auth/google/success');
     });  
 
 
   })(req, res, next);
 });
 
-// router.get( '/auth/google/callback', 
-//   passport.authenticate( 'google-auth', { 
-//     successRedirect: '/auth/google/success',
-//     failureRedirect: '/auth/google/failure'
-// }));
-
 router.get('/auth/google/success', function(req, res) {
-  res.json('Great success!');
+  res.json(req.session.userData);
 });
 
 router.get('/auth/google/failure', function(req, res) {

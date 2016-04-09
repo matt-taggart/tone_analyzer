@@ -84,14 +84,13 @@ module.exports = function(passport) {
       if (err) {
         return err;
       }
-
       if (user) {
         return done(null, user);
       } else {
         var newUser = new User({
           googleId: profile.id,
           googleToken: accessToken,
-          googleName: profile.displayName,
+          googleName: profile.name.givenName,
           googleEmail: profile.emails[0].value
         });
 
