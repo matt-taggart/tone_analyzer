@@ -44,6 +44,32 @@ a {
   background-color: white;
 }
 
+.analyzeBtn {
+  background: transparent;
+  transition: background-color 0.5s ease;
+  border-radius: 0;
+  letter-spacing: .2em;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  padding: 20px;
+  color: #01579b;
+  border: 2px solid #01579b;
+  margin: 20px;
+ /* margin-left: 450px;*/
+  text-shadow: none;
+  cursor: pointer;
+ /*  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
+ }
+
+ .hover-button:hover {
+  background-color: #01579b;
+  color: #fff;
+ }
+
 button {
   background: transparent;
 }
@@ -84,9 +110,7 @@ html, body, .container {
   height: 100%;
 }
 
-.mainpge-title {
-  margin-left: 33%;
-}
+
 
 #register-panel {
   margin-top: 60px;
@@ -209,7 +233,7 @@ input::-webkit-input-placeholder {
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  width: 90%;
+  margin-top: 5%
 }
 
 .container
@@ -226,6 +250,7 @@ input::-webkit-input-placeholder {
     height: 100%;
     display: table-row;
 }
+
 .col-xs-3.no-float, .col-xs-9.no-float {
     float: none;
 }
