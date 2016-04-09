@@ -46,13 +46,18 @@ button {
   background: transparent;
 }
 
-body {
+html, body {
+  height:100%;
+}
+
+.space {
   background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   background-color:#464646;
+  height: 100%;
   
   /* SHORTHAND CSS NOTATION some reason not working
    * background: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95) center center cover no-repeat fixed;
@@ -66,6 +71,12 @@ body {
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
 }*/
+
+.side-panel {
+  background-color: blue;
+  width: 20%;
+  height: 100%;
+}
 
 #register-panel {
   margin-top: 60px;
@@ -183,24 +194,14 @@ input::-webkit-input-placeholder {
 }
 
 
-.tone_textarea {
+.tone_textarea, .tone_textarea:focus {
   margin-top: 60px;
   border: 1px solid #fff !important;
   border-radius: 0px !important;
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-}
-
-.tone_textarea:focus {
-  margin-top: 60px;
-  border: 1px solid #fff !important;
-  border-radius: 0px !important;
-  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  outline: none;
-  border: none;
+  
 }
 
 .strike {

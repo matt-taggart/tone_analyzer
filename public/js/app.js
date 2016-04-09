@@ -24,7 +24,7 @@ angular.module('toneAnalyzer', ['ui.router'])
     //Main Page
     .state('main_page', {
       url: '/main_page',
-      templateUrl: 'views/main_page.html'
+      templateUrl: 'partials/main_page.html'
     })
 
   $locationProvider.html5Mode({
