@@ -24,6 +24,7 @@ angular.module("toneDown")
       restrict: 'EA',
       templateUrl: 'chartRender.html',
       link: function (scope, element, attrs){
+
         var socialToneDataType = [];
         var socialToneDataScore = [];
 
@@ -53,13 +54,9 @@ angular.module("toneDown")
             }
 
             socialToneDataScore.push(socialtoneScoreElements)
-            // console.log(socialToneDataScore)
             socialToneDataType.push(socialtoneNameElements)
-            // console.log(socialToneDataType)
             emotionToneDataType.push(emotiontoneNameElements)
             emotionToneDataScore.push(emotiontoneScoreElements)
-            // console.log(emotionToneDataType)
-            // console.log(emotionToneDataScore)
 
               $(element).highcharts({
                 chart: {
@@ -101,7 +98,10 @@ angular.module("toneDown")
               //   },
               //   series: [{
               //       data: emotionToneDataScore[attrs.chartindex]
-              //   }]
+              //   }],
+              //   legend: {
+              //     enabled: false
+              //   }
               // });
           }
         }
