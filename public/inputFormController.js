@@ -52,57 +52,54 @@ angular.module("toneDown")
               emotiontoneScoreElements.push(scope.idArray[i].emotion_tone_data[j].tone_score)
               emotiontoneNameElements.push(scope.idArray[i].emotion_tone_data[j].tone_type)
             }
+            for (var j = 0; j < scope.idArray[i].writing_tone_data.length; j++) {  
+              writingtoneScoreElements.push(scope.idArray[i].writing_tone_data[j].tone_score)
+              writingtoneNameElements.push(scope.idArray[i].writing_tone_data[j].tone_type)
+            }
 
             socialToneDataScore.push(socialtoneScoreElements)
             socialToneDataType.push(socialtoneNameElements)
             emotionToneDataType.push(emotiontoneNameElements)
             emotionToneDataScore.push(emotiontoneScoreElements)
+            writingToneDataType.push(writingtoneNameElements)
+            writingToneDataScore.push(writingtoneScoreElements)
 
               $(element).highcharts({
-                chart: {
-                    type: 'bar',
-                },
+                // chart: {
+                //     type: 'bar',
+                // },
                 title: {
-                    text: 'Social Tone Trends'
+                    text: 'Tone Analysis'
                 },
-                xAxis: {
+                xAxis: [{
                     categories: socialToneDataType[attrs.chartindex]
-                },
+                  }, {
+                    categories: emotionToneDataType[attrs.chartindex]
+                  }, {
+                    categories: writingToneDataType[attrs.chartindex]
+                  }],
                 yAxis: {
                     title: {
-                        text: 'Social Tone Score'
+                        text: 'Tone Score'
                     }
                 },
                 series: [{
-                    data: socialToneDataScore[attrs.chartindex]
+                    data: socialToneDataScore[attrs.chartindex],
+                    name: 'Social Tone Trends',
+                    type: 'column',
+                    xAxis: 0
+                  }, {
+                    data: emotionToneDataScore[attrs.chartindex],
+                    name: 'Emotional Tone Trend',
+                    type: 'column',
+                    xAxis: 1
+                }, {
+                    data: writingToneDataScore[attrs.chartindex],
+                    name: 'Writing Tone Trend',
+                    type: 'column',
+                    xAxis: 2
                 }],
-                legend: {
-                  enabled: false
-                }
               });
-
-              // $(element).highcharts({
-              //   chart: {
-              //       type: 'bar',
-              //   },
-              //   title: {
-              //       text: 'Emotional Tone Trends'
-              //   },
-              //   xAxis: {
-              //       categories: emotionToneDataType[attrs.chartindex]
-              //   },
-              //   yAxis: {
-              //       title: {
-              //           text: 'Emotion Tone Score'
-              //       }
-              //   },
-              //   series: [{
-              //       data: emotionToneDataScore[attrs.chartindex]
-              //   }],
-              //   legend: {
-              //     enabled: false
-              //   }
-              // });
           }
         }
       }
