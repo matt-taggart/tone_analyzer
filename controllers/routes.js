@@ -29,6 +29,15 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
+//Define a middleware function to be used for every secured route
+var auth = function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.send(401);
+  } else {
+    next();
+  }
+}
+
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -70,6 +79,12 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
+router.get('/loggedin', function(req, res) {
+  // console.log(req.isAuthenticated());
+  // console.log(req.user);
+  res.send(req.isAuthenticated() ? req.user : '0');
+})
+
 router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
 
 router.get('/auth/google/callback', function(req, res, next) {
@@ -103,22 +118,13 @@ router.get('/auth/google/callback', function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/auth/google/success', function(req, res) {
-  res.json(req.session.userData);
-});
-
-router.get('/auth/google/failure', function(req, res) {
-  res.json('Complete and utter failure');
-});
 
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
+  res.send(200);
 });
 
-router.get('/user', function(req, res) {
-  res.json({ authenticated: req.isAuthenticated(), user: req.user });
-});
 
 router.get('*', function(req, res) {
   res.sendFile(process.cwd() + '/public/views/index.html');
