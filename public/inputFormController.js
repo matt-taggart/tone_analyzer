@@ -14,7 +14,7 @@ angular.module("toneDown")
         $scope.idArray = [];
         angular.forEach($scope.toneDatas, function(value, key) {
           $scope.value = value._id
-          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data})
+          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
         });
       });
     }
@@ -27,24 +27,46 @@ angular.module("toneDown")
         var socialToneDataType = [];
         var socialToneDataScore = [];
 
+        var writingToneDataType = [];
+        var writingToneDataScore = [];
+
+        var emotionToneDataType = [];
+        var emotionToneDataScore = [];
+
+
           for (var i = 0; i < scope.idArray.length; i++) {
-           var toneScoreElements = [];
-           var toneNameElements = [];
+           var socialtoneScoreElements = [];
+           var socialtoneNameElements = [];
+
+           var writingtoneScoreElements = [];
+           var writingtoneNameElements = [];
+
+           var emotiontoneScoreElements = [];
+           var emotiontoneNameElements = [];
             for (var j = 0; j < scope.idArray[i].social_tone_data.length; j++) {  
-              toneScoreElements.push(scope.idArray[i].social_tone_data[j].tone_score)
-              toneNameElements.push(scope.idArray[i].social_tone_data[j].tone_type)
+              socialtoneScoreElements.push(scope.idArray[i].social_tone_data[j].tone_score)
+              socialtoneNameElements.push(scope.idArray[i].social_tone_data[j].tone_type)
             }
-            socialToneDataScore.push(toneScoreElements)
-            console.log(socialToneDataScore)
-            socialToneDataType.push(toneNameElements)
-            console.log(socialToneDataType)
+            for (var j = 0; j < scope.idArray[i].emotion_tone_data.length; j++) {  
+              emotiontoneScoreElements.push(scope.idArray[i].emotion_tone_data[j].tone_score)
+              emotiontoneNameElements.push(scope.idArray[i].emotion_tone_data[j].tone_type)
+            }
+
+            socialToneDataScore.push(socialtoneScoreElements)
+            // console.log(socialToneDataScore)
+            socialToneDataType.push(socialtoneNameElements)
+            // console.log(socialToneDataType)
+            emotionToneDataType.push(emotiontoneNameElements)
+            emotionToneDataScore.push(emotiontoneScoreElements)
+            // console.log(emotionToneDataType)
+            // console.log(emotionToneDataScore)
 
               $(element).highcharts({
                 chart: {
                     type: 'bar',
                 },
                 title: {
-                    text: 'Tone Data'
+                    text: 'Social Tone Trends'
                 },
                 xAxis: {
                     categories: socialToneDataType[attrs.chartindex]
@@ -56,8 +78,31 @@ angular.module("toneDown")
                 },
                 series: [{
                     data: socialToneDataScore[attrs.chartindex]
-                }]
+                }],
+                legend: {
+                  enabled: false
+                }
               });
+
+              // $(element).highcharts({
+              //   chart: {
+              //       type: 'bar',
+              //   },
+              //   title: {
+              //       text: 'Emotional Tone Trends'
+              //   },
+              //   xAxis: {
+              //       categories: emotionToneDataType[attrs.chartindex]
+              //   },
+              //   yAxis: {
+              //       title: {
+              //           text: 'Emotion Tone Score'
+              //       }
+              //   },
+              //   series: [{
+              //       data: emotionToneDataScore[attrs.chartindex]
+              //   }]
+              // });
           }
         }
       }

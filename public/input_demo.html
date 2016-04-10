@@ -27,7 +27,7 @@
       <li ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
       <li><strong>Writing tone data</strong></li>
       <li ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-      <draw-chart chartIndex={{$index}}></draw-chart>
+      <draw-chart id= {{value._id}} chartIndex={{$index}}></draw-chart>
     </ul>
   </div>
 
