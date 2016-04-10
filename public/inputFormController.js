@@ -11,7 +11,7 @@ angular.module("toneDown")
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
-        $scope.idArray = []
+        $scope.idArray = [];
         angular.forEach($scope.toneDatas, function(value, key) {
           $scope.value = value._id
           $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data})
@@ -24,39 +24,41 @@ angular.module("toneDown")
       restrict: 'EA',
       templateUrl: 'chartRender.html',
       link: function (scope, element, attrs){
+        var socialToneDataType = [];
+        var socialToneDataScore = [];
 
-        var socialToneName = [];
-        var socialToneScore = [];
+          for (var i = 0; i < scope.idArray.length; i++) {
+           var toneScoreElements = [];
+           var toneNameElements = [];
+            for (var j = 0; j < scope.idArray[i].social_tone_data.length; j++) {  
+              toneScoreElements.push(scope.idArray[i].social_tone_data[j].tone_score)
+              toneNameElements.push(scope.idArray[i].social_tone_data[j].tone_type)
+            }
+            socialToneDataScore.push(toneScoreElements)
+            console.log(socialToneDataScore)
+            socialToneDataType.push(toneNameElements)
+            console.log(socialToneDataType)
 
-        angular.forEach(scope.idArray, function(value, key) {
-          console.log(value.social_tone_data)
-          angular.forEach(value.social_tone_data, function(value, key) {
-            // console.log(value.tone_type)
-            // console.log(value.tone_score)
-            socialToneName.push(value.tone_type)
-            socialToneScore.push(value.tone_score)
-
-            $(element).highcharts({
-              chart: {
-                  type: 'bar',
-              },
-              title: {
-                  text: 'Tone Data'
-              },
-              xAxis: {
-                  categories: socialToneName
-              },
-              yAxis: {
-                  title: {
-                      text: 'Social Tone Score'
-                  }
-              },
-              series: [{
-                  data: socialToneScore
-              }]
-            });
-          })
-        })
+              $(element).highcharts({
+                chart: {
+                    type: 'bar',
+                },
+                title: {
+                    text: 'Tone Data'
+                },
+                xAxis: {
+                    categories: socialToneDataType[attrs.chartindex]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Social Tone Score'
+                    }
+                },
+                series: [{
+                    data: socialToneDataScore[attrs.chartindex]
+                }]
+              });
+          }
         }
       }
   });
