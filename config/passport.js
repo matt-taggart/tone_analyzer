@@ -1,6 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
-var bcrypt = require('bcryptjs');
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var User = require('../models/users.js');
+var googleUser = require('../models/googleOAuth.js');
+var googleCredentials = require('./google-credentials.js');
+var bcrypt = require('bcryptjs');
 
 module.exports = function(passport) {
 
@@ -69,6 +72,39 @@ module.exports = function(passport) {
      }
 
     });
+  }));
+
+  passport.use('google-auth', new GoogleStrategy({
+    clientID: googleCredentials.clientId,
+    clientSecret: googleCredentials.clientSecret,
+    callbackURL: googleCredentials.callbackURL,
+    passReqToCallback: true
+  }, function(request, accessToken, refreshToken, profile, done) {
+    User.findOne({ googleId: profile.id }, function(err, user) {
+      if (err) {
+        return err;
+      }
+      if (user) {
+        return done(null, user);
+      } else {
+        var newUser = new User({
+          googleId: profile.id,
+          googleToken: accessToken,
+          googleName: profile.name.givenName,
+          googleEmail: profile.emails[0].value
+        });
+
+        newUser.save(function(err, userData) {
+          if (err) {
+            return err;
+          } else {
+            return done(null, userData)
+          }
+        });
+      }
+
+    });
+
   }));
 
 };

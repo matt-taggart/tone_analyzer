@@ -6,7 +6,7 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
-        $location.path('welcome');
+        $location.path('/welcome');
       });
     }
 
@@ -16,15 +16,12 @@ angular.module('toneAnalyzer')
         url: '/login',
         data: $scope.user
       }).then(function(result) {
-        if (result.data.authenticated) {
-          $rootScope.isAuthenticated = true;
-          $rootScope.username = result.data.user.firstname;
-          $location.path('welcome');
-        } else {
-          $rootScope.isAuthenticated = false;
-          $scope.error = result.data.message;
-        }
+        $location.path('/welcome');
       });
+    }
+
+    $scope.googleLogin = function() {
+      $window.open('/auth/google', '_self');
     }
 
     $scope.logout = function() {
@@ -33,21 +30,8 @@ angular.module('toneAnalyzer')
         url: '/logout'
       }).then(function(result) {
         $rootScope.isAuthenticated = result.data;
-        $location.path('welcome');
+        $location.path('/welcome');
       });
     }
-
-    $http({
-      method: 'GET',
-      url: '/user'
-    }).then(function(result) {
-      if (result.data.authenticated) {
-        $rootScope.isAuthenticated = true;
-        $rootScope.username = result.data.user.firstname;
-        $location.path('welcome');
-      } else {
-        $rootScope.isAuthenticated = false;
-      }
-    });
 
   });
