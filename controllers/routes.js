@@ -29,11 +29,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
-// router.post('/register', passport.authenticate('register'), function(req, res) {
-//   res.json(req.user);
-// });
-
-
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -69,24 +64,56 @@ router.post('/login', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      console.log(req.isAuthenticated());
-      return res.json({ authenticated: true, user: user });
+      return res.json('Success');
     });      
   })(req, res, next);
 });
+
+router.get('/loggedin', function(req, res) {
+  res.json(req.isAuthenticated() ? req.user : '0');
+})
+
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
+
+router.get('/auth/google/callback', function(req, res, next) {
+  passport.authenticate('google-auth', function(err, user, info) {
+
+    if (err) {
+      return next(err); // will generate a 500 error
+    }
+
+
+    // Generate a JSON response reflecting authentication status
+    // if (!user) {
+    //   var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+    //   return res.json({ authenticated: user, message: errorMessage });
+    // }
+
+    if (!user) {
+      console.log(err);
+    }
+
+    req.login(user, function(err) {
+      if (err) {
+        return next(err);
+      }
+      var firstName = user.googleName;
+      res.redirect('/welcome');
+    });  
+
+
+  })(req, res, next);
+});
+
 
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
 });
 
-router.get('/user', function(req, res) {
-  res.json({ authenticated: req.isAuthenticated(), user: req.user });
-});
 
 router.get('*', function(req, res) {
   res.sendFile(process.cwd() + '/public/views/index.html');
 });
-
 
 module.exports = router;
