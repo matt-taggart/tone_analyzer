@@ -16,14 +16,6 @@ angular.module('toneAnalyzer')
         url: '/login',
         data: $scope.user
       }).then(function(result) {
-        // if (result.data.authenticated) {
-        //   $rootScope.isAuthenticated = true;
-        //   $rootScope.username = result.data.user.firstname;
-        //   $location.path('welcome');
-        // } else {
-        //   $rootScope.isAuthenticated = false;
-        //   $scope.error = result.data.message;
-        // }
         $location.path('/welcome');
       });
     }
@@ -41,20 +33,5 @@ angular.module('toneAnalyzer')
         $location.path('/welcome');
       });
     }
-
-    // $http({
-    //   method: 'GET',
-    //   url: '/auth/google/success'
-    // }).then(function(result) {
-    //   if (result.data.authenticated) {
-    //     $rootScope.isAuthenticated = true;
-    //     $rootScope.username = result.data.user.firstname;
-    //     $location.path('welcome');
-    //   } else {
-    //     $rootScope.isAuthenticated = false;
-    //     $scope.error = result.data.message;
-    //   }
-    // });
-
 
   });

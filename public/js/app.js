@@ -28,8 +28,13 @@ angular.module('toneAnalyzer', ['ui.router'])
     return {
       response: function(response) {
         if (typeof response.data === 'object') {
-          $rootScope.isAuthenticated = true;
-          $rootScope.username = response.data.firstname
+          if (response.data.googleName) {
+            $rootScope.isAuthenticated = true;
+            $rootScope.username = response.data.googleName;
+          } else {
+            $rootScope.isAuthenticated = true;
+            $rootScope.username = response.data.firstname
+          }
         }
         return response;
       },

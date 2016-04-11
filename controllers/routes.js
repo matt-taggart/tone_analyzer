@@ -64,8 +64,7 @@ router.post('/login', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      console.log(req.isAuthenticated());
-      return res.json({ authenticated: req.isAuthenticated(), user: user });
+      return res.json('Success');
     });      
   })(req, res, next);
 });
@@ -99,8 +98,7 @@ router.get('/auth/google/callback', function(req, res, next) {
         return next(err);
       }
       var firstName = user.googleName;
-      req.session.userData = { authenticated: req.isAuthenticated(), user: firstName };
-      res.redirect('/auth/google/success');
+      res.redirect('/welcome');
     });  
 
 
