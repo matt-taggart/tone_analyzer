@@ -21,8 +21,6 @@ a {
 
  }
 
-
-
 .startBtn {
   background: transparent;
   transition: background-color 0.5s ease;
@@ -93,24 +91,22 @@ html, body, .container {
 }
 
 
-/* For mobile devices */
+/* Mobile devices */
 /*@media only screen and (max-width: 767px) {
   body {
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
 }*/
 
-.side-panel {
+/*.side-panel {
   height: 100%;
   background-color: #01579b ;
 }
 
 .main_page_bkgrd {
   background-color: #eceff1;
-  height: 100%;
 }
-
-
+*/
 
 #register-panel {
   margin-top: 60px;
@@ -237,7 +233,7 @@ input::-webkit-input-placeholder {
   margin-top: 5%
 }
 
-.nav-container
+/*.nav-container
 {
     display:table;
     width: 100%;
@@ -263,7 +259,7 @@ input::-webkit-input-placeholder {
 {
     display: table-cell;
       float: none;
-}
+}*/
 
 .strike {
     display: block;
