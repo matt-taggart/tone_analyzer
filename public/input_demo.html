@@ -27,7 +27,7 @@
       <li ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
       <li><strong>Writing tone data</strong></li>
       <li ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-      <draw-chart chartIndex={{$index}} id="thisChart{{$index}}" ></draw-chart>
+      <draw-chart chartIndex={{$index}} ></draw-chart>
     </ul>
   </div>
 
@@ -36,5 +36,6 @@
   <script type="text/javascript" src="./app.js"></script>
   <script type="text/javascript" src="./inputFormController.js"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script type="text/javascript" src="./grouped-categories.js"></script>
 </body>
 </html>

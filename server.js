@@ -80,10 +80,6 @@ app.post('/tonetext', function(req, res) {
   });
 })
 
-// app.get('*', function(req, res) {
-//   res.sendFile(process.cwd() + '/public/views/index.html');
-// });
-
 app.get('/demobox', function(req, res){
   res.sendFile(__dirname+ '/public/input_demo.html')
 })

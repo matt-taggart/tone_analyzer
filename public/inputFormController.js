@@ -64,42 +64,45 @@ angular.module("toneDown")
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
-              $(element).highcharts({
-                // chart: {
-                //     type: 'bar',
-                // },
-                title: {
-                    text: 'Tone Analysis'
-                },
-                xAxis: [{
-                    categories: socialToneDataType[attrs.chartindex]
-                  }, {
-                    categories: emotionToneDataType[attrs.chartindex]
-                  }, {
-                    categories: writingToneDataType[attrs.chartindex]
-                  }],
-                yAxis: {
-                    title: {
-                        text: 'Tone Score'
-                    }
-                },
-                series: [{
-                    data: socialToneDataScore[attrs.chartindex],
-                    name: 'Social Tone Trends',
-                    type: 'column',
-                    xAxis: 0
-                  }, {
-                    data: emotionToneDataScore[attrs.chartindex],
-                    name: 'Emotional Tone Trend',
-                    type: 'column',
-                    xAxis: 1
+            $(element).highcharts({
+              title: {
+                  text: 'Tone Analysis'
+              },
+              xAxis: [{
+                  name: 'Social Tone Data',
+                  categories: socialToneDataType[attrs.chartindex]
                 }, {
-                    data: writingToneDataScore[attrs.chartindex],
-                    name: 'Writing Tone Trend',
-                    type: 'column',
-                    xAxis: 2
+                  name: 'Emotion Tone Data',
+                  categories: emotionToneDataType[attrs.chartindex]
+                }, {
+                  name: 'Writing Tone Data',
+                  categories: writingToneDataType[attrs.chartindex]
                 }],
-              });
+              yAxis: {
+                  title: {
+                      text: 'Tone Score'
+                  }
+              },
+              series: [{
+                  data: socialToneDataScore[attrs.chartindex],
+                  name: 'Social Tone Trend',
+                  type: 'column',
+                  maxPointWidth: 15,
+                  xAxis: 0
+                }, {
+                  data: emotionToneDataScore[attrs.chartindex],
+                  name: 'Emotional Tone Trend',
+                  type: 'column',
+                  maxPointWidth: 15,
+                  xAxis: 1
+                }, {
+                  data: writingToneDataScore[attrs.chartindex],
+                  name: 'Writing Tone Trend',
+                  type: 'column',
+                  maxPointWidth: 15,
+                  xAxis: 2
+              }],
+            });
           }
         }
       }
