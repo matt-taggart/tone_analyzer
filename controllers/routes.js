@@ -29,15 +29,6 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
-//Define a middleware function to be used for every secured route
-var auth = function(req, res, next) {
-  if (!req.isAuthenticated()) {
-    res.send(401);
-  } else {
-    next();
-  }
-}
-
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
@@ -79,9 +70,7 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/loggedin', auth, function(req, res) {
-  // console.log(req.isAuthenticated());
-  // console.log(req.user);
+router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 })
 
