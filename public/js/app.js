@@ -9,24 +9,29 @@ angular.module('toneAnalyzer', ['ui.router'])
     var deferred = $q.defer();
 
     //Make an ajax call to check if user is logged in 
-    $http.get('/loggedin').success(function(user) {
+    $http({
+      method: 'GET',
+      url: '/loggedin'
+    }).then(function(user) {
       if (user !== '0') {
-        console.log(user);
         deferred.resolve();
       } else {
         $rootScope.message = 'You need to log in';
         deferred.reject();
-        $location.path('/login');
+        $location.path('login');
       }
     });
 
     return deferred.promise;
   }
 
-  $httpProvider.interceptors.push(function($q, $location) {
+  $httpProvider.interceptors.push(function($q, $location, $rootScope) {
     return {
       response: function(response) {
-        console.log('hello');
+        if (typeof response.data === 'object') {
+          $rootScope.isAuthenticated = true;
+          $rootScope.username = response.data.firstname
+        }
         return response;
       },
       responseError: function(response) {

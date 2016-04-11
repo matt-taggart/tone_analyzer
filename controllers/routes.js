@@ -82,7 +82,7 @@ router.post('/login', function(req, res, next) {
 router.get('/loggedin', function(req, res) {
   // console.log(req.isAuthenticated());
   // console.log(req.user);
-  res.send(req.isAuthenticated() ? req.user : '0');
+  res.json(req.isAuthenticated() ? req.user : '0');
 })
 
 router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
@@ -122,7 +122,6 @@ router.get('/auth/google/callback', function(req, res, next) {
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
-  res.send(200);
 });
 
 
