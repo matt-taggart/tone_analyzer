@@ -103,11 +103,10 @@ html, body, .container {
   background-color: #01579b ;
 }
 
-*/
-
 .main_page_bkgrd {
   background-color: #eceff1;
 }
+*/
 
 #register-panel {
   margin-top: 60px;
@@ -403,12 +402,13 @@ span, a {
 
 .draft_links {
   margin-top: 0px;
+}
 
- }
-
- .yo {
-  width: 50%;
- }
+.mainpge-title {
+  color: #01579b;
+  text-transform: uppercase;
+  text-shadow: none;
+}
 
 @media(min-width:768px) {
     #wrapper {
