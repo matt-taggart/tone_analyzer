@@ -42,46 +42,71 @@ a {
   background-color: white;
 }
 
+.analyzeBtn {
+  background: transparent;
+  transition: background-color 0.5s ease;
+  border-radius: 0;
+  letter-spacing: .2em;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  padding: 20px;
+  color: #01579b;
+  border: 2px solid #01579b;
+  margin: 20px;
+ /* margin-left: 450px;*/
+  text-shadow: none;
+  cursor: pointer;
+ /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
+ }
+
+ .hover-button:hover {
+  background-color: #01579b;
+  color: #fff;
+ }
+
 button {
   background: transparent;
 }
 
- /* Responsive Full Background Image Using CSS
- * Tutorial URL: http://sixrevisions.com/css/responsive-background-image/
-*/
-body {
-  /* Location of the image */
+html, body, .container {
+  height: 100%;
+}
+
+.space {
   background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
-  
-  /* Image is centered vertically and horizontally at all times */
   background-position: center center;
-  
-  /* Image doesn't repeat */
   background-repeat: no-repeat;
-  
-  /* Makes the image fixed in the viewport so that it doesn't move when 
-     the content height is greater than the image height */
   background-attachment: fixed;
-  
-  /* This is what makes the background image rescale based on its container's size */
   background-size: cover;
-  
-  /* Pick a solid background color that will be displayed while the background image is loading */
   background-color:#464646;
+  height: 100%;
   
-  /* SHORTHAND CSS NOTATION
-   * background: url(background-photo.jpg) center center cover no-repeat fixed;
+  /* SHORTHAND CSS NOTATION some reason not working
+   * background: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95) center center cover no-repeat fixed;
    */
 }
 
-/* For mobile devices */
+
+/* Mobile devices */
 /*@media only screen and (max-width: 767px) {
   body {
-     The file size of this background image is 93% smaller
-     * to improve page load speed on mobile internet connections 
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
 }*/
+
+/*.side-panel {
+  height: 100%;
+  background-color: #01579b ;
+}
+
+.main_page_bkgrd {
+  background-color: #eceff1;
+}
+*/
 
 #register-panel {
   margin-top: 60px;
@@ -96,6 +121,7 @@ h3, h2 {
   letter-spacing: 0.2em;
   font-family: 'Lato', sans-serif;
 }
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -131,7 +157,7 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="text"]:hover {
+.form-signin input[type="text"]:focus{
   background-color: white;
   color: #000;
 }
@@ -144,7 +170,7 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="email"]:hover {
+.form-signin input[type="email"]:focus{
   background-color: white;
   color: #000;
 }
@@ -157,13 +183,16 @@ h3, h2 {
   transition: background-color 0.5s ease;
 }
 
-.form-signin input[type="password"]:hover {
+.form-signin input[type="password"]:focus{
   background-color: white;
   color: #000;
 }
 
 input::-webkit-input-placeholder {
-    color: #fff !important;
+  color: #fff !important;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
 }
 
 .panel {
@@ -172,22 +201,64 @@ input::-webkit-input-placeholder {
   border: 5px solid #fff;
 }
 
-.login-button {
+.login_signup-button {
   margin-bottom: 10px;
   background: transparent;
   color: #fff;
   border: 2px solid #fff;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
   transition: background-color 0.5s ease;
 }
 
-.login-button:hover {
+.login_signup-button:hover {
   background-color: white;
   color: #000;
 }
 
-.form-control {
-  color: #fff;
+.login_signup-button:focus {
+  background-color: white;
+  color: #000;
+  outline: none;
+  border: none;
 }
+
+.tone_textarea, .tone_textarea:focus {
+  border: 1px solid #fff !important;
+  border-radius: 0px !important;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+}
+
+/*.nav-container
+{
+    display:table;
+    width: 100%;
+    padding: 0;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.nav-row
+{
+    height: 100%;
+    display: table-row;
+}
+
+.col-xs-3.no-float, .col-xs-9.no-float {
+    float: none;
+}
+.col-xs-3
+{
+    display: table-cell;
+}
+.col-xs-9
+{
+    display: table-cell;
+      float: none;
+}*/
 
 .strike {
     display: block;
@@ -227,5 +298,142 @@ span, a {
 
 
 .form-signin p {
-  background: red;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+               0px 8px 13px rgba(0,0,0,0.1),
+               0px 18px 23px rgba(0,0,0,0.1);
+  letter-spacing: 0.2em;
+  font-family: 'Lato', sans-serif;
+
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #01579b;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: absolute;
+    margin-right: -250px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.sidebar-nav li .draft_links {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.5s ease;
+
+}
+
+.sidebar-nav li .draft_links:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav li .draft_links:active,
+.sidebar-nav li .draft_links:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav > .sidebar-brand .draft_links {
+    color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand .draft_links:hover {
+    color: #fff;
+    background: none;
+}
+
+.draft_links {
+  margin-top: 0px;
+}
+
+.mainpge-title {
+  color: #01579b;
+  text-transform: uppercase;
+  text-shadow: none;
+}
+
+@media(min-width:768px) {
+    #wrapper {
+        padding-left: 250px;
+    }
+
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+
+    #sidebar-wrapper {
+        width: 250px;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+        width: 0;
+    }
+
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+    }
+
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+    }
 }

@@ -51,7 +51,7 @@ angular.module('toneAnalyzer', ['ui.router'])
   $httpProvider.interceptors.push('localLogin');
 
   $stateProvider
-    //The Welcome Cards are Displayed
+    //Welcome Page
     .state('welcome', {
       url: '/welcome',
       templateUrl: 'partials/welcome.html',
@@ -61,18 +61,23 @@ angular.module('toneAnalyzer', ['ui.router'])
       }
     })
 
-    //the login display
+    //Login Page
     .state('login', {
       url: '/login',
       templateUrl: 'partials/login.html'
     })
 
-    //the signup display
+    //Register Page
     .state('register', {
       url: '/register',
       templateUrl: 'partials/register.html'
     })
 
+    //Main Page
+    .state('main_page', {
+      url: '/main_page',
+      templateUrl: 'partials/main_page.html'
+    })
 
   $locationProvider.html5Mode({
     enabled: true,
