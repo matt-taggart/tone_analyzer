@@ -1,7 +1,6 @@
 angular.module('toneAnalyzer', ['ui.router'])
-.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
-
 
   //Check if the user is connected
   var checkLoggedIn = function($q, $timeout, $http, $location, $rootScope) {
@@ -25,7 +24,7 @@ angular.module('toneAnalyzer', ['ui.router'])
     return deferred.promise;
   }
 
-  $httpProvider.interceptors.push(function($q, $location, $rootScope) {
+  $provide.factory('localLogin', function($q, $location, $rootScope) {
     return {
       response: function(response) {
         if (typeof response.data === 'object') {
@@ -42,6 +41,9 @@ angular.module('toneAnalyzer', ['ui.router'])
       }
     }
   });
+
+
+  $httpProvider.interceptors.push('localLogin');
 
   $stateProvider
     //The Welcome Cards are Displayed

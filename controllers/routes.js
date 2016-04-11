@@ -79,7 +79,7 @@ router.post('/login', function(req, res, next) {
   })(req, res, next);
 });
 
-router.get('/loggedin', function(req, res) {
+router.get('/loggedin', auth, function(req, res) {
   // console.log(req.isAuthenticated());
   // console.log(req.user);
   res.json(req.isAuthenticated() ? req.user : '0');
