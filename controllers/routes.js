@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
+var nodemailer = require('nodemailer');
+var xoauth2 = require('xoauth2');
+var googleCredentials = require('../config/google-credentials.js');
 var router = express.Router();
 
 router.use(cookieParser());
@@ -73,7 +76,7 @@ router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 })
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email'] }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'] }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
@@ -97,6 +100,26 @@ router.get('/auth/google/callback', function(req, res, next) {
       if (err) {
         return next(err);
       }
+
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          xoauth2: xoauth2.createXOAuth2Generator({
+            user: user.googleName,
+            clientId: googleCredentials.clientId,
+            clientSecret: googleCredentials.clientSecret,
+            refreshToken: googleCredentials.refreshToken
+          })
+        }
+      });
+
+      transporter.sendMail({
+        from: googleCredentials.googleEmail,
+        to: 'mtaggart89@gmail.com, ntekal@gmail.com',
+        subject: 'hello world',
+        text: 'hello world!'
+      })
+
       var firstName = user.googleName;
       res.redirect('/welcome');
     });  
@@ -104,6 +127,7 @@ router.get('/auth/google/callback', function(req, res, next) {
 
   })(req, res, next);
 });
+
 
 
 router.post('/logout', function(req, res) {
