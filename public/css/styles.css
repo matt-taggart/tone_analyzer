@@ -74,6 +74,7 @@ button {
 
 html, body, .container {
   height: 100%;
+  overflow-y: hidden;
 }
 
 .space {
@@ -102,11 +103,12 @@ html, body, .container {
   height: 100%;
   background-color: #01579b ;
 }
+*/
 
 .main_page_bkgrd {
   background-color: #eceff1;
 }
-*/
+
 
 #register-panel {
   margin-top: 60px;
