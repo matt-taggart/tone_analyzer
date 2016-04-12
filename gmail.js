@@ -9,7 +9,7 @@ var transporter = nodemailer.createTransport({
 
 console.log('created');
 transporter.sendMail({
-from: 'toneanalyzer@gmail.com',
+  from: 'toneanalyzer@gmail.com',
   to: 'mtaggart89@gmail.com',
   subject: 'hello world!',
   text: 'hello world!'

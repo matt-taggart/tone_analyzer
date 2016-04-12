@@ -97,6 +97,19 @@ router.get('/auth/google/callback', function(req, res, next) {
       if (err) {
         return next(err);
       }
+
+      // var transporter = nodemailer.createTransport({
+      //   service = 'gmail',
+      //   auth: {
+      //     xoauth2: xoauth2.createXOAuth2Generator{(
+      //       user: '',
+      //       clientId: '',
+      //       clientSecret:''
+      //       )}
+      //     }
+      //   })
+
+      
       var firstName = user.googleName;
       res.redirect('/welcome');
     });  
