@@ -109,24 +109,24 @@ router.get('/auth/google/callback', function(req, res, next) {
         return next(err);
       }
 
-      var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          xoauth2: xoauth2.createXOAuth2Generator({
-            user: user.googleName,
-            clientId: googleCredentials.clientId,
-            clientSecret: googleCredentials.clientSecret,
-            refreshToken: googleCredentials.refreshToken
-          })
-        }
-      });
+      // var transporter = nodemailer.createTransport({
+      //   service: 'gmail',
+      //   auth: {
+      //     xoauth2: xoauth2.createXOAuth2Generator({
+      //       user: user.googleName,
+      //       clientId: googleCredentials.clientId,
+      //       clientSecret: googleCredentials.clientSecret,
+      //       refreshToken: googleCredentials.refreshToken
+      //     })
+      //   }
+      // });
 
-      transporter.sendMail({
-        from: googleCredentials.googleEmail,
-        to: 'mtaggart89@gmail.com, ntekal@gmail.com',
-        subject: 'hello world',
-        text: 'hello world!'
-      })
+      // transporter.sendMail({
+      //   from: googleCredentials.googleEmail,
+      //   to: 'mtaggart89@gmail.com, ntekal@gmail.com',
+      //   subject: 'hello world',
+      //   text: 'hello world!'
+      // })
 
       var firstName = user.googleName;
       res.redirect('/welcome');
