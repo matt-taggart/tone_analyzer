@@ -16,7 +16,12 @@ angular.module('toneAnalyzer')
         url: '/login',
         data: $scope.user
       }).then(function(result) {
-        $location.path('/welcome');
+        console.log(result);
+        if (!result.data.authenticated) {
+          $rootScope.error = result.data.message;
+        } else {
+          $location.path('/welcome');
+        }
       });
     }
 

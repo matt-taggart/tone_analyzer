@@ -12,10 +12,9 @@ angular.module('toneAnalyzer', ['ui.router'])
       method: 'GET',
       url: '/loggedin'
     }).then(function(user) {
-      if (user !== '0') {
+      if (user) {
         deferred.resolve();
       } else {
-        $rootScope.message = 'You need to log in';
         deferred.reject();
         $location.path('login');
       }
@@ -35,6 +34,10 @@ angular.module('toneAnalyzer', ['ui.router'])
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.firstname
           }
+        }
+
+        if (response.data === '0') {
+          $rootScope.isAuthenticated = false;
         }
         return response;
       },

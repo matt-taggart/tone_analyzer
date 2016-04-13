@@ -65,7 +65,6 @@ module.exports = function(passport) {
         if (user) {
           return done(null, userData);
         } else {
-          console.log(err);
           return done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
         }
       });
