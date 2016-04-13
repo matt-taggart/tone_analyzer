@@ -1,24 +1,26 @@
-<div class="container">
-  <div class="col-md-6 col-sm-offset-3 col-xs-6-offset-3" id="login-form">
-    <div class="panel panel-default" id="register-panel">
-      <div class="panel-body">
-        <div class="row">
-          <form ng-submit="register()" class="form-signin" autocomplete="off">  
-            <h2 class="form-signin-heading">Sign Up</h2>
-            <button class="btn btn-lg login-button btn-block" type="submit">Login With Gmail</button>  
-            <div class="strike">
-              <span>OR</span>
-            </div>
-            <br>
-              <input type="text" class="form-control" name="firstname" placeholder="First Name" required="" autofocus="" />
-              <input type="text" class="form-control" name="username" placeholder="Last Name" class="validate" />
-              <input type="text" class="form-control" name="username" placeholder="Username" class="validate" />
-               <input type="email" class="form-control" name="email" placeholder="Email" class="validate" />
-              <input type="password" class="form-control" name="password" placeholder="Password" class="validate"/>   
+<div class="space">
+  <div class="container">
+    <div class="col-md-6 col-sm-offset-3 col-xs-6-offset-3" id="login-form">
+      <div class="panel panel-default" id="register-panel" ng-controller="loginController">
+        <div class="panel-body">
+          <div class="row">
+            <form ng-submit="register()" class="form-signin" autocomplete="off"> 
+              <h2 class="form-signin-heading">Sign Up</h2>
+              <button ng-click="googleLogin()" class="btn btn-lg login_signup-button btn-block">Login With Gmail</button>  
+              <div class="strike">
+                <span>OR</span>
+              </div>
+              <br>
+              <input type="text" class="form-control" ng-model="registration.firstname" placeholder="First Name" required />
+              <input type="text" class="form-control" ng-model="registration.lastname" placeholder="Last Name" required />
+              <input type="text" class="form-control" ng-model="registration.username" placeholder="Username" required />
+              <input type="email" class="form-control" ng-model="registration.email" placeholder="Email" required />
+              <input type="password" class="form-control" ng-model="registration.password" placeholder="Password" required/> 
               <br>  
-              <button class="btn btn-lg login-button btn-block" type="submit">Sign Up</button>  
+              <button class="btn btn-lg login_signup-button btn-block" type="submit">Sign Up</button>  
               <a href="welcome">cancel</a> 
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>

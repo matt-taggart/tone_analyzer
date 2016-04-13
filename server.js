@@ -1,10 +1,10 @@
+var env = require('dotenv').config({ silent: true })
 var express = require('express');
 var logger = require('morgan');
 var bodyParser = require('body-parser')
 var watson = require('watson-developer-cloud');
 var mongoose = require('mongoose');
 var app = express();
-
 var PORT = process.env.PORT || 3000;
 
 app.use(logger('dev'));
@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+var routes = require('./controllers/routes.js');
+
+app.use('/', routes);
 
 var db = 'mongodb://localhost/ToneDownForWhatDB'
 var ContentDB = require('./model/contentAnalysisModel.js')
@@ -89,6 +93,7 @@ app.get('/calldata', function(req, res){
     res.json(response);
   });
 })
+
 
 app.listen(PORT, function() {
   console.log('Listening on PORT %s', PORT);

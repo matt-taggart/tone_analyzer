@@ -1,12 +1,21 @@
-<button ui-sref="login" class="login-show-button" >Login</button>
-<button ui-sref="register" >Sign Up</button>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="content">
-        <h1>Tone Down For What</h1>
-        <h3>Web App That Uses Linguistic Analysis to Identify Tones In Text</h3>
-        <a href="#" class="action btn startBtn btn-large" >Get Started</a>
+<div ng-controller="loginController" class="space">
+  <div >
+    <button ui-sref="login" class="login-show-button" ng-show="!isAuthenticated">Login</button>
+    <button ui-sref="register" ng-show="!isAuthenticated">Sign Up</button>
+    <form ng-submit="logout()" ng-show="isAuthenticated">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="content">
+          <h1 ng-show="!isAuthenticated">Tone Down For What</h1>
+          <h1 ng-show="isAuthenticated">Welcome {{ username }}</h1>
+          <h3 ng-show="!isAuthenticated">Web App That Uses Linguistic Analysis to Identify Tones In Text</h3>
+          <a href="/main_page" class="action btn startBtn btn-large" >Get Started</a>
+        </div>
       </div>
     </div>
   </div>
