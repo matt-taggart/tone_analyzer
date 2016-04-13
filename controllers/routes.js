@@ -19,10 +19,13 @@ router.use(bodyParser.urlencoded({
 
 var LOCAL_DB = 'mongodb://localhost/users';
 
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };  
+
 if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(process.env.MONGO_URI);
+  mongoose.connect(process.env.MONGODB_URI, options);
 } else {
-  mongoose.connect(LOCAL_DB);
+  mongoose.connect(LOCAL_DB, options);
 }
 
 router.use(session({
