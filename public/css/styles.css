@@ -63,7 +63,7 @@ a {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
  }
 
- .hover-button:hover {
+.hover-button:hover {
   background-color: #01579b;
   color: #fff;
  }
@@ -74,6 +74,7 @@ button {
 
 html, body, .container {
   height: 100%;
+  overflow-y: hidden;
 }
 
 .space {
@@ -102,11 +103,13 @@ html, body, .container {
   height: 100%;
   background-color: #01579b ;
 }
+*/
 
 .main_page_bkgrd {
   background-color: #eceff1;
+  height: 100%;
 }
-*/
+
 
 #register-panel {
   margin-top: 60px;

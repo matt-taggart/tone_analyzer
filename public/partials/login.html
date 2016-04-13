@@ -6,9 +6,9 @@
           <div class="row">
             <form ng-submit="login()" class="form-signin" autocomplete="off">
               <h2 class="form-signin-heading">Log In</h2>
-                <input type="text" class="form-control" ng-model="user.username" placeholder="Username" class="validate"/>
+                <input type="text" class="form-control" ng-model="user.username" placeholder="Username" required/>
                 <br>
-                <input type="password" class="form-control" ng-model="user.password" placeholder="Password" class="validate"/>
+                <input type="password" class="form-control" ng-model="user.password" placeholder="Password" required/>
                 <button class="btn btn-lg login_signup-button btn-block" type="submit">Login</button>  
                 <p>{{ error }}</p>
                 <a href="register">Not registered?</a> 
