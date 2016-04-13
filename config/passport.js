@@ -73,10 +73,16 @@ module.exports = function(passport) {
     });
   }));
 
+  if (process.env.NODE_ENV === 'production') {
+    var callbackURL = googleCredentials.herokuCallbackUrl;
+  } else {
+    var callbackURL = googleCredentials.localCallbackUrl;
+  }
+
   passport.use('google-auth', new GoogleStrategy({
     clientID: googleCredentials.clientId,
     clientSecret: googleCredentials.clientSecret,
-    callbackURL: googleCredentials.localCallbackUrl || googleCredentials.herokuCallbackUrl,
+    callbackURL: callbackURL,
     passReqToCallback: true
   }, function(request, accessToken, refreshToken, profile, done) {
     User.findOne({ googleId: profile.id }, function(err, user) {
