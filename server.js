@@ -1,3 +1,4 @@
+var env = require('dotenv').config({ silent: true })
 var express = require('express');
 var app = express();
 var logger = require('morgan');
