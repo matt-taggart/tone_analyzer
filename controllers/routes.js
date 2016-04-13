@@ -17,8 +17,13 @@ router.use(bodyParser.urlencoded({
   extended: false
 }));
 
-var db = 'mongodb://localhost/users'
-mongoose.connect(db);
+var LOCAL_DB = 'mongodb://localhost/users'
+
+if (process.env.NODE_ENV === 'production') {
+  mongoose.connect(process.env.MONGO_URI);
+} else {
+  mongoose.connect(LOCAL_DB);
+}
 
 router.use(session({
   secret: 'super secret',
