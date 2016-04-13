@@ -63,7 +63,7 @@ a {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
  }
 
- .hover-button:hover {
+.hover-button:hover {
   background-color: #01579b;
   color: #fff;
  }
@@ -107,6 +107,7 @@ html, body, .container {
 
 .main_page_bkgrd {
   background-color: #eceff1;
+  height: 100%;
 }
 
 
