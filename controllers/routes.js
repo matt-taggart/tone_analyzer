@@ -53,7 +53,7 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('login', function(err, user, info) {
-
+    console.log(user);
     if (err) {
       return next(err); // will generate a 500 error
     }
@@ -67,7 +67,7 @@ router.post('/login', function(req, res, next) {
       if (err) {
         return next(err);
       }
-      return res.json('Success');
+      return res.json({ authenticated: user });
     });      
   })(req, res, next);
 });

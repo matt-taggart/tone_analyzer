@@ -36,6 +36,12 @@ angular.module('toneAnalyzer', ['ui.router'])
             $rootScope.username = response.data.firstname
           }
         }
+
+        if (response.data === '0') {
+          console.log('this hit');
+          $rootScope.isAuthenticated = false;
+          $location.url('/login')
+        }
         return response;
       },
       responseError: function(response) {
