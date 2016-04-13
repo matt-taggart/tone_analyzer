@@ -17,7 +17,8 @@ router.use(bodyParser.urlencoded({
   extended: false
 }));
 
-var LOCAL_DB = 'mongodb://localhost/users'
+var LOCAL_DB = 'mongodb://root:@localhost:27017/users'
+console.log(process.env.MONGO_URI);
 
 if (process.env.NODE_ENV === 'production') {
   mongoose.connect(process.env.MONGO_URI);
