@@ -9,4 +9,4 @@ var contentSchema = new Schema({
   // user: [{type: Schema.Types.ObjectId, ref: 'UsersDB'}]
 });
 
-module.exports = mongoose.model('ContentDB', contentSchema)
+module.exports = mongoose.model('Content', contentSchema)
