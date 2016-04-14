@@ -74,7 +74,7 @@ button {
 
 html, body, .container {
   height: 100%;
-  overflow-y: hidden;
+  /*overflow-y: hidden;*/
 }
 
 .space {

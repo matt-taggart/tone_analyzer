@@ -10,7 +10,6 @@ angular.module("toneAnalyzer")
     };
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
-        console.log(response)
         $scope.toneDatas = response.data
         $scope.idArray = [];
         angular.forEach($scope.toneDatas, function(value, key) {
@@ -23,7 +22,8 @@ angular.module("toneAnalyzer")
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
-      template: '<div style="width:100%; height:400px;"></div>',
+      // template: '<div style="width:100%; height:400px;"></div>',
+      templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
         var socialToneDataType = [];
@@ -65,6 +65,10 @@ angular.module("toneAnalyzer")
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
+            console.log(attrs.chartindex)
+            console.log(socialToneDataType)
+            console.log(socialToneDataScore)
+
             $(element).highcharts({
               title: {
                   text: 'Tone Analysis'
@@ -104,6 +108,9 @@ angular.module("toneAnalyzer")
                   xAxis: 2
               }],
             });
+            
+            console.log(attrs.chartindex)
+
           }
         }
       }
