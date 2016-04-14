@@ -1,4 +1,4 @@
-angular.module("toneDown")
+angular.module("toneAnalyzer")
   .controller('inputForm', function($scope, $http) {
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
@@ -10,6 +10,7 @@ angular.module("toneDown")
     };
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
+        console.log(response)
         $scope.toneDatas = response.data
         $scope.idArray = [];
         angular.forEach($scope.toneDatas, function(value, key) {
@@ -22,7 +23,7 @@ angular.module("toneDown")
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
-      templateUrl: 'chartRender.html',
+      template: '<div style="width:100%; height:400px;"></div>',
       link: function (scope, element, attrs){
 
         var socialToneDataType = [];

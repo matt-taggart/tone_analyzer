@@ -86,4 +86,4 @@ angular.module('toneAnalyzer', ['ui.router'])
     enabled: true,
     requireBase: false
   });
-});
+})

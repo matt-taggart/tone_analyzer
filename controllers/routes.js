@@ -22,10 +22,14 @@ var LOCAL_DB = 'mongodb://localhost/users';
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };  
 
+var db = 'mongodb://localhost/ToneDownForWhatDB'
+var ContentDB = require('../models/contentAnalysisModel.js')
+mongoose.createConnection(db)
+
 if (process.env.NODE_ENV === 'production') {
-  mongoose.connect(process.env.MONGODB_URI, options);
+  mongoose.createConnection(process.env.MONGODB_URI, options);
 } else {
-  mongoose.connect(LOCAL_DB, options);
+  mongoose.createConnection(LOCAL_DB, options);
 }
 
 router.use(session({

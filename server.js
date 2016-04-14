@@ -18,9 +18,9 @@ var routes = require('./controllers/routes.js');
 
 app.use('/', routes);
 
-var db = 'mongodb://localhost/ToneDownForWhatDB'
-var ContentDB = require('./model/contentAnalysisModel.js')
-mongoose.connect(db)
+// var db = 'mongodb://localhost/ToneDownForWhatDB'
+// var ContentDB = require('./models/contentAnalysisModel.js')
+// mongoose.connect(db)
 
 var tone_analyzer = watson.tone_analyzer({
   url: "https://gateway.watsonplatform.net/tone-analyzer-beta/api",
@@ -90,6 +90,7 @@ app.get('/demobox', function(req, res){
 
 app.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
+    console.log(response)
     res.json(response);
   });
 })
