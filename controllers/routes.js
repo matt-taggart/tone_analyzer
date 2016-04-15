@@ -56,6 +56,8 @@ router.post('/register', function(req, res, next) {
     }
 
     if (user) {
+      var successMessage = req.session.flash.successMessage[req.session.flash.successMessage.length-1];
+      console.log(successMessage);
       return res.json('success');
     }
 
@@ -96,12 +98,10 @@ router.get('/auth/google/callback', function(req, res, next) {
       return next(err); // will generate a 500 error
     }
 
-
-    // Generate a JSON response reflecting authentication status
-    // if (!user) {
-    //   var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
-    //   return res.json({ authenticated: user, message: errorMessage });
-    // }
+    if (!user) {
+      var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+      return res.json({ authenticated: user, message: errorMessage });
+    }
 
     if (!user) {
       console.log(err);
