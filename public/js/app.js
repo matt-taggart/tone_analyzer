@@ -76,12 +76,6 @@ angular.module('toneAnalyzer', ['ui.router'])
       templateUrl: 'partials/register.html'
     })
 
-    //Main Page
-    .state('main_page', {
-      url: '/main_page',
-      templateUrl: 'partials/main_page.html'
-    })
-
   $locationProvider.html5Mode({
     enabled: true,
     requireBase: false
