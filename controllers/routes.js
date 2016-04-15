@@ -142,10 +142,10 @@ router.get('/auth/google/callback', function(req, res, next) {
 });
 
 var auth = function(req, res, next) {
-
+  !req.isAuthenticated() ? res.sendStatus(401):next();
 }
 
-router.get('/main_page', function(req, res) {
+router.get('/main_page', auth, function(req, res) {
   res.sendFile(process.cwd() + '/public/views/main_page.html');
 });
 
