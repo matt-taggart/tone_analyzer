@@ -72,7 +72,7 @@ button {
   background: transparent;
 }
 
-html, body, .container {
+html, body {
   height: 100%;
   /*overflow-y: hidden;*/
 }
@@ -98,6 +98,7 @@ html, body, .container {
     background-image: url(https://images.unsplash.com/photo-1447433819943-74a20887a81e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=8ea623c09260918e2aee37156aacab95);
   }
 }*/
+
 
 /*.side-panel {
   height: 100%;
@@ -200,7 +201,7 @@ input::-webkit-input-placeholder {
 }
 
 .panel {
-  margin-top: 160px;
+  margin-top: 60px;
   background: transparent;
   border: 5px solid #fff;
 }

@@ -49,7 +49,7 @@ router.post('/register', function(req, res, next) {
     if (err) {
       return next(err); // will generate a 500 error
     }
-
+    
     if (!user) {
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
       return res.json({ authenticated: user, message: errorMessage });
@@ -85,7 +85,7 @@ router.post('/login', function(req, res, next) {
 
 router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
-})
+});
 
 router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'] }));
 
@@ -138,8 +138,6 @@ router.get('/auth/google/callback', function(req, res, next) {
 
   })(req, res, next);
 });
-
-
 
 router.post('/logout', function(req, res) {
   req.logout();
