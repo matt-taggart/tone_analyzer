@@ -11,7 +11,7 @@
           <h3 ng-show="!isAuthenticated">Web App That Uses Linguistic Analysis to Identify Tones In Text</h3>
           <a ui-sref="login" ng-show="!isAuthenticated" class="action btn startBtn btn-large" >Login</a>
           <a ui-sref="register" ng-show="!isAuthenticated" class="action btn startBtn btn-large" >Sign Up</a>
-          <a href="/main_page" ng-show="isAuthenticated" class="action btn startBtn btn-large" >Get Started</a>
+          <button ng-click="showMainPage()" ng-show="isAuthenticated" class="action btn startBtn btn-large" >Get Started</button>
         </div>
       </div>
     </div>

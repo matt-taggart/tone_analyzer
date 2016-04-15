@@ -42,6 +42,10 @@ angular.module('toneAnalyzer')
       $window.open('/auth/google', '_self');
     }
 
+    $scope.showMainPage = function() {
+      $window.open('/main_page', '_self');
+    }
+
     $scope.logout = function() {
       $http({
         method: 'POST',

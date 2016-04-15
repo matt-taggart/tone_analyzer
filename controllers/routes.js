@@ -139,6 +139,10 @@ router.get('/auth/google/callback', function(req, res, next) {
   })(req, res, next);
 });
 
+router.get('/main_page', function(req, res) {
+  res.sendFile(process.cwd() + '/public/views/main_page.html');
+});
+
 router.post('/logout', function(req, res) {
   req.logout();
   res.json(req.isAuthenticated());
