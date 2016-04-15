@@ -51,13 +51,11 @@ router.post('/register', function(req, res, next) {
     }
     
     if (!user) {
-      console.log(user);
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
       return res.json({ registered: user, message: errorMessage });
     }
 
     if (user) {
-      console.log(user);
       return res.json('success');
     }
 
