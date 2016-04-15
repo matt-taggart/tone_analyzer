@@ -22,7 +22,6 @@ angular.module("toneAnalyzer")
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
-      // template: '<div style="width:100%; height:400px;"></div>',
       templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
