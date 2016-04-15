@@ -74,6 +74,7 @@ button {
 
 html, body {
   height: 100%;
+  /*overflow-y: hidden;*/
 }
 
 .space {
@@ -166,6 +167,7 @@ h3, h2 {
 }
 
 .form-signin input[type="email"] {
+>>>>>>> 4e3061345f3bb45bbda053091cfadeb9160af663
   margin-bottom: 10px;
   background: transparent;
   color: #fff;
