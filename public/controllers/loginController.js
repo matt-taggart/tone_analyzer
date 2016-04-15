@@ -6,20 +6,20 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
-        if (!result.data.authenticated) {
-            console.log(result);
-            if (result.data.message.username) {
-              var userLengthError = result.data.message.username.message;
-              $rootScope.error = userLengthError;
-            } else if (result.data.message.password) {
-              var passwordLengthError = result.data.message.password.message;
-              $rootScope.error = passwordLengthError;
-            } else {
-              var usernameError = result.data.message;
-              $rootScope.error = usernameError;
-            }
-        } else {
+        if (result.data === 'success') {
+          console.log(result);
           $location.path('/welcome');
+        } else {
+          if (result.data.message.username) {
+            var userLengthError = result.data.message.username.message;
+            $rootScope.error = userLengthError;
+          } else if (result.data.message.password) {
+            var passwordLengthError = result.data.message.password.message;
+            $rootScope.error = passwordLengthError;
+          } else {
+            var usernameError = result.data.message;
+            $rootScope.error = usernameError;
+          }
         }
       });
     }

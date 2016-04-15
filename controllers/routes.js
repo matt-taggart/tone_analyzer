@@ -48,12 +48,14 @@ router.post('/register', function(req, res, next) {
     }
     
     if (!user) {
+      console.log(user);
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
-      return res.json({ authenticated: user, message: errorMessage });
+      return res.json({ registered: user, message: errorMessage });
     }
 
     if (user) {
-      return res.json('success!');
+      console.log(user);
+      return res.json('success');
     }
 
   })(req, res, next);
@@ -135,6 +137,10 @@ router.get('/auth/google/callback', function(req, res, next) {
 
   })(req, res, next);
 });
+
+var auth = function(req, res, next) {
+
+}
 
 router.get('/main_page', function(req, res) {
   res.sendFile(process.cwd() + '/public/views/main_page.html');
