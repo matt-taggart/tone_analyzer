@@ -63,10 +63,15 @@ a {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
  } 
 
-.hover-button:hover {
+.analyzeBtn > span {
+  color: #01579b;
+}
+
+.hover-button:hover, .hover-button:hover span {
   background-color: #01579b;
   color: #fff;
  }
+
 
 button {
   background: transparent;
