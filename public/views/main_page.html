@@ -57,8 +57,11 @@
                   <textarea class="form-control tone_textarea" rows="15" ng-model='toneText'></textarea>  
                 </div>
                 <div class="row">
-                  <div class="col-xs-12 text-center">
+                  <div class="col-xs-6 text-right">
                     <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
+                  </div>                  
+                  <div class="col-xs-6 text-left">
+                   <button class="btn analyzeBtn hover-button"><span><i class="fa fa-envelope fa-lg"></i></span> Send</button>
                   </div>
                 </div>
                   <div ng-init='retrieveData()'>
@@ -145,3 +148,5 @@
      </div>
    </div>
  </div> -->
+
+

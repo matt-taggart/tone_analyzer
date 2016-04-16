@@ -61,7 +61,7 @@ a {
  /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
- }
+ } 
 
 .hover-button:hover {
   background-color: #01579b;
