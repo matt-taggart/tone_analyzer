@@ -7,7 +7,6 @@ angular.module('toneAnalyzer')
         data: $scope.registration
       }).then(function(result) {
         if (result.data === 'success') {
-          console.log(result);
           $location.path('/welcome');
         } else {
           if (result.data.message.username) {
