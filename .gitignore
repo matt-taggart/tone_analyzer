@@ -3,3 +3,4 @@ node_modules
 npm-debug.log
 google-oauth.js
 .env
+grouped-categories.js

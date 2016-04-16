@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/matt-taggart/tone_analyzer#readme",
   "dependencies": {
+    "express": "^4.13.4",
+    "highcharts": "^4.2.3",
+    "mongoose": "^4.4.10",
     "bcryptjs": "^2.3.0",
     "body-parser": "^1.15.0",
     "connect-flash": "^0.1.1",
