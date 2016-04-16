@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
- <!--    // <script type="text/javascript" src="../controllers/inputFormController.js"></script> -->
+    <script type="text/javascript" src="../controllers/inputFormController.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
   <body class="main_page_bkgrd"> 
@@ -22,23 +22,8 @@
               <li class="sidebar-brand">
                 Saved Drafts
               </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 1</a>
-              </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 2</a>
-              </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 3</a>
-              </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 4</a>
-              </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 5</a>
-              </li>
-              <li>
-                <a class="draft_links" href="#">Saved Draft # 6</a>
+              <li ng-init="retrieveDraft()">
+                <a class="draft_links" ng-repeat="draft in drafts"> {{ draft._id }}</a>
               </li>
             </ul>
           </div>

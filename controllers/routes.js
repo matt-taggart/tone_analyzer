@@ -219,6 +219,13 @@ router.get('/demobox', function(req, res){
 
 router.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
+    console.log(response);
+    res.json(response);
+  });
+})
+
+router.get('/drafts', function(req, res){
+  ContentDB.find({}).exec().then(function(response) {
     res.json(response);
   });
 })
