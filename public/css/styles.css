@@ -449,3 +449,5 @@ span, a {
 .highcharts-container {
   height: 600px !important;
 }
+
+p { margin: 0; }

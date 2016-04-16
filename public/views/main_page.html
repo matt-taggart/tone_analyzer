@@ -74,27 +74,23 @@
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h4>Social tone data</h4>
-                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}} </p>
+                          <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                       </div>
                     </div>
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h4>Emotional tone data</h4>
-                          <ul>
-                            <li ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-                          </ul>
+                          <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                       </div>
                     </div>
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h4>Writing tone data</h4>
-                          <ul>
-                            <li ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-                          </ul>
+                          <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                       </div>
                     </div>
                   </div>
-                  <draw-chart style="width: 52%; height: 541px;" chartIndex={{$index}}></draw-chart>
+                  <draw-chart style="width: 52%; height: 511px;" chartIndex={{$index}}></draw-chart>
                 </div>
               </div>
             </div>
