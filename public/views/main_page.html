@@ -62,7 +62,7 @@
               </div>
               <div ng-init='retrieveData()'>
                 <div ng-repeat='(key, value) in toneDatas track by $index'>
-                  <div class="col-xs-11">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h4>Input</h4>
@@ -74,9 +74,7 @@
                     <div class="panel panel-default">
                       <div class="panel-body">
                         <h4>Social tone data</h4>
-                        <ul id="socialTones">
-                          <li ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
-                        </ul>
+                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}} </p>
                       </div>
                     </div>
                     <div class="panel panel-default">
@@ -96,7 +94,7 @@
                       </div>
                     </div>
                   </div>
-                  <draw-chart style="width: 50%; height: 541px;" chartIndex={{$index}}></draw-chart>
+                  <draw-chart style="width: 52%; height: 541px;" chartIndex={{$index}}></draw-chart>
                 </div>
               </div>
             </div>
