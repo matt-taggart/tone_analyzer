@@ -101,7 +101,12 @@ angular.module('toneAnalyzer', ['ui.router'])
       });
     }
     $scope.retrieveDraft = function(){
-      alert("HERE");
+      $http.get('/drafts').then(function(response){
+        $scope.drafts = response.data
+        console.log($scope.dra);
+      });
+    }
+    $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
         console.log($scope.dra);
