@@ -61,14 +61,14 @@
                 </div>
               </div>
               <div class="container" ng-init='retrieveData()'>
-                <div id='socialTones' ng-repeat='(key, value) in toneDatas track by $index'>
+                <div ng-repeat='(key, value) in toneDatas track by $index'>
                   <h4>Input</h4>
                   <p> {{value.content}} </p>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                   <div class="panel panel-default">
                     <div class="panel-body">
                       <h4>Social tone data</h4>
-                      <ul>
+                      <ul id="socialTones">
                         <li ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}} </li>
                       </ul>
                     </div>
@@ -91,6 +91,7 @@
                   </div>
                 </div>
                 <draw-chart style="width: 50%; height: 541px;" chartIndex={{$index}}></draw-chart>
+                </div>
               </div>
             </div>
           </div>
