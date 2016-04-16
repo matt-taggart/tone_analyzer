@@ -69,6 +69,9 @@ angular.module("toneAnalyzer")
             console.log(socialToneDataScore)
 
             $(element).highcharts({
+              chart: {
+                height: 1000,
+              }
               title: {
                   text: 'Tone Analysis'
               },
