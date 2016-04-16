@@ -42,32 +42,6 @@ a {
   background-color: white;
 }
 
-.analyzeBtn {
-  background: transparent;
-  transition: background-color 0.5s ease;
-  border-radius: 0;
-  letter-spacing: .2em;
-  font-size: 13px;
-  font-weight: 400;
-  font-family: 'Lato', sans-serif;
-  text-transform: uppercase;
-  padding: 20px;
-  color: #01579b;
-  border: 2px solid #01579b;
-  margin: 20px;
- /* margin-left: 450px;*/
-  text-shadow: none;
-  cursor: pointer;
- /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
- }
-
-.hover-button:hover {
-  background-color: #01579b;
-  color: #fff;
- }
-
 button {
   background: transparent;
 }
@@ -105,12 +79,6 @@ html, body {
   background-color: #01579b ;
 }
 */
-
-.main_page_bkgrd {
-  background-color: #eceff1;
-  height: 100%;
-}
-
 
 #register-panel {
   margin-top: 60px;
@@ -199,11 +167,11 @@ input::-webkit-input-placeholder {
   font-family: 'Lato', sans-serif;
 }
 
-/*.panel {
+.panel {
   margin-top: 60px;
   background: transparent;
   border: 5px solid #fff;
-}*/
+}
 
 .login_signup-button {
   margin-bottom: 10px;
@@ -226,14 +194,6 @@ input::-webkit-input-placeholder {
   color: #000;
   outline: none;
   border: none;
-}
-
-.tone_textarea, .tone_textarea:focus {
-  border: 1px solid #fff !important;
-  border-radius: 0px !important;
-  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
 }
 
 /*.nav-container
@@ -311,143 +271,3 @@ span, a {
   font-family: 'Lato', sans-serif;
 
 }
-
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-#wrapper.toggled {
-    padding-left: 250px;
-}
-
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    left: 250px;
-    width: 0;
-    height: 100%;
-    margin-left: -250px;
-    overflow-y: auto;
-    background: #01579b;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
-
-/*#page-content-wrapper {
-    width: 100%;
-    position: absolute;
-    padding: 15px;
-}*/
-
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
-}
-
-/* Sidebar Styles */
-
-.sidebar-nav {
-    position: absolute;
-    top: 0;
-    width: 250px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li .draft_links {
-    display: block;
-    text-decoration: none;
-    color: #fff;
-    transition: background-color 0.5s ease;
-
-}
-
-.sidebar-nav li .draft_links:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li .draft_links:active,
-.sidebar-nav li .draft_links:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand .draft_links {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand .draft_links:hover {
-    color: #fff;
-    background: none;
-}
-
-.draft_links {
-  margin-top: 0px;
-}
-
-.mainpge-title {
-  color: #01579b;
-  text-transform: uppercase;
-  text-shadow: none;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
-}
-
-#socialTones {
-  list-style-type: none;
-}
-
-.highcharts-container {
-  height: 600px !important;
-}
-
-p { margin: 0; }
