@@ -1,0 +1,179 @@
+  <!DOCTYPE html>
+  <html ng-app="toneAnalyzer">
+  <head>
+    <title>Tone Down For What</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/css/bootstrap-modal.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main_page.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+ <!--    // <script type="text/javascript" src="../controllers/inputFormController.js"></script> -->
+    <script type="text/javascript" src="/js/app.js"></script>
+  </head>
+  <body class="main_page_bkgrd"> 
+    <div ng-controller='inputForm'>
+      <div id="wrapper"> 
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li class="sidebar-brand">Welcome {{ username }}</li>
+            <li class="sidebar-brand">
+              Saved Drafts
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 1</a>
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 2</a>
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 3</a>
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 4</a>
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 5</a>
+            </li>
+            <li>
+              <a class="draft_links" href="#">Saved Draft # 6</a>
+            </li>
+          </ul>
+        </div>
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <h3 class="mainpge-title">Tone Down For What</h3>
+                <br/>
+              </div>
+              <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
+                <input type="text" class="form-control tone_textarea" placeholder="Title" class="validate title-text"/>
+                <br/>
+              </div>
+              <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <textarea class="form-control tone_textarea" rows="15" ng-model='toneText'></textarea>  
+              </div>
+              <div class="row">
+                <div class="col-xs-6 text-right">
+                  <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
+                </div>                  
+                <div class="col-xs-6 text-left">
+                  <button class="btn analyzeBtn hover-button" data-toggle="modal" data-target="#email-form"><i class="fa fa-envelope fa-lg"></i> Send</button>
+                </div>
+              </div>
+              <div ng-init='retrieveData()'>
+                <div ng-repeat='(key, value) in toneDatas track by $index'>
+                  
+                    <div class="col-lg-4 col-sm-6">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <h4>Social tone data</h4>
+                          <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <h4>Emotional tone data</h4>
+                          <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                        </div>
+                      </div>
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <h4>Writing tone data</h4>
+                          <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <draw-chart style="width: 50%; height: 511px;" chartIndex={{$index}}></draw-chart>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Modal -->
+    <div id="email-form" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Email</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control input-lg" placeholder="To">               
+                  </div>
+                </div>
+              </div>              
+              <div class="row">
+                <div class="col-xs-12">
+                 <div class="form-group">
+                   <input type="text" class="form-control input-lg" placeholder="From">               
+                 </div>
+                </div>
+              </div>              
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control input-lg" placeholder="Subject">               
+                  </div>            
+                </div>
+              </div>              
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <textarea type="text" class="form-control" rows="9"></textarea>          
+                  </div>            
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modalmanager.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-modal/2.2.6/js/bootstrap-modal.min.js"></script>
+    <script type="text/javascript" src="/controllers/loginController.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+  </body>  
+  </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

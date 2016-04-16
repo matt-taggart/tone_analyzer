@@ -6,20 +6,19 @@ angular.module('toneAnalyzer')
         url: '/register',
         data: $scope.registration
       }).then(function(result) {
-        if (!result.data.authenticated) {
-            console.log(result);
-            if (result.data.message.username) {
-              var userLengthError = result.data.message.username.message;
-              $rootScope.error = userLengthError;
-            } else if (result.data.message.password) {
-              var passwordLengthError = result.data.message.password.message;
-              $rootScope.error = passwordLengthError;
-            } else {
-              var usernameError = result.data.message;
-              $rootScope.error = usernameError;
-            }
-        } else {
+        if (result.data === 'success') {
           $location.path('/welcome');
+        } else {
+          if (result.data.message.username) {
+            var userLengthError = result.data.message.username.message;
+            $scope.registrationError = userLengthError;
+          } else if (result.data.message.password) {
+            var passwordLengthError = result.data.message.password.message;
+            $scope.registrationError = passwordLengthError;
+          } else {
+            var usernameError = result.data.message;
+            $scope.registrationError = usernameError;
+          }
         }
       });
     }
@@ -31,7 +30,7 @@ angular.module('toneAnalyzer')
         data: $scope.user
       }).then(function(result) {
         if (!result.data.authenticated) {
-          $rootScope.error = result.data.message;
+          $scope.loginError = result.data.message;
         } else {
           $location.path('/welcome');
         }
@@ -41,6 +40,10 @@ angular.module('toneAnalyzer')
 
     $scope.googleLogin = function() {
       $window.open('/auth/google', '_self');
+    }
+
+    $scope.showMainPage = function() {
+      $window.open('/main_page', '_self');
     }
 
     $scope.logout = function() {

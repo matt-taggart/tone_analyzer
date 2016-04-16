@@ -1,4 +1,3 @@
-<div class="space">
   <div class="container">
     <div class="col-md-6 col-sm-offset-3 col-xs-6-offset-3" id="login-form">
       <div class="panel panel-default" id="register-panel" ng-controller="loginController">
@@ -6,7 +5,7 @@
           <div class="row">
             <form ng-submit="register()" class="form-signin" autocomplete="off"> 
               <h2 class="form-signin-heading">Sign Up</h2>
-              <button ng-click="googleLogin()" class="btn btn-lg login_signup-button btn-block">Login With Gmail</button>  
+              <button ng-click="googleLogin()" class="btn btn-lg login_signup-button btn-block" type="button">Login With Gmail</button>  
               <div class="strike">
                 <span>OR</span>
               </div>
@@ -18,7 +17,7 @@
               <input type="password" class="form-control" ng-model="registration.password" placeholder="Password" required/> 
               <br>  
               <button class="btn btn-lg login_signup-button btn-block" type="submit">Sign Up</button>  
-              <p>{{ error }}</p>
+              <p>{{ registrationError }}</p>
               <a href="welcome">cancel</a> 
             </form>
           </div>
@@ -26,4 +25,3 @@
       </div>
     </div>
   </div>
-</div>
