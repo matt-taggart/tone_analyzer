@@ -109,7 +109,13 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
-        console.log($scope.dra);
+        console.log($scope.drafts);
+      });
+    }
+    $scope.retrieveUsername = function(){
+      $http.get('/loggedin').then(function(response){
+        $scope.firstname = response.data.googleName
+        console.log(response.data);
       });
     }
   })
