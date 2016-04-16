@@ -30,9 +30,11 @@ angular.module('toneAnalyzer', ['ui.router'])
           if (response.data.googleName) {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.googleName;
+            // sharedProperties.setUsername(response.data.googleName);
           } else {
             $rootScope.isAuthenticated = true;
-            $rootScope.username = response.data.firstname
+            $rootScope.username = response.data.firstname;
+            // sharedProperties.setUsername(response.data.firstname);
           }
         }
 
@@ -81,6 +83,23 @@ angular.module('toneAnalyzer', ['ui.router'])
     requireBase: false
   });
 })
+
+// .service('sharedProperties', function() {
+//   var username;
+
+//   return {
+//     setUsername: function(name) {
+//       username = $rootScope.name;
+//     }
+//   }
+
+//   return {
+//     getUsername: function() {
+//       return username;
+//     }
+//   }
+// })
+
 .controller('inputForm', function($scope, $http) {
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
@@ -100,6 +119,12 @@ angular.module('toneAnalyzer', ['ui.router'])
         });
       });
     }
+    $scope.getUser = function(){
+      $http.get('/loggedin').then(function(response){
+        $scope.firstname = response.data.firstname
+      })
+    }
+
   })
   .directive('drawChart', function() {
     return {

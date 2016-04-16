@@ -1,4 +1,4 @@
-angular.module("toneAnalyzer")
+angular.module('toneAnalyzer')
   .controller('inputForm', function($scope, $http) {
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
@@ -8,6 +8,7 @@ angular.module("toneAnalyzer")
         $scope.retrieveData();
       });
     };
+
     $scope.retrieveData = function(){
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
@@ -16,6 +17,9 @@ angular.module("toneAnalyzer")
           $scope.value = value._id
           $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
         });
+      });
+      $http.get('/loggedin').then(function(response){
+        console.log(response);
       });
     }
   })
@@ -71,7 +75,7 @@ angular.module("toneAnalyzer")
             $(element).highcharts({
               chart: {
                 height: 1000,
-              }
+              },
               title: {
                   text: 'Tone Analysis'
               },
