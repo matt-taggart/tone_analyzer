@@ -35,7 +35,7 @@ module.exports = function(passport) {
           if (err) {
             return done(null, false, req.flash('registerMessage', err.errors));
           } else {
-            return done(null, userData);
+            return done(false, userData, req.flash('successMessage', 'Congratulations, you have successfully registered as ' + userData.username + '!'));
           }
         });
 
