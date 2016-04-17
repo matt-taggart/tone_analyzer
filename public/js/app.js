@@ -124,7 +124,6 @@ angular.module('toneAnalyzer', ['ui.router'])
         $scope.firstname = response.data.firstname
       })
     }
-
   })
   .directive('drawChart', function() {
     return {

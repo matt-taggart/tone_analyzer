@@ -1,8 +1,7 @@
 .main_page_bkgrd {
   background-color: #eceff1;
   height: 100%;
-    font-family: 'Lato', sans-serif;
-
+  font-family: 'Lato', sans-serif;
 }
 
 h3 {
@@ -40,10 +39,10 @@ h3 {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
  }
 
- .hover-button:hover {
+.hover-button:hover {
   background-color: #01579b;
   color: #fff;
- }
+}
 
 #wrapper {
   padding-left: 0;
@@ -75,6 +74,7 @@ h3 {
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  color: #fff;
 }
 
 .tone_textarea, .tone_textarea:focus {
@@ -87,10 +87,6 @@ h3 {
 
 #wrapper.toggled #sidebar-wrapper {
   width: 250px;
-}
-
-#menu-toggle {
-  float: right;
 }
 
 #page-content-wrapper {
@@ -198,4 +194,14 @@ h3 {
 
 p { 
   margin: 0; 
+}
+
+.toggle{
+ margin: 0px;
+ background: transparent;
+ transition: background-color 0.5s ease;
+ color: #01579b ;
+ border: 2px solid #01579b ;
+ top: 0px;
+ float: right;
 }
