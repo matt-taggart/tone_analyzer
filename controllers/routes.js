@@ -90,7 +90,6 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/loggedin', function(req, res) {
-  console.log(req.user);
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
@@ -224,13 +223,13 @@ router.get('/calldata', function(req, res){
 })
 
 router.post('/send_email', function(req, res) {
-  console.log(googleEmail);
-  transporter.sendMail({
-    from: googleEmail,
-    to: 'mtaggart89@gmail.com, ntekal@gmail.com',
-    subject: 'hello world',
-    text: 'hello world!'
-  })
+  console.log(req.user);
+  // transporter.sendMail({
+  //   from: googleEmail,
+  //   to: 'mtaggart89@gmail.com, ntekal@gmail.com',
+  //   subject: 'hello world',
+  //   text: 'hello world!'
+  // })
   res.send('hello');
 })
 

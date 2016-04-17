@@ -74,29 +74,28 @@
                     </div>  
                   </div>
                   
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <h4>Social tone data</h4>
-                          <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <h4>Emotional tone data</h4>
-                          <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                        </div>
-                      </div>
-                      <div class="panel panel-default">
-                        <div class="panel-body">
-                          <h4>Writing tone data</h4>
-                          <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                        </div>
+                  <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h4>Social tone data</h4>
+                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                       </div>
                     </div>
-                    <div class="col-lg-8 col-md-8 col-sm-12">
-                      <draw-chart class='img-responsive' style="width: 100%; height: 511px;" chartIndex={{$index}}></draw-chart>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h4>Emotional tone data</h4>
+                        <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      </div>
                     </div>
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <h4>Writing tone data</h4>
+                        <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-12">
+                    <draw-chart class='img-responsive' style="width: 100%; height: 511px;" chartIndex={{$index}}></draw-chart>
                   </div>
                 </div>
               </div>
@@ -109,52 +108,51 @@
     <!-- Modal -->
     <div id="email-form" class="modal fade" role="dialog">
       <div class="modal-dialog">
-
+        <form ng-submit="sendEmail()">
         <!-- Modal content-->
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Email</h4>
-          </div>
-          <div class="modal-body">
-            <form ng-submit="sendEmail()">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Email</h4>
+            </div>
+            <div class="modal-body">
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="To" value="" ng-model="emailData.email">            
+                    <input type="text" class="form-control input-lg" placeholder="To" ng-model="emailData.sendTo">
                   </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                  <div class="form-group">
-                   <input type="text" class="form-control input-lg" placeholder="From">               
+                   <input type="text" class="form-control input-lg" placeholder="From" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
                  </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="Subject">               
+                    <input type="text" class="form-control input-lg" placeholder="Subject" ng-model="emailData.subject">               
                   </div>            
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <textarea type="text" class="form-control" rows="9"></textarea>          
+                    <textarea type="text" class="form-control" rows="9" ng-model="emailData.message"></textarea>          
                   </div>            
                 </div>
               </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit">Send</button>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
-          </div>
-        </div>
-
+        </form>
       </div>
     </div>
+  </div>
 
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>

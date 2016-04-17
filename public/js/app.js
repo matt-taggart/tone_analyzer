@@ -30,11 +30,9 @@ angular.module('toneAnalyzer', ['ui.router'])
           if (response.data.googleName) {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.googleName;
-            // sharedProperties.setUsername(response.data.googleName);
           } else {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.firstname;
-            // sharedProperties.setUsername(response.data.firstname);
           }
         }
 
@@ -121,21 +119,23 @@ angular.module('toneAnalyzer', ['ui.router'])
     }
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
-        console.log(response);
         if (response.data.firstname) {
           $scope.firstname = response.data.firstname;
-          $scope.email = response.data.email;
+          $scope.emailData.email = response.data.email;
         } else {
           $scope.firstname = response.data.googleName;
-          $scope.email = response.data.googleEmail;
+          $scope.emailData.email = response.data.googleEmail;
         }
       })
     }
+
     $scope.sendEmail = function() {
       $http({
         method: 'POST',
         url: '/send_email',
         data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
       })
     }
 
