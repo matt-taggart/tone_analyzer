@@ -200,7 +200,8 @@ router.post('/tonetext', function(req, res) {
           content: req.body.content,
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
-          writing_tone_data: writingToneArray
+          writing_tone_data: writingToneArray,
+          userId: req.body.userId
         })
         content.save(function(err, response){
           if (err) {

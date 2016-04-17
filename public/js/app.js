@@ -84,7 +84,8 @@ angular.module('toneAnalyzer', ['ui.router'])
 .controller('inputForm', function($scope, $http) {
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
-        content: $scope.toneText
+        content: $scope.toneText,
+        userId: $scope.firstname._id
       }).then(function(){
         $scope.toneText = '';
         $scope.retrieveData();
@@ -103,19 +104,13 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
-        console.log($scope.dra);
-      });
-    }
-    $scope.retrieveDraft = function(){
-      $http.get('/drafts').then(function(response){
-        $scope.drafts = response.data
         console.log($scope.drafts);
       });
     }
     $scope.retrieveUsername = function(){
       $http.get('/loggedin').then(function(response){
-        $scope.firstname = response.data.googleName
-        console.log(response.data);
+        $scope.firstname = response.data
+        // console.log($scope.firstname);
       });
     }
   })
