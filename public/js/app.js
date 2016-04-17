@@ -82,6 +82,7 @@ angular.module('toneAnalyzer', ['ui.router'])
   });
 })
 .controller('inputForm', function($scope, $http) {
+  //Get tone analysis from API
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText
@@ -91,6 +92,7 @@ angular.module('toneAnalyzer', ['ui.router'])
       });
     };
     $scope.retrieveData = function(){
+    //When page loads or refreshes, data is rendered to the webpage from the database
       $http.get('/calldata').then(function(response){
         $scope.toneDatas = response.data
         $scope.idArray = [];
@@ -102,6 +104,7 @@ angular.module('toneAnalyzer', ['ui.router'])
     }
   })
   .directive('drawChart', function() {
+    //Render charts
     return {
       restrict: 'EA',
       templateUrl: '../template/chartRender.html',
@@ -148,8 +151,9 @@ angular.module('toneAnalyzer', ['ui.router'])
             // writingToneDataScore.push(writingtoneScoreElements)
 
             toneScoresHighchart.push(socialtoneScoreElements.concat(emotiontoneScoreElements, writingtoneScoreElements))
-            console.log(toneScoresHighchart)
+            //console.log(toneScoresHighchart)
 
+            //Code for rendering individual charts
             $(element).highcharts({
               chart: {
                 type: 'column'
