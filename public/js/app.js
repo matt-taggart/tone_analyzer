@@ -116,6 +116,7 @@ angular.module('toneAnalyzer', ['ui.router'])
         var emotionToneDataType = [];
         var emotionToneDataScore = [];
 
+        var toneScoresHighchart = [];
 
           for (var i = 0; i < scope.idArray.length; i++) {
            var socialtoneScoreElements = [];
@@ -146,10 +147,13 @@ angular.module('toneAnalyzer', ['ui.router'])
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(socialToneDataScore)
-            console.log(socialtoneScoreElements)
+            toneScoresHighchart.push(socialtoneScoreElements.concat(emotiontoneScoreElements, writingtoneScoreElements))
+            console.log(toneScoresHighchart)
 
             $(element).highcharts({
+              chart: {
+                type: 'column'
+              },
               title: {
                   text: 'Tone Analysis'
               },
@@ -162,35 +166,29 @@ angular.module('toneAnalyzer', ['ui.router'])
                 }, {
                   name: 'Writing Tone Data',
                   categories: writingToneDataType[attrs.chartindex]
-                }],
+                }
+                ],
               yAxis: {
                   title: {
                       text: 'Tone Score'
                   }
               },
               series: [{
-                  data: socialToneDataScore[attrs.chartindex],
-                  name: 'Social Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 0
-                }, {
-                  data: emotionToneDataScore[attrs.chartindex],
-                  name: 'Emotional Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 1
-                }, {
-                  data: writingToneDataScore[attrs.chartindex],
-                  name: 'Writing Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 2
-              }],
+                  data: toneScoresHighchart[attrs.chartindex],
+                  // name: 'Social Tone Trend',
+                  // type: 'column',
+                  // maxPointWidth: 15,
+                  // xAxis: 0
+                },
+              //   {
+              //     data: writingToneDataScore[attrs.chartindex],
+              //     name: 'Writing Tone Trend',
+              //     type: 'column',
+              //     maxPointWidth: 15,
+              //     xAxis: 2
+              // }
+              ],
             });
-            
-            console.log(attrs.chartindex)
-
           }
         }
       }
