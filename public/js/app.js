@@ -104,6 +104,13 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
+        $scope.draftArray = []
+          angular.forEach($scope.drafts, function(value, key) {
+            console.log(value)
+            if (value.userId === $scope.firstname._id) {
+              $scope.draftArray.push(value)
+            }
+          })
         console.log($scope.drafts);
       });
     }
