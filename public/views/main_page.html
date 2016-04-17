@@ -23,7 +23,7 @@
                 Saved Drafts
               </li>
               <li ng-init="retrieveDraft()">
-                <a class="draft_links" ng-repeat="draft in draftArray"> {{ draft._id }}</a>
+                <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft._id }}</a>
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@
                   </div>
                 </div>
                   <div ng-init='retrieveData()'>
-                    <ul ng-repeat='(key, value) in toneDatas track by $index'>
+                    <ul ng-repeat='(key, value) in draftData track by $index'>
                       <li><strong>Text to be analyzed</strong> </li>
                       <li> {{value.content}} </li>
                       <li><strong>Social tone data</strong></li>

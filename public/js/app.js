@@ -92,14 +92,20 @@ angular.module('toneAnalyzer', ['ui.router'])
       });
     };
     $scope.retrieveData = function(){
-      $http.get('/calldata').then(function(response){
-        $scope.toneDatas = response.data
-        $scope.idArray = [];
-        angular.forEach($scope.toneDatas, function(value, key) {
-          $scope.value = value._id
-          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
-        });
-      });
+      // $http.get('/calldata').then(function(response){
+      //   $scope.toneDatas = response.data
+      //   $scope.idArray = [];
+      //   angular.forEach($scope.toneDatas, function(value, key) {
+      //     $scope.value = value._id
+      //     $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
+      //   });
+        // });
+      $scope.renderDraftAndData = function(id){
+        $http.get('/textdata/' + id).then(function(response){
+          console.log(response.data)
+          $scope.draftData = response.data
+        })
+      }
     }
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){

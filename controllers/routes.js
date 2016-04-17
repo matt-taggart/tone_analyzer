@@ -225,6 +225,14 @@ router.get('/calldata', function(req, res){
   });
 })
 
+router.get('/textdata/:id', function(req, res){
+  var id = req.params.id
+  ContentDB.find({_id: id}).exec().then(function(response) {
+    console.log(response);
+    res.json(response);
+  });
+})
+
 router.get('/drafts', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
