@@ -82,7 +82,7 @@ angular.module('toneAnalyzer', ['ui.router'])
   });
 })
 .controller('inputForm', function($scope, $http) {
-  //Get tone analysis from API
+  //Post content to be processed through API
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText
