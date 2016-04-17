@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-    <!-- <script type="text/javascript" src="../controllers/inputFormController.js"></script> -->
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
   <body class="main_page_bkgrd"> 
@@ -32,7 +31,6 @@
               <a class="draft_links" href="#">Saved Draft # 3</a>
             </li>
             <li>
-              <a class="draft_links" href="#">Saved Draft # 4</a>
             </li>
             <li>
               <a class="draft_links" href="#">Saved Draft # 5</a>
@@ -119,11 +117,11 @@
             <h4 class="modal-title">Email</h4>
           </div>
           <div class="modal-body">
-            <form>
+            <form ng-submit="sendEmail()">
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg" placeholder="To">               
+                    <input type="text" class="form-control input-lg" placeholder="To" value="" ng-model="emailData.email">            
                   </div>
                 </div>
               </div>              

@@ -27,7 +27,6 @@ module.exports = function(passport) {
       }
 
       if (!userData) {
-
         var newUser = new User(req.body);
         newUser.validateSync();
 

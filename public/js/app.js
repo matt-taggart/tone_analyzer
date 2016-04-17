@@ -121,7 +121,21 @@ angular.module('toneAnalyzer', ['ui.router'])
     }
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
-        $scope.firstname = response.data.firstname
+        console.log(response);
+        if (response.data.firstname) {
+          $scope.firstname = response.data.firstname;
+          $scope.email = response.data.email;
+        } else {
+          $scope.firstname = response.data.googleName;
+          $scope.email = response.data.googleEmail;
+        }
+      })
+    }
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
       })
     }
 

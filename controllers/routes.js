@@ -90,6 +90,7 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/loggedin', function(req, res) {
+  console.log(req.user);
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
@@ -116,24 +117,18 @@ router.get('/auth/google/callback', function(req, res, next) {
         return next(err);
       }
 
-      // var transporter = nodemailer.createTransport({
-      //   service: 'gmail',
-      //   auth: {
-      //     xoauth2: xoauth2.createXOAuth2Generator({
-      //       user: user.googleName,
-      //       clientId: googleCredentials.clientId,
-      //       clientSecret: googleCredentials.clientSecret,
-      //       refreshToken: googleCredentials.refreshToken
-      //     })
-      //   }
-      // });
-
-      // transporter.sendMail({
-      //   from: googleCredentials.googleEmail,
-      //   to: 'mtaggart89@gmail.com, ntekal@gmail.com',
-      //   subject: 'hello world',
-      //   text: 'hello world!'
-      // })
+      googleEmail = user.googleEmail;
+      var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          xoauth2: xoauth2.createXOAuth2Generator({
+            user: user.googleName,
+            clientId: googleCredentials.clientId,
+            clientSecret: googleCredentials.clientSecret,
+            refreshToken: googleCredentials.refreshToken
+          })
+        }
+      });
 
       var firstName = user.googleName;
       res.redirect('/welcome');
@@ -226,6 +221,17 @@ router.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
   });
+})
+
+router.post('/send_email', function(req, res) {
+  console.log(googleEmail);
+  transporter.sendMail({
+    from: googleEmail,
+    to: 'mtaggart89@gmail.com, ntekal@gmail.com',
+    subject: 'hello world',
+    text: 'hello world!'
+  })
+  res.send('hello');
 })
 
 router.get('*', function(req, res) {
