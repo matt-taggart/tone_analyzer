@@ -146,9 +146,8 @@ angular.module('toneAnalyzer', ['ui.router'])
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(attrs.chartindex)
-            console.log(socialToneDataType)
             console.log(socialToneDataScore)
+            console.log(socialtoneScoreElements)
 
             $(element).highcharts({
               title: {
