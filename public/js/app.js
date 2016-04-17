@@ -177,7 +177,8 @@ angular.module('toneAnalyzer', ['ui.router'])
 
             $(element).highcharts({
               chart: {
-                type: 'column'
+                type: 'column',
+                shadow: true
               },
               title: {
                   text: 'Tone Analysis'
