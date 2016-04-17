@@ -1,6 +1,8 @@
 .main_page_bkgrd {
   background-color: #eceff1;
   height: 100%;
+    font-family: 'Lato', sans-serif;
+
 }
 
 h3 {
@@ -53,6 +55,11 @@ h3 {
 
 #wrapper.toggled {
   padding-left: 250px;
+}
+.panel-shadow {
+  border: 1px solid #fff !important;
+  border-radius: 0px !important;
+  box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.32);
 }
 
 #sidebar-wrapper {
