@@ -43,13 +43,17 @@ router.use(passport.initialize());
 router.use(passport.session());
 require('../config/passport.js')(passport);
 
+var auth = function(req, res, next) {
+  (!req.isAuthenticated()) ? res.sendStatus(401) : next();
+}
+
 router.post('/register', function(req, res, next) {
   passport.authenticate('register', function(err, user, info) {
 
     if (err) {
       return next(err); // will generate a 500 error
     }
-    
+
     if (!user) {
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
       return res.json({ registered: user, message: errorMessage });
@@ -138,6 +142,7 @@ router.get('/auth/google/callback', function(req, res, next) {
 
   })(req, res, next);
 });
+
 
 var auth = function(req, res, next) {
   !req.isAuthenticated() ? res.sendStatus(401):next();
