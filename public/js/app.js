@@ -82,24 +82,48 @@ angular.module('toneAnalyzer', ['ui.router'])
   });
 })
 .controller('inputForm', function($scope, $http) {
-  //Post content to be processed through API
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
-        content: $scope.toneText
+        content: $scope.toneText,
+        userId: $scope.firstname._id
       }).then(function(){
         $scope.toneText = '';
         $scope.retrieveData();
       });
     };
     $scope.retrieveData = function(){
-    //When page loads or refreshes, data is rendered to the webpage from the database
-      $http.get('/calldata').then(function(response){
-        $scope.toneDatas = response.data
-        $scope.idArray = [];
-        angular.forEach($scope.toneDatas, function(value, key) {
-          $scope.value = value._id
-          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
-        });
+      // $http.get('/calldata').then(function(response){
+      //   $scope.toneDatas = response.data
+      //   $scope.idArray = [];
+      //   angular.forEach($scope.toneDatas, function(value, key) {
+      //     $scope.value = value._id
+      //     $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
+      //   });
+        // });
+      $scope.renderDraftAndData = function(id){
+        $http.get('/textdata/' + id).then(function(response){
+          console.log(response.data)
+          $scope.draftData = response.data
+        })
+      }
+    }
+    $scope.retrieveDraft = function(){
+      $http.get('/drafts').then(function(response){
+        $scope.drafts = response.data
+        $scope.draftArray = []
+          angular.forEach($scope.drafts, function(value, key) {
+            console.log(value)
+            if (value.userId === $scope.firstname._id) {
+              $scope.draftArray.push(value)
+            }
+          })
+        console.log($scope.drafts);
+      });
+    }
+    $scope.retrieveUsername = function(){
+      $http.get('/loggedin').then(function(response){
+        $scope.firstname = response.data
+        // console.log($scope.firstname);
       });
     }
   })
