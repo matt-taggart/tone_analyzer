@@ -166,11 +166,8 @@ router.post('/tonetext', function(req, res) {
     function(err, tone) {
       console.log(tone)
       if (err) {
-        console.log('hit error')
         console.log(err);
       } else {
-        console.log('hit api call')
-
         var emotionToneArray = []
         var writingToneArray = []
         var socialToneArray = []
@@ -195,12 +192,12 @@ router.post('/tonetext', function(req, res) {
             tone_score: tone.document_tone.tone_categories[2].tones[i].score 
           })
         };
-        console.log('api call still good')
         var content = new ContentDB ({
           content: req.body.content,
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
-          writing_tone_data: writingToneArray
+          writing_tone_data: writingToneArray,
+          user: req.body.userId
         })
         content.save(function(err, response){
           if (err) {
@@ -209,7 +206,8 @@ router.post('/tonetext', function(req, res) {
             console.log('content saved into db')
             res.json(response);
           }
-        }) }
+        }) 
+      }
   });
 })
 

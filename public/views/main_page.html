@@ -18,7 +18,7 @@
       <div id="wrapper"> 
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
-            <li class="sidebar-brand">Welcome {{ username }}</li>
+            <li class="sidebar-brand" ng-init='getUsername()'>Welcome {{name.googleName}} </li>
             <li class="sidebar-brand">
               Saved Drafts
             </li>

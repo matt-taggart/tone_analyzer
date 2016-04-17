@@ -102,6 +102,12 @@ angular.module('toneAnalyzer', ['ui.router'])
         });
       });
     }
+    $scope.getUsername = function(){
+      $http.get('/loggedin').then(function(response){
+        $scope.name = response.data
+        console.log($scope.name)
+      })
+    }
   })
   .directive('drawChart', function() {
     //Render charts
