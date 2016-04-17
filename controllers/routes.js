@@ -160,12 +160,10 @@ router.post('/tonetext', function(req, res) {
 
   tone_analyzer.tone({ text: req.body.content },
     function(err, tone) {
-      console.log(tone)
+      // console.log(tone)
       if (err) {
-        console.log('hit error')
-        console.log(err);
+        return err;
       } else {
-        console.log('hit api call')
 
         var emotionToneArray = []
         var writingToneArray = []
@@ -191,18 +189,17 @@ router.post('/tonetext', function(req, res) {
             tone_score: tone.document_tone.tone_categories[2].tones[i].score 
           })
         };
-        console.log('api call still good')
         var content = new ContentDB ({
           content: req.body.content,
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
-          writing_tone_data: writingToneArray
+          writing_tone_data: writingToneArray,
+          user: 'adshfkdsjhfak;'
         })
         content.save(function(err, response){
           if (err) {
             throw err
           } else {
-            console.log('content saved into db')
             res.json(response);
           }
         }) }
@@ -215,8 +212,15 @@ router.get('/demobox', function(req, res){
 
 router.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
+    console.log(response)
     res.json(response);
   });
+})
+
+router.get('/loggedInUser', function(req, res){
+  passport.find({}).exec().then(function(response) {
+    console.log(response)
+  })
 })
 
 router.get('*', function(req, res) {

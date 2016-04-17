@@ -100,6 +100,11 @@ angular.module('toneAnalyzer', ['ui.router'])
         });
       });
     }
+    $scope.getUserData = function(){
+      $http.get('/loggedInUser').then(function(response){
+        console.log(response)
+      })
+    }
   })
   .directive('drawChart', function() {
     return {
@@ -146,9 +151,9 @@ angular.module('toneAnalyzer', ['ui.router'])
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(attrs.chartindex)
-            console.log(socialToneDataType)
-            console.log(socialToneDataScore)
+            // console.log(attrs.chartindex)
+            // console.log(socialToneDataType)
+            // console.log(socialToneDataScore)
 
             $(element).highcharts({
               title: {
@@ -190,7 +195,7 @@ angular.module('toneAnalyzer', ['ui.router'])
               }],
             });
             
-            console.log(attrs.chartindex)
+            // console.log(attrs.chartindex)
 
           }
         }

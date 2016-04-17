@@ -200,11 +200,11 @@ input::-webkit-input-placeholder {
   font-family: 'Lato', sans-serif;
 }
 
-.panel {
+/*.panel {
   margin-top: 60px;
   background: transparent;
   border: 5px solid #fff;
-}
+}*/
 
 .login_signup-button {
   margin-bottom: 10px;
@@ -441,4 +441,8 @@ span, a {
         position: relative;
         margin-right: 0;
     }
+}
+
+#socialTones li {
+  list-style-type: none;
 }

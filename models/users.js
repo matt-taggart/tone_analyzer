@@ -19,14 +19,14 @@ var UserSchema = new Schema({
    username: {
     type: String,
     trim: true,
-    lowercase: true,
-    minlength: [6, 'Username must be at least 6 characters.']
+    lowercase: true
+    // minlength: [6, 'Username must be at least 6 characters.']
   },
 
   password: {
     type: String,
-    trim: true,
-    minlength: [6, 'Password must be at least 6 characters']
+    trim: true
+    // minlength: [6, 'Password must be at least 6 characters']
   },
 
   email: {

@@ -18,6 +18,9 @@ angular.module("toneAnalyzer")
         });
       });
     }
+    $scope.getUserData = function(){
+      console.log('hello world')
+    }
   })
   .directive('drawChart', function() {
     return {
@@ -64,9 +67,9 @@ angular.module("toneAnalyzer")
             writingToneDataType.push(writingtoneNameElements)
             writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(attrs.chartindex)
-            console.log(socialToneDataType)
-            console.log(socialToneDataScore)
+            // console.log(attrs.chartindex)
+            // console.log(socialToneDataType)
+            // console.log(socialToneDataScore)
 
             $(element).highcharts({
               title: {
