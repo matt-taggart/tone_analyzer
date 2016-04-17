@@ -228,7 +228,7 @@ router.get('/calldata', function(req, res){
 router.get('/textdata/:id', function(req, res){
   var id = req.params.id
   ContentDB.find({_id: id}).exec().then(function(response) {
-    console.log(response);
+    // console.log(response);
     res.json(response);
   });
 })
