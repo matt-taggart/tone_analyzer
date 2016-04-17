@@ -196,9 +196,9 @@ angular.module('toneAnalyzer', ['ui.router'])
                 '#2b908f', 
                 '#f45b5b', 
                 '#91e8e1', 
-                '#465CCC', 
+                '#00cc99', 
                 '#00c46d', 
-                '#fffa6e'
+                '#cc66ff'
             ],
               title: {
                   text: 'Tone Analysis'
