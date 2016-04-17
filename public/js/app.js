@@ -132,15 +132,16 @@ angular.module('toneAnalyzer', ['ui.router'])
       templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
-        var socialToneDataType = [];
-        var socialToneDataScore = [];
+        // var socialToneDataType = [];
+        // var socialToneDataScore = [];
 
-        var writingToneDataType = [];
-        var writingToneDataScore = [];
+        // var writingToneDataType = [];
+        // var writingToneDataScore = [];
 
-        var emotionToneDataType = [];
-        var emotionToneDataScore = [];
+        // var emotionToneDataType = [];
+        // var emotionToneDataScore = [];
 
+        var toneScoresHighchart = [];
 
           for (var i = 0; i < scope.idArray.length; i++) {
            var socialtoneScoreElements = [];
@@ -164,59 +165,50 @@ angular.module('toneAnalyzer', ['ui.router'])
               writingtoneNameElements.push(scope.idArray[i].writing_tone_data[j].tone_type)
             }
 
-            socialToneDataScore.push(socialtoneScoreElements)
-            socialToneDataType.push(socialtoneNameElements)
-            emotionToneDataType.push(emotiontoneNameElements)
-            emotionToneDataScore.push(emotiontoneScoreElements)
-            writingToneDataType.push(writingtoneNameElements)
-            writingToneDataScore.push(writingtoneScoreElements)
+            // socialToneDataScore.push(socialtoneScoreElements)
+            // socialToneDataType.push(socialtoneNameElements)
+            // emotionToneDataType.push(emotiontoneNameElements)
+            // emotionToneDataScore.push(emotiontoneScoreElements)
+            // writingToneDataType.push(writingtoneNameElements)
+            // writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(attrs.chartindex)
-            console.log(socialToneDataType)
-            console.log(socialToneDataScore)
+            toneScoresHighchart.push(socialtoneScoreElements.concat(emotiontoneScoreElements, writingtoneScoreElements))
+            console.log(toneScoresHighchart)
 
             $(element).highcharts({
+              chart: {
+                type: 'column'
+              },
               title: {
                   text: 'Tone Analysis'
               },
               xAxis: [{
-                  name: 'Social Tone Data',
-                  categories: socialToneDataType[attrs.chartindex]
-                }, {
-                  name: 'Emotion Tone Data',
-                  categories: emotionToneDataType[attrs.chartindex]
-                }, {
-                  name: 'Writing Tone Data',
-                  categories: writingToneDataType[attrs.chartindex]
-                }],
+                  categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative'] //socialToneDataType[attrs.chartindex]
+                }, 
+                // {
+                //   name: 'Emotion Tone Data',
+                //   categories: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'] //emotionToneDataType[attrs.chartindex]
+                // }, {
+                //   name: 'Writing Tone Data',
+                //   categories: ['Analytical', 'Confident', 'Tentative'] //writingToneDataType[attrs.chartindex]
+                // }
+                ],
               yAxis: {
                   title: {
                       text: 'Tone Score'
                   }
               },
               series: [{
-                  data: socialToneDataScore[attrs.chartindex],
-                  name: 'Social Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 0
-                }, {
-                  data: emotionToneDataScore[attrs.chartindex],
-                  name: 'Emotional Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 1
-                }, {
-                  data: writingToneDataScore[attrs.chartindex],
-                  name: 'Writing Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 2
-              }],
+                  data: toneScoresHighchart[attrs.chartindex],
+                  // name: 'Social Tone Trend',
+                  // type: 'column',
+                  // maxPointWidth: 15,
+                  // xAxis: 0
+                }],
+              legend: {
+                enabled: false
+              }
             });
-            
-            console.log(attrs.chartindex)
-
           }
         }
       }
