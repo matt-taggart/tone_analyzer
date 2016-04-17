@@ -30,14 +30,13 @@ h3 {
   padding: 20px;
   color: #01579b;
   border: 2px solid #01579b;
-  margin: 20px;
- /* margin-left: 450px;*/
+  margin: 20px 0px 50px 0px;
   text-shadow: none;
   cursor: pointer;
  /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
- }
+}
 
 .hover-button:hover {
   background-color: #01579b;
