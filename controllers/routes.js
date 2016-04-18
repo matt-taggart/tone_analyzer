@@ -197,7 +197,7 @@ router.post('/tonetext', function(req, res) {
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
           writing_tone_data: writingToneArray,
-          user: req.body.userId
+          userId: req.body.userId
         })
         content.save(function(err, response){
           if (err) {
@@ -216,6 +216,21 @@ router.get('/demobox', function(req, res){
 })
 
 router.get('/calldata', function(req, res){
+  ContentDB.find({}).exec().then(function(response) {
+    console.log(response);
+    res.json(response);
+  });
+})
+
+router.get('/textdata/:id', function(req, res){
+  var id = req.params.id
+  ContentDB.find({_id: id}).exec().then(function(response) {
+    console.log(response);
+    res.json(response);
+  });
+})
+
+router.get('/drafts', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
   });
