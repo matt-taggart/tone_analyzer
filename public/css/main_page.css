@@ -43,6 +43,11 @@ h3 {
   color: #fff;
  }
 
+ .hover-button:hover:disabled {
+  background-color: transparent;
+  color: #01579b;
+ }
+
 #wrapper {
   padding-left: 0;
   -webkit-transition: all 0.5s ease;

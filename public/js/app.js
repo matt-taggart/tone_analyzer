@@ -120,10 +120,13 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
         if (response.data.firstname) {
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.attr('disabled', 'disabled');
           $scope.firstname = response.data.firstname;
           $scope.emailData.email = response.data.email;
         } else {
-          $scope.isGmail = false;
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.removeAttr('disabled');
           $scope.firstname = response.data.googleName;
           $scope.emailData.email = response.data.googleEmail;
         }
@@ -145,6 +148,7 @@ angular.module('toneAnalyzer', ['ui.router'])
     });
 
   })
+
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
