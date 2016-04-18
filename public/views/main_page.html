@@ -126,7 +126,7 @@
               <div class="row">
                 <div class="col-xs-12">
                  <div class="form-group">
-                   <input type="text" class="form-control input-lg" placeholder="From" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
+                   <input type="text" class="form-control input-lg" placeholder="From" disabled="true" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
                  </div>
                 </div>
               </div>              
@@ -146,6 +146,10 @@
               </div>
             </div>
             <div class="modal-footer">
+              <button class="btn btn-danger" data-dismiss="modal">
+                <i class="fa fa-trash-o" title="Delete" aria-hidden="true"></i>
+                <span class="sr-only">Delete</span>
+              </button>
               <button class="btn btn-primary" type="submit">Send</button>
             </div>
           </div>

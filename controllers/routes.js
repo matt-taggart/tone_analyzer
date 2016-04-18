@@ -226,8 +226,6 @@ router.get('/calldata', function(req, res){
 
 router.post('/send_email', function(req, res) {
 
-  console.log(transporterObject);
-
   transporterObject[0].sendMail({
     from: req.body.email,
     to: req.body.sendTo,

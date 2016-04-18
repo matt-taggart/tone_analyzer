@@ -139,6 +139,14 @@ angular.module('toneAnalyzer', ['ui.router'])
       })
     }
 
+
+    $('#email-form').on('hidden.bs.modal', function (e) {
+      $(this)
+        .find("input,textarea,select")
+           .val('')
+           .end()
+    });
+
   })
   .directive('drawChart', function() {
     return {
