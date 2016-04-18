@@ -30,7 +30,7 @@ h3 {
   padding: 20px;
   color: #01579b;
   border: 2px solid #01579b;
-  margin: 20px 0px 50px 0px;
+  margin: 20px;
   text-shadow: none;
   cursor: pointer;
  /* -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
@@ -38,9 +38,18 @@ h3 {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
 }
 
+ #tooltip-wrapper {
+  float: left;
+ }
+
 .hover-button:hover {
   background-color: #01579b;
   color: #fff;
+}
+
+.hover-button:hover:disabled {
+  background-color: transparent;
+  color: #01579b;
 }
 
 #wrapper {
