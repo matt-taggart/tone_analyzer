@@ -93,7 +93,7 @@ router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'] }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
@@ -116,11 +116,6 @@ router.get('/auth/google/callback', function(req, res, next) {
         return next(err);
       }
 
-      console.log(user.googleName);
-      console.log(user.googleEmail);
-      console.log(googleCredentials.clientId);
-      console.log(googleCredentials.clientSecret);
-
       var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -128,7 +123,8 @@ router.get('/auth/google/callback', function(req, res, next) {
             user: user.googleEmail,
             clientId: googleCredentials.clientId,
             clientSecret: googleCredentials.clientSecret,
-            refreshToken: googleCredentials.refreshToken
+            refreshToken: user.googleRefreshToken,
+            accessToken: user.googleAccessToken
           }) 
         }
       });
