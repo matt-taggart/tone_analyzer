@@ -51,7 +51,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea class="form-control tone_textarea" rows="15" ng-model='toneText'></textarea>  
+                <textarea class="form-control tone_textarea" rows="15" ng-model='toneText' placeholder='Enter Text Here'></textarea>  
               </div>
               <div class="row">
                 <div class="col-xs-6 text-right">
@@ -65,33 +65,31 @@
               </div>
               <div ng-init='retrieveData()'>
                 <div ng-repeat='(key, value) in toneDatas track by $index'>
-
                   <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default panel-shadow">
                       <div class="panel-body">
-                        <h4>Text for tone analysis</h4>
-                        <p> {{value.content}} </p>
+                        <h4 class="text-center">Text Tone Analysis</h4>
+                        <p class="text-center"> {{value.content}} </p>
                       </div>
                     </div>  
                   </div>
-                  
                   <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Social tone data</h4>
-                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                    <div class="panel panel-default panel-shadow">
+                      <div class="panel-body text-center">
+                        <h4>Social Tone Data</h4>
+                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}}: {{value.tone_score}}</p>
                       </div>
                     </div>
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Emotional tone data</h4>
-                        <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                    <div class="panel panel-default panel-shadow">
+                      <div class="panel-body text-center">
+                        <h4>Emotional Tone Data</h4>
+                        <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}}: {{value.tone_score}}</p>
                       </div>
                     </div>
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Writing tone data</h4>
-                        <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                    <div class="panel panel-default panel-shadow">
+                      <div class="panel-body text-center">
+                        <h4>Writing Tone Data</h4>
+                        <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}}: {{value.tone_score}}</p>
                       </div>
                     </div>
                   </div>

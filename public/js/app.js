@@ -201,8 +201,29 @@ angular.module('toneAnalyzer', ['ui.router'])
 
             $(element).highcharts({
               chart: {
-                type: 'column'
+                type: 'column',
+                shadow: true
               },
+              plotOptions: {
+                series: {
+                  colorByPoint: true
+                }
+              },
+               colors: [
+                '#7cb5ec',
+                '#434348',
+                '#90ed7d',
+                '#f7a35c',
+                '#8085e9', 
+                '#f15c80', 
+                '#e4d354', 
+                '#2b908f', 
+                '#f45b5b', 
+                '#91e8e1', 
+                '#00cc99', 
+                '#00c46d', 
+                '#cc66ff'
+            ],
               title: {
                   text: 'Tone Analysis'
               },
