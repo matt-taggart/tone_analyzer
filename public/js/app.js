@@ -123,12 +123,12 @@ angular.module('toneAnalyzer', ['ui.router'])
           $scope.firstname = response.data.firstname;
           $scope.emailData.email = response.data.email;
         } else {
+          $scope.isGmail = false;
           $scope.firstname = response.data.googleName;
           $scope.emailData.email = response.data.googleEmail;
         }
       })
     }
-
     $scope.sendEmail = function() {
       $http({
         method: 'POST',
@@ -138,13 +138,10 @@ angular.module('toneAnalyzer', ['ui.router'])
         console.log(result.data);
       })
     }
-
-
     $('#email-form').on('hidden.bs.modal', function (e) {
       $(this)
-        .find("input,textarea,select")
+        .find(".enable")
            .val('')
-           .end()
     });
 
   })

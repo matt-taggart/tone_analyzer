@@ -104,7 +104,7 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     if (!user) {
-      var errorMessage = req.session.flash.loginMessage[req.session.flash.loginMessage.length-1];
+      var errorMessage = req.session.flash.oAuthError[req.session.flash.oAuthError.length-1];
       return res.json({ authenticated: user, message: errorMessage });
     }
 
@@ -138,11 +138,6 @@ router.get('/auth/google/callback', function(req, res, next) {
 
   })(req, res, next);
 });
-
-
-var auth = function(req, res, next) {
-  !req.isAuthenticated() ? res.sendStatus(401):next();
-}
 
 router.get('/main_page', auth, function(req, res) {
   res.sendFile(process.cwd() + '/public/views/main_page.html');

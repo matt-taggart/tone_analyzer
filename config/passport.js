@@ -88,6 +88,11 @@ module.exports = function(passport) {
       if (err) {
         return err;
       }
+
+      if (!user) {
+        return done(null, false, req.flash('oAuthError', 'Permission denied.'))
+      }
+
       if (user) {
         return done(null, user);
       } else {
