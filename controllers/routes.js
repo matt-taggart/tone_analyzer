@@ -10,7 +10,8 @@ var nodemailer = require('nodemailer');
 var xoauth2 = require('xoauth2');
 var watson = require('watson-developer-cloud');
 var googleCredentials = require('../config/google-credentials.js');
-var ContentDB = require('../models/contentAnalysisModel.js')
+var ContentDB = require('../models/contentAnalysisModel.js');
+var transporterObject = [];
 
 var router = express.Router();
 
@@ -129,25 +130,7 @@ router.get('/auth/google/callback', function(req, res, next) {
         }
       });
 
-      transporter.sendMail({
-        from: user.googleEmail,
-        to: 'mtaggart89@gmail.com',
-        subject: 'Test Subject',
-        text: 'Test e-mail'
-      }, function(err, info) {
-        if (err) {
-          return console.log(err);
-        }
-        console.log('Message sent: ' + info.response);
-      });
-
-      transporter.verify(function(error, success) {
-         if (error) {
-              console.log(error);
-         } else {
-              console.log('Server is ready to take our messages');
-         }
-      });
+      transporterObject.push(transporter);
 
       res.redirect('/welcome');
     });  
@@ -242,12 +225,29 @@ router.get('/calldata', function(req, res){
 })
 
 router.post('/send_email', function(req, res) {
-  transportObject[0].sendMail({
+
+  console.log(transporterObject);
+
+  transporterObject[0].sendMail({
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,
     text: req.body.message
-  })
+  }, function(err, info) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log('Message sent: ' + info.response);
+  });
+
+  transporterObject[0].verify(function(error, success) {
+     if (error) {
+          console.log(error);
+     } else {
+          console.log('Server is ready to take our messages');
+     }
+  });
+
   res.send('Email Successful!');
 });
 
