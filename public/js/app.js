@@ -89,50 +89,35 @@ angular.module('toneAnalyzer', ['ui.router'])
         userId: $scope.firstname._id
       }).then(function(){
         $scope.toneText = '';
-        $scope.retrieveData();
+        $scope.retrieveDraft();
       });
     };
-    $scope.retrieveData = function(){
-    //When page loads or refreshes, data is rendered to the webpage from the database
-      // $http.get('/calldata').then(function(response){
-      //   $scope.toneDatas = response.data
-      //   $scope.idArray = [];
-      //   angular.forEach($scope.toneDatas, function(value, key) {
-      //     $scope.value = value._id
-      //     $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
-      //   });
-        // });
-      $scope.renderDraftAndData = function(id){
-        $http.get('/textdata/' + id).then(function(response){
-          console.log(response.data)
-          $scope.draftData = response.data
+    $scope.renderDraftAndData = function(id){
+      $http.get('/textdata/' + id).then(function(response){
+        $scope.draftData = response.data
+        $scope.idArray = [];
+        angular.forEach($scope.draftData, function(value, key){
+          $scope.value = value._id
+          $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
+          console.log($scope.idArray)
         })
-      }
+      })
     }
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
-        $scope.draftArray = []
+        $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
-            console.log(value)
             if (value.userId === $scope.firstname._id) {
               $scope.draftArray.push(value)
             }
           })
-        console.log($scope.drafts);
-      });
+      })
     }
     $scope.retrieveUsername = function(){
       $http.get('/loggedin').then(function(response){
         $scope.firstname = response.data
-        // console.log($scope.firstname);
       });
-    }
-    $scope.getUsername = function(){
-      $http.get('/loggedin').then(function(response){
-        $scope.name = response.data
-        console.log($scope.name)
-      })
     }
   })
   .directive('drawChart', function() {
@@ -142,85 +127,53 @@ angular.module('toneAnalyzer', ['ui.router'])
       templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
-        // var socialToneDataType = [];
-        // var socialToneDataScore = [];
+        console.log(attrs)
+          
+        $('.draft_links').on('click', function(){
 
-        // var writingToneDataType = [];
-        // var writingToneDataScore = [];
+          var socialToneScore = [];
+          var emotionToneScore = [];
+          var writingToneScore = [];
+          scope.toneScoreArray = [];
+          
+          angular.forEach(scope.idArray, function(value, key) {
+            angular.forEach(value.social_tone_data, function(value, key){
+              socialToneScore.push(value.tone_score)
+            })
+            angular.forEach(value.emotion_tone_data, function(value, key){
+              emotionToneScore.push(value.tone_score)
+            })
+            angular.forEach(value.writing_tone_data, function(value, key){
+              emotionToneScore.push(value.tone_score)
+            })
+          })
 
-        // var emotionToneDataType = [];
-        // var emotionToneDataScore = [];
+          scope.toneScoreArray = socialToneScore.concat(emotionToneScore, writingToneScore)
+          console.log(scope.toneScoreArray)
 
-        var toneScoresHighchart = [];
-
-          for (var i = 0; i < scope.idArray.length; i++) {
-           var socialtoneScoreElements = [];
-           var socialtoneNameElements = [];
-
-           var writingtoneScoreElements = [];
-           var writingtoneNameElements = [];
-
-           var emotiontoneScoreElements = [];
-           var emotiontoneNameElements = [];
-            for (var j = 0; j < scope.idArray[i].social_tone_data.length; j++) {  
-              socialtoneScoreElements.push(scope.idArray[i].social_tone_data[j].tone_score)
-              socialtoneNameElements.push(scope.idArray[i].social_tone_data[j].tone_type)
+          $(element).highcharts({
+            chart: {
+              type: 'column'
+            },
+            title: {
+                text: 'Tone Analysis'
+            },
+            xAxis: [{
+                categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
+              }],
+            yAxis: {
+                title: {
+                    text: 'Tone Score'
+                }
+            },
+            series: [{
+                data: scope.toneScoreArray,
+              }],
+            legend: {
+              enabled: false
             }
-            for (var j = 0; j < scope.idArray[i].emotion_tone_data.length; j++) {  
-              emotiontoneScoreElements.push(scope.idArray[i].emotion_tone_data[j].tone_score)
-              emotiontoneNameElements.push(scope.idArray[i].emotion_tone_data[j].tone_type)
-            }
-            for (var j = 0; j < scope.idArray[i].writing_tone_data.length; j++) {  
-              writingtoneScoreElements.push(scope.idArray[i].writing_tone_data[j].tone_score)
-              writingtoneNameElements.push(scope.idArray[i].writing_tone_data[j].tone_type)
-            }
-
-            // socialToneDataScore.push(socialtoneScoreElements)
-            // socialToneDataType.push(socialtoneNameElements)
-            // emotionToneDataType.push(emotiontoneNameElements)
-            // emotionToneDataScore.push(emotiontoneScoreElements)
-            // writingToneDataType.push(writingtoneNameElements)
-            // writingToneDataScore.push(writingtoneScoreElements)
-
-            toneScoresHighchart.push(socialtoneScoreElements.concat(emotiontoneScoreElements, writingtoneScoreElements))
-            //console.log(toneScoresHighchart)
-
-            //Code for rendering individual charts
-            $(element).highcharts({
-              chart: {
-                type: 'column'
-              },
-              title: {
-                  text: 'Tone Analysis'
-              },
-              xAxis: [{
-                  categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative'] //socialToneDataType[attrs.chartindex]
-                }, 
-                // {
-                //   name: 'Emotion Tone Data',
-                //   categories: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'] //emotionToneDataType[attrs.chartindex]
-                // }, {
-                //   name: 'Writing Tone Data',
-                //   categories: ['Analytical', 'Confident', 'Tentative'] //writingToneDataType[attrs.chartindex]
-                // }
-                ],
-              yAxis: {
-                  title: {
-                      text: 'Tone Score'
-                  }
-              },
-              series: [{
-                  data: toneScoresHighchart[attrs.chartindex],
-                  // name: 'Social Tone Trend',
-                  // type: 'column',
-                  // maxPointWidth: 15,
-                  // xAxis: 0
-                }],
-              legend: {
-                enabled: false
-              }
-            });
-          }
+          });
+          })
         }
       }
   });
