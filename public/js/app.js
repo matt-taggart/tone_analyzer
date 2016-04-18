@@ -124,6 +124,10 @@ angular.module('toneAnalyzer', ['ui.router'])
         $scope.firstname = response.data.firstname
       })
     }
+    $("#menu-toggle").click(function(e) {
+     e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    });
   })
   .directive('drawChart', function() {
     return {

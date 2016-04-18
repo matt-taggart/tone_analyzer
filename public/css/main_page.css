@@ -60,6 +60,10 @@ h3 {
   box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.32);
 }
 
+.text-panel {
+  margin-top: 10px;
+}
+
 #sidebar-wrapper {
   z-index: 1000;
   position: fixed;
@@ -204,3 +208,16 @@ p {
  top: 0px;
  float: right;
 }
+
+.draft_links > i {
+  padding-left: 50px;
+  opacity: 0;
+ -webkit-transition: opacity 0.5s;
+ -moz-transition: opacity 0.5s;
+ -o-transition: opacity 0.5s;
+}
+
+.draft_links:hover > i {
+ opacity: 1;
+}
+
