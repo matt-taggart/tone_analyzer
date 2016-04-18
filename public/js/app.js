@@ -120,10 +120,11 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
         if (response.data.firstname) {
-          var el = angular.element(document.querySelector('#emailBtn'));
-          el.attr('disabled', 'disabled');
           $scope.firstname = response.data.firstname;
           $scope.emailData.email = response.data.email;
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.attr('disabled', 'disabled');
+          $('#tooltip-wrapper').tooltip('hover');
         } else {
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
