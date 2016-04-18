@@ -116,20 +116,43 @@ router.get('/auth/google/callback', function(req, res, next) {
         return next(err);
       }
 
-      googleEmail = user.googleEmail;
+      console.log(user.googleName);
+      console.log(user.googleEmail);
+      console.log(googleCredentials.clientId);
+      console.log(googleCredentials.clientSecret);
+
       var transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'Gmail',
         auth: {
           xoauth2: xoauth2.createXOAuth2Generator({
-            user: user.googleName,
+            user: user.googleEmail,
             clientId: googleCredentials.clientId,
             clientSecret: googleCredentials.clientSecret,
             refreshToken: googleCredentials.refreshToken
-          })
+          }) 
         }
       });
 
-      var firstName = user.googleName;
+      transporter.sendMail({
+        from: user.googleEmail,
+        to: 'mtaggart89@gmail.com',
+        subject: 'Test Subject',
+        text: 'Test e-mail'
+      }, function(err, info) {
+        if (err) {
+          return console.log(err);
+        }
+        console.log('Message sent: ' + info.response);
+      });
+
+      transporter.verify(function(error, success) {
+         if (error) {
+              console.log(error);
+         } else {
+              console.log('Server is ready to take our messages');
+         }
+      });
+
       res.redirect('/welcome');
     });  
 
@@ -223,15 +246,14 @@ router.get('/calldata', function(req, res){
 })
 
 router.post('/send_email', function(req, res) {
-  console.log(req.user);
-  // transporter.sendMail({
-  //   from: googleEmail,
-  //   to: 'mtaggart89@gmail.com, ntekal@gmail.com',
-  //   subject: 'hello world',
-  //   text: 'hello world!'
-  // })
-  res.send('hello');
-})
+  transportObject[0].sendMail({
+    from: req.body.email,
+    to: req.body.sendTo,
+    subject: req.body.subject,
+    text: req.body.message
+  })
+  res.send('Email Successful!');
+});
 
 router.get('*', function(req, res) {
   res.sendFile(process.cwd() + '/public/views/index.html');
