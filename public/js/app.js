@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router'])
+angular.module('toneAnalyzer', [ 'ui.router', 'wysiwyg.module'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -126,7 +126,20 @@ angular.module('toneAnalyzer', ['ui.router'])
         // console.log($scope.firstname);
       });
     }
+    $scope.data.text.customMenu = [
+          ['bold', 'italic', 'underline', 'strikethrough', 'subscript', 'superscript'],
+          ['format-block'],
+          ['font'],
+          ['font-size'],
+          ['font-color', 'hilite-color'],
+          ['remove-format'],
+          ['ordered-list', 'unordered-list', 'outdent', 'indent'],
+          ['left-justify', 'center-justify', 'right-justify'],
+          ['code', 'quote', 'paragraph'],
+          ['link', 'image']
+      ];
   })
+
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
