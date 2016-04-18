@@ -124,7 +124,7 @@ angular.module('toneAnalyzer', ['ui.router'])
           $scope.emailData.email = response.data.email;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.attr('disabled', 'disabled');
-          $('#tooltip-wrapper').tooltip('hover');
+          $('#tooltip-wrapper').tooltip({ trigger: 'hover', placement: 'right'});
         } else {
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
