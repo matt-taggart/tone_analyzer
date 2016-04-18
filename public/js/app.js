@@ -30,9 +30,11 @@ angular.module('toneAnalyzer', ['ui.router'])
           if (response.data.googleName) {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.googleName;
+            // sharedProperties.setUsername(response.data.googleName);
           } else {
             $rootScope.isAuthenticated = true;
-            $rootScope.username = response.data.firstname
+            $rootScope.username = response.data.firstname;
+            // sharedProperties.setUsername(response.data.firstname);
           }
         }
 
@@ -81,6 +83,23 @@ angular.module('toneAnalyzer', ['ui.router'])
     requireBase: false
   });
 })
+
+// .service('sharedProperties', function() {
+//   var username;
+
+//   return {
+//     setUsername: function(name) {
+//       username = $rootScope.name;
+//     }
+//   }
+
+//   return {
+//     getUsername: function() {
+//       return username;
+//     }
+//   }
+// })
+
 .controller('inputForm', function($scope, $http) {
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
@@ -100,6 +119,11 @@ angular.module('toneAnalyzer', ['ui.router'])
         });
       });
     }
+    $scope.getUser = function(){
+      $http.get('/loggedin').then(function(response){
+        $scope.firstname = response.data.firstname
+      })
+    }
   })
   .directive('drawChart', function() {
     return {
@@ -107,15 +131,16 @@ angular.module('toneAnalyzer', ['ui.router'])
       templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
-        var socialToneDataType = [];
-        var socialToneDataScore = [];
+        // var socialToneDataType = [];
+        // var socialToneDataScore = [];
 
-        var writingToneDataType = [];
-        var writingToneDataScore = [];
+        // var writingToneDataType = [];
+        // var writingToneDataScore = [];
 
-        var emotionToneDataType = [];
-        var emotionToneDataScore = [];
+        // var emotionToneDataType = [];
+        // var emotionToneDataScore = [];
 
+        var toneScoresHighchart = [];
 
           for (var i = 0; i < scope.idArray.length; i++) {
            var socialtoneScoreElements = [];
@@ -139,59 +164,71 @@ angular.module('toneAnalyzer', ['ui.router'])
               writingtoneNameElements.push(scope.idArray[i].writing_tone_data[j].tone_type)
             }
 
-            socialToneDataScore.push(socialtoneScoreElements)
-            socialToneDataType.push(socialtoneNameElements)
-            emotionToneDataType.push(emotiontoneNameElements)
-            emotionToneDataScore.push(emotiontoneScoreElements)
-            writingToneDataType.push(writingtoneNameElements)
-            writingToneDataScore.push(writingtoneScoreElements)
+            // socialToneDataScore.push(socialtoneScoreElements)
+            // socialToneDataType.push(socialtoneNameElements)
+            // emotionToneDataType.push(emotiontoneNameElements)
+            // emotionToneDataScore.push(emotiontoneScoreElements)
+            // writingToneDataType.push(writingtoneNameElements)
+            // writingToneDataScore.push(writingtoneScoreElements)
 
-            console.log(attrs.chartindex)
-            console.log(socialToneDataType)
-            console.log(socialToneDataScore)
+            toneScoresHighchart.push(socialtoneScoreElements.concat(emotiontoneScoreElements, writingtoneScoreElements))
+            console.log(toneScoresHighchart)
 
             $(element).highcharts({
+              chart: {
+                type: 'column',
+                shadow: true
+              },
+              plotOptions: {
+                series: {
+                  colorByPoint: true
+                }
+              },
+               colors: [
+                '#7cb5ec',
+                '#434348',
+                '#90ed7d',
+                '#f7a35c',
+                '#8085e9', 
+                '#f15c80', 
+                '#e4d354', 
+                '#2b908f', 
+                '#f45b5b', 
+                '#91e8e1', 
+                '#00cc99', 
+                '#00c46d', 
+                '#cc66ff'
+            ],
               title: {
                   text: 'Tone Analysis'
               },
               xAxis: [{
-                  name: 'Social Tone Data',
-                  categories: socialToneDataType[attrs.chartindex]
-                }, {
-                  name: 'Emotion Tone Data',
-                  categories: emotionToneDataType[attrs.chartindex]
-                }, {
-                  name: 'Writing Tone Data',
-                  categories: writingToneDataType[attrs.chartindex]
-                }],
+                  categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative'] //socialToneDataType[attrs.chartindex]
+                }, 
+                // {
+                //   name: 'Emotion Tone Data',
+                //   categories: ['Anger', 'Disgust', 'Fear', 'Joy', 'Sadness'] //emotionToneDataType[attrs.chartindex]
+                // }, {
+                //   name: 'Writing Tone Data',
+                //   categories: ['Analytical', 'Confident', 'Tentative'] //writingToneDataType[attrs.chartindex]
+                // }
+                ],
               yAxis: {
                   title: {
                       text: 'Tone Score'
                   }
               },
               series: [{
-                  data: socialToneDataScore[attrs.chartindex],
-                  name: 'Social Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 0
-                }, {
-                  data: emotionToneDataScore[attrs.chartindex],
-                  name: 'Emotional Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 1
-                }, {
-                  data: writingToneDataScore[attrs.chartindex],
-                  name: 'Writing Tone Trend',
-                  type: 'column',
-                  maxPointWidth: 15,
-                  xAxis: 2
-              }],
+                  data: toneScoresHighchart[attrs.chartindex],
+                  // name: 'Social Tone Trend',
+                  // type: 'column',
+                  // maxPointWidth: 15,
+                  // xAxis: 0
+                }],
+              legend: {
+                enabled: false
+              }
             });
-            
-            console.log(attrs.chartindex)
-
           }
         }
       }
