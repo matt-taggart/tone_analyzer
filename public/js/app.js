@@ -198,6 +198,7 @@ angular.module('toneAnalyzer', ['ui.router'])
     $scope.retrieveUsername = function(){
       $http.get('/loggedin').then(function(response){
         $scope.firstname = response.data
+        console.log(response)
       });
     }
     $scope.getUser = function(){
