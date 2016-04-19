@@ -127,15 +127,12 @@ angular.module('toneAnalyzer', ['ui.router'])
       templateUrl: '../template/chartRender.html',
       link: function (scope, element, attrs){
 
-        console.log(attrs)
-          
-        $('.draft_links').on('click', function(){
-
           var socialToneScore = [];
           var emotionToneScore = [];
           var writingToneScore = [];
           scope.toneScoreArray = [];
           
+        
           angular.forEach(scope.idArray, function(value, key) {
             angular.forEach(value.social_tone_data, function(value, key){
               socialToneScore.push(value.tone_score)
@@ -146,7 +143,7 @@ angular.module('toneAnalyzer', ['ui.router'])
             angular.forEach(value.writing_tone_data, function(value, key){
               emotionToneScore.push(value.tone_score)
             })
-          })
+          
 
           scope.toneScoreArray = socialToneScore.concat(emotionToneScore, writingToneScore)
           console.log(scope.toneScoreArray)
@@ -173,7 +170,7 @@ angular.module('toneAnalyzer', ['ui.router'])
               enabled: false
             }
           });
-          })
-        }
-      }
-  });
+        })
+    }
+  }
+});

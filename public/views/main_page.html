@@ -23,7 +23,7 @@
               Saved Drafts
             </li>
             <li ng-init="retrieveDraft()">
-              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft._id }}</a>
+              <a class="draft_links" ng-click="renderDraftAndData(draft._id);drawHighchart();" ng-repeat="draft in draftArray">{{ draft._id }}</a>
             </li>
           </ul>
         </div>
@@ -53,40 +53,38 @@
               The tone data is reported on a scale of 0 to 1 for ease of interpretation. A score of 0 means that the specific tone of interest is not present in your text, whereas a score of 1 indicates the most extreme case of that tone.  This data will help you become aware of the tone of your email with quantified data before sending it.
                 </div>
               </div>
-              <div ng-init='retrieveData()'>
-                <div ng-repeat='(key, value) in draftData track by $index'>
+              <div ng-repeat='(key, value) in draftData track by $index'>
 
-                  <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Text for tone analysis</h4>
-                        <p> {{value.content}} </p>
-                      </div>
-                    </div>  
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-sm-12">
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Social tone data</h4>
-                        <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                      </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Text for tone analysis</h4>
+                      <p> {{value.content}} </p>
                     </div>
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Emotional tone data</h4>
-                        <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                      </div>
-                    </div>
-                    <div class="panel panel-default">
-                      <div class="panel-body">
-                        <h4>Writing tone data</h4>
-                        <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
-                      </div>
+                  </div>  
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Social tone data</h4>
+                      <p ng-repeat='(key, value) in value.social_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                     </div>
                   </div>
-                  <div class="col-lg-8 col-md-8 col-sm-12">
-                    <draw-chart class='img-responsive' style="width: 100%; height: 511px;"></draw-chart>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Emotional tone data</h4>
+                      <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                    </div>
                   </div>
+                  <div class="panel panel-default">
+                    <div class="panel-body">
+                      <h4>Writing tone data</h4>
+                      <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                  <draw-chart class='img-responsive' style="width: 100%; height: 511px;"></draw-chart>
                 </div>
               </div>
             </div>
