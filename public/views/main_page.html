@@ -21,7 +21,7 @@
               Saved Drafts
             </li>
             <li ng-init="retrieveDraft()">
-              <a class="draft_links" ng-click="renderDraftAndData(draft._id);drawHighchart();" ng-repeat="draft in draftArray">{{ draft._id }}</a>
+              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft._id }}</a>
             </li>
           </ul>
         </div>
@@ -81,9 +81,6 @@
                       <h4>Writing tone data</h4>
                       <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                     </div>
-                  </div>
-                  <div class="col-lg-8 col-md-8 col-sm-12">
-                    <draw-chart class='img-responsive' style="width: 100%; height: 511px;" chartIndex={{$index}}></draw-chart>
                   </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12">
