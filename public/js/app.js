@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -225,6 +225,10 @@ angular.module('toneAnalyzer', ['ui.router'])
         console.log(result.data);
       })
     }
+    $scope.tinymceOptions = {
+      plugins: 'link image code',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+    };
     $('#email-form').on('hidden.bs.modal', function (e) {
       $(this)
         .find(".enable")
