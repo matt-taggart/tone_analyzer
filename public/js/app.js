@@ -32,7 +32,7 @@ angular.module('toneAnalyzer', ['ui.router'])
             $rootScope.username = response.data.googleName;
           } else {
             $rootScope.isAuthenticated = true;
-            $rootScope.username = response.data.firstname
+            $rootScope.username = response.data.firstname;
           }
         }
 
@@ -81,6 +81,23 @@ angular.module('toneAnalyzer', ['ui.router'])
     requireBase: false
   });
 })
+
+// .service('sharedProperties', function() {
+//   var username;
+
+//   return {
+//     setUsername: function(name) {
+//       username = $rootScope.name;
+//     }
+//   }
+
+//   return {
+//     getUsername: function() {
+//       return username;
+//     }
+//   }
+// })
+
 .controller('inputForm', function($scope, $http) {
   //Post content to be processed through API
     $scope.analyzeTone = function(){
@@ -119,7 +136,39 @@ angular.module('toneAnalyzer', ['ui.router'])
         $scope.firstname = response.data
       });
     }
+    $scope.getUser = function(){
+      $http.get('/loggedin').then(function(response){
+        if (response.data.firstname) {
+          $scope.firstname = response.data.firstname;
+          $scope.emailData.email = response.data.email;
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.attr('disabled', 'disabled');
+          $('#tooltip-wrapper').tooltip({ trigger: 'hover', placement: 'right'});
+        } else {
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.removeAttr('disabled');
+          $scope.firstname = response.data.googleName;
+          $scope.emailData.email = response.data.googleEmail;
+        }
+      })
+    }
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
+      })
+    }
+    $('#email-form').on('hidden.bs.modal', function (e) {
+      $(this)
+        .find(".enable")
+           .val('')
+    });
+
   })
+
   .directive('drawChart', function() {
     //Render charts
     return {
@@ -150,8 +199,29 @@ angular.module('toneAnalyzer', ['ui.router'])
 
           $(element).highcharts({
             chart: {
-              type: 'column'
-            },
+                type: 'column',
+                shadow: true
+              },
+              plotOptions: {
+                series: {
+                  colorByPoint: true
+                }
+              },
+               colors: [
+                '#7cb5ec',
+                '#434348',
+                '#90ed7d',
+                '#f7a35c',
+                '#8085e9', 
+                '#f15c80', 
+                '#e4d354', 
+                '#2b908f', 
+                '#f45b5b', 
+                '#91e8e1', 
+                '#00cc99', 
+                '#00c46d', 
+                '#cc66ff'
+            ],
             title: {
                 text: 'Tone Analysis'
             },
@@ -174,3 +244,4 @@ angular.module('toneAnalyzer', ['ui.router'])
     }
   }
 });
+
