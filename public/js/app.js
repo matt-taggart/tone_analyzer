@@ -30,11 +30,9 @@ angular.module('toneAnalyzer', ['ui.router'])
           if (response.data.googleName) {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.googleName;
-            // sharedProperties.setUsername(response.data.googleName);
           } else {
             $rootScope.isAuthenticated = true;
             $rootScope.username = response.data.firstname;
-            // sharedProperties.setUsername(response.data.firstname);
           }
         }
 
@@ -121,14 +119,40 @@ angular.module('toneAnalyzer', ['ui.router'])
     }
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
-        $scope.firstname = response.data.firstname
+        if (response.data.firstname) {
+          $scope.firstname = response.data.firstname;
+          $scope.emailData.email = response.data.email;
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.attr('disabled', 'disabled');
+          $('#tooltip-wrapper').tooltip({ trigger: 'hover', placement: 'right'});
+        } else {
+          var el = angular.element(document.querySelector('#emailBtn'));
+          el.removeAttr('disabled');
+          $scope.firstname = response.data.googleName;
+          $scope.emailData.email = response.data.googleEmail;
+        }
+      })
+    }
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
       })
     }
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
     });
+    $('#email-form').on('hidden.bs.modal', function (e) {
+      $(this)
+        .find(".enable")
+           .val('')
+    });
   })
+
   .directive('drawChart', function() {
     return {
       restrict: 'EA',

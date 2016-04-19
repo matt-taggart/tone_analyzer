@@ -39,7 +39,11 @@ var UserSchema = new Schema({
     type: String
   },
 
-  googleToken: {
+  googleAccessToken: {
+    type: String
+  },
+
+  googleRefreshToken: {
     type: String
   },
 
