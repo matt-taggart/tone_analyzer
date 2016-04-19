@@ -27,7 +27,6 @@ module.exports = function(passport) {
       }
 
       if (!userData) {
-
         var newUser = new User(req.body);
         newUser.validateSync();
 
@@ -89,12 +88,19 @@ module.exports = function(passport) {
       if (err) {
         return err;
       }
+
+      // if (!user) {
+      //   return done(null, false, req.flash('oAuthError', 'Permission denied.'))
+      // }
+
       if (user) {
         return done(null, user);
       } else {
+
         var newUser = new User({
           googleId: profile.id,
-          googleToken: accessToken,
+          googleAccessToken: accessToken,
+          googleRefreshToken: refreshToken,
           googleName: profile.name.givenName,
           googleEmail: profile.emails[0].value
         });
