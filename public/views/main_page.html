@@ -8,13 +8,14 @@
     <link rel="stylesheet" type="text/css" href="css/main_page.css">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
+    <script type="text/javascript" src="/bower_components/tinymce-dist/test.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
     <!-- <script type="text/javascript" src="../controllers/inputFormController.js"></script> -->
+    <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
-      <script src='http://textangular.com/dist/textAngular-rangy.min.js'></script>
-      <script src='http://textangular.com/dist/textAngular-sanitize.min.js'></script>
-      <script src='http://textangular.com/dist/textAngular.min.js'></script>
+
   </head>
   <body class="main_page_bkgrd"> 
     <div ng-controller='inputForm'>
@@ -57,7 +58,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea class="form-control tone_textarea" rows="15" ng-model='toneText' placeholder='Enter Text Here'></textarea>  
+                <textarea ui-tinymce="tinymceOptions"class="form-control tone_textarea" rows="15" ng-model='toneText' placeholder='Enter Text Here'></textarea> 
               </div>
               <div class="row">
                 <div class="col-xs-6 text-right">

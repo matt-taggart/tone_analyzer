@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -125,6 +125,11 @@ angular.module('toneAnalyzer', ['ui.router'])
       })
     }
   })
+
+  // $scope.tinymceOptions = {
+  //   plugins: 'link image code',
+  //   toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+  // };
   .directive('drawChart', function() {
     return {
       restrict: 'EA',
