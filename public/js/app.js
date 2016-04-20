@@ -275,16 +275,21 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         console.log(result.data);
       })
     }
+    $("#menu-toggle").click(function(e) {
+     e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    });
+
     $scope.tinymceOptions = {
       plugins: 'link image code',
       toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
     };
+    
     $('#email-form').on('hidden.bs.modal', function (e) {
       $(this)
         .find(".enable")
            .val('')
     });
-
   })
 
 //   .directive('drawChart', function() {
