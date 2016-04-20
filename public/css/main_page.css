@@ -219,7 +219,6 @@ p {
 }
 
 .draft_links > i {
-  padding-left: 50px;
   opacity: 0;
  -webkit-transition: opacity 0.5s;
  -moz-transition: opacity 0.5s;
@@ -230,3 +229,44 @@ p {
  opacity: 1;
 }
 
+.mce-menubar .mce-menubtn button span {
+    color: #fff !important;
+}
+
+#mceu_9-body, #mceu_17-body, #mceu_16, #mceu_23  {
+  background-color: #01579b;
+}
+
+.mce-menubar {
+    border: 0px !important;
+}
+
+.mce-btn {
+  background-color: #01579b !important;
+}
+/*.mce-flow-layout {
+    white-space: normal;
+    background-color: #01579b;
+}*/
+.mce-btn i {
+    text-shadow: 1px 1px none;
+    color: #fff;
+    background-color: transparent; 
+}
+
+#mceu_8 {
+  border: 1px solid #fff !important;
+  border-radius: 0px !important;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  border: 0px !important;
+}
+
+.mce-caret {
+  border-top-color: #fff !important;
+}
+
+#Anger {
+  color: red;
+}
