@@ -103,9 +103,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
-        userId: $scope.firstname._id
+        userId: $scope.firstname._id,
+        draftTitle: $scope.draftTitle
       }).then(function(response){
         $scope.toneText = '';
+        $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
       });

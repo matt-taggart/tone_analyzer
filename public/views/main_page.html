@@ -24,7 +24,7 @@
               Saved Drafts
             </li>
             <li ng-init="retrieveDraft()">
-              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft._id }}</a>
+              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft.drafttitle }}</a>
             </li>
           </ul>
         </div>
@@ -87,7 +87,7 @@
                   </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12">
-                  <draw-chart class='img-responsive' style="width: 100%; height: 511px;" ng-model='generateHighchart()' ></draw-chart>
+                  <draw-chart class='img-responsive' style="width: 100%; height: 511px;" ng-bind='generateHighchart()' ></draw-chart>
                 </div>
               </div>
             </div>
