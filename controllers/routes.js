@@ -233,6 +233,11 @@ router.get('/drafts', function(req, res){
   });
 })
 
+router.delete('/deletedraft', function(req, res){
+  var deleteId = req.params.id
+  ContentDB.find({ id: deleteId }).remove().exec();
+})
+
 router.post('/send_email', function(req, res) {
 
   transporterObject[0].sendMail({

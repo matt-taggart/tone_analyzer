@@ -112,13 +112,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         $scope.retrieveDraft();
       });
     };
-    $scope.renderDataAfterAnalysis = function(){
-
-    }
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        console.log($($scope.draftData[0].content).text())
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
@@ -144,50 +140,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           $scope.toneScoreArray = socialToneScore.concat(emotionToneScore, writingToneScore)
           console.log($scope.toneScoreArray)
           $scope.generateHighchart();
-
-          // $('draw-chart').highcharts({
-          //   chart: {
-          //       type: 'column',
-          //       shadow: true
-          //     },
-          //     plotOptions: {
-          //       series: {
-          //         colorByPoint: true
-          //       }
-          //     },
-          //      colors: [
-          //       '#7cb5ec',
-          //       '#434348',
-          //       '#90ed7d',
-          //       '#f7a35c',
-          //       '#8085e9', 
-          //       '#f15c80', 
-          //       '#e4d354', 
-          //       '#2b908f', 
-          //       '#f45b5b', 
-          //       '#91e8e1', 
-          //       '#00cc99', 
-          //       '#00c46d', 
-          //       '#cc66ff'
-          //   ],
-          //   title: {
-          //       text: 'Tone Analysis'
-          //   },
-          //   xAxis: [{
-          //       categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
-          //     }],
-          //   yAxis: {
-          //       title: {
-          //           text: 'Tone Score'
-          //       }
-          //   },
-          //   series: [{
-          //       data: $scope.toneScoreArray,
-          //     }],
-          //   legend: {
-          //     enabled: false
-          //   }
-          // });
         })
       })
     }
@@ -251,6 +203,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           enabled: false
         }
       });
+    }
+    $scope.deleteDraft = function(id){
+      $http.delete('/deletedraft').then(function(response){
+        
+      })
     }
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
