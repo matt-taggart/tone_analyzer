@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -100,21 +100,27 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 
 .controller('inputForm', function($scope, $http) {
   //Post content to be processed through API
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
+      })
+    }
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
-      }).then(function(response){
-        $scope.toneText = '';
+      }).then(function(response) {
         $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
       });
     };
-    $scope.renderDataAfterAnalysis = function(){
 
-    }
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
@@ -270,15 +276,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         }
       })
     }
-    $scope.sendEmail = function() {
-      $http({
-        method: 'POST',
-        url: '/send_email',
-        data: $scope.emailData
-      }).then(function(result) {
-        console.log(result.data);
-      })
-    }
+
+    $scope.$watch('toneText', function() {
+      $scope.emailData.message = $scope.toneText;
+    })
+
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
