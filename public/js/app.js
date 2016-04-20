@@ -101,6 +101,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 .controller('inputForm', function($scope, $http) {
   //Post content to be processed through API
     $scope.analyzeTone = function(){
+      // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
+      var raw = $($scope.draftData[0].content).text();
+      console.log(raw);
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.firstname._id,
@@ -118,7 +121,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        console.log($($scope.draftData[0].content).text())
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
