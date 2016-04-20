@@ -235,6 +235,14 @@ router.get('/drafts', function(req, res){
 
 router.post('/send_email', function(req, res) {
 
+  transporterObject[0].verify(function(error, success) {
+     if (error) {
+          console.log(error);
+     } else {
+          console.log('Server is ready to take our messages');
+     }
+  });
+
   transporterObject[0].sendMail({
     from: req.body.email,
     to: req.body.sendTo,
@@ -245,14 +253,6 @@ router.post('/send_email', function(req, res) {
       return console.log(err);
     }
     console.log('Message sent: ' + info.response);
-  });
-
-  transporterObject[0].verify(function(error, success) {
-     if (error) {
-          console.log(error);
-     } else {
-          console.log('Server is ready to take our messages');
-     }
   });
 
   res.send('Email Successful!');

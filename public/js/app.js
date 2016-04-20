@@ -100,6 +100,15 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
 
 .controller('inputForm', function($scope, $http) {
   //Post content to be processed through API
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
+      })
+    }
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
@@ -112,9 +121,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         $scope.retrieveDraft();
       });
     };
-    $scope.renderDataAfterAnalysis = function(){
-
-    }
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
@@ -268,15 +274,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
           $scope.firstname = response.data.googleName;
           $scope.emailData.email = response.data.googleEmail;
         }
-      })
-    }
-    $scope.sendEmail = function() {
-      $http({
-        method: 'POST',
-        url: '/send_email',
-        data: $scope.emailData
-      }).then(function(result) {
-        console.log(result.data);
       })
     }
     $("#menu-toggle").click(function(e) {
