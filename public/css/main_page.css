@@ -38,6 +38,14 @@ h3 {
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);*/
 }
 
+#emailSubmit {
+  background-color: #01579b;
+}
+
+#emailSubmit:hover {
+  background-color: #014b84;
+}
+
  #tooltip-wrapper {
   float: left;
  }
