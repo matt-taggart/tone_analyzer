@@ -27,7 +27,7 @@
               Saved Drafts
             </li>
             <li ng-init="retrieveDraft()">
-              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft._id }}<i class="fa fa-trash-o" aria-hidden="true"></i></a>
+              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft.drafttitle }}<i class="fa fa-trash-o" aria-hidden="true"></i></a>
             </li>
           </ul>
         </div>
@@ -40,7 +40,7 @@
                 <br/>
               </div>
               <div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
-                <input type="text" class="form-control tone_textarea" placeholder="Title" class="validate title-text"/>
+                <input type="text" ng-model='draftTitle' class="form-control tone_textarea" placeholder="Title" class="validate title-text"/>
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -90,7 +90,7 @@
                   </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12">
-                  <draw-chart class='img-responsive' style="width: 100%; height: 511px;" ng-model='generateHighchart()' ></draw-chart>
+                  <draw-chart class='img-responsive' style="width: 100%; height: 511px;" ng-bind='generateHighchart()' ></draw-chart>
                 </div>
               </div>
             </div>
