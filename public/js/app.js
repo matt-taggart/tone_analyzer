@@ -114,13 +114,13 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         content: $scope.toneText,
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
-      }).then(function(response){
-        $scope.toneText = '';
+      }).then(function(response) {
         $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
       });
     };
+
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
@@ -276,6 +276,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       })
     }
+
+    $scope.$watch('toneText', function() {
+      $scope.emailData.message = $scope.toneText;
+    })
+
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
