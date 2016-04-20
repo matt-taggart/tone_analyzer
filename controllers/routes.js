@@ -193,7 +193,8 @@ router.post('/tonetext', function(req, res) {
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
           writing_tone_data: writingToneArray,
-          userId: req.body.userId
+          userId: req.body.userId,
+          drafttitle: req.body.draftTitle
         })
         content.save(function(err, response){
           if (err) {
