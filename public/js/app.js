@@ -103,7 +103,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
-        userId: $scope.firstname._id
+        userId: $scope.firstname._id,
+        draftTitle: $scope.draftTitle
       }).then(function(){
         $scope.toneText = '';
         $scope.retrieveDraft();
@@ -236,84 +237,4 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     });
 
   })
-
-//   .directive('drawChart', function() {
-//     //Render charts
-//     return {
-//       restrict: 'EA',
-//       // templateUrl: '../template/chartRender.html',
-//       scope: {
-//         draftInfo: '=',
-//       },
-//       link: function (scope, element, attrs){
-
-//         $('.draft_links').on('click', function(){
-
-//           var socialToneScore = [];
-//           var emotionToneScore = [];
-//           var writingToneScore = [];
-//           var toneScoreArray = [];
-        
-//           angular.forEach(scope.idArray, function(value, key) {
-//             angular.forEach(value.social_tone_data, function(value, key){
-//               socialToneScore.push(value.tone_score)
-//             })
-//             angular.forEach(value.emotion_tone_data, function(value, key){
-//               emotionToneScore.push(value.tone_score)
-//             })
-//             angular.forEach(value.writing_tone_data, function(value, key){
-//               emotionToneScore.push(value.tone_score)
-//             })
-
-//           toneScoreArray = socialToneScore.concat(emotionToneScore, writingToneScore)
-//           console.log(toneScoreArray)
-
-//           $(element).highcharts({
-//             chart: {
-//                 type: 'column',
-//                 shadow: true
-//               },
-//               plotOptions: {
-//                 series: {
-//                   colorByPoint: true
-//                 }
-//               },
-//                colors: [
-//                 '#7cb5ec',
-//                 '#434348',
-//                 '#90ed7d',
-//                 '#f7a35c',
-//                 '#8085e9', 
-//                 '#f15c80', 
-//                 '#e4d354', 
-//                 '#2b908f', 
-//                 '#f45b5b', 
-//                 '#91e8e1', 
-//                 '#00cc99', 
-//                 '#00c46d', 
-//                 '#cc66ff'
-//             ],
-//             title: {
-//                 text: 'Tone Analysis'
-//             },
-//             xAxis: [{
-//                 categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
-//               }],
-//             yAxis: {
-//                 title: {
-//                     text: 'Tone Score'
-//                 }
-//             },
-//             series: [{
-//                 data: toneScoreArray,
-//               }],
-//             legend: {
-//               enabled: false
-//             }
-//           });
-//         })
-//       })
-//     }
-//   }
-// });
 
