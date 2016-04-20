@@ -103,7 +103,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
-        userId: $scope.firstname._id,
+        userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
       }).then(function(response){
         $scope.toneText = '';
@@ -196,17 +196,17 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         $scope.drafts = response.data
         $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
-            if (value.userId === $scope.firstname._id) {
+            if (value.userId === $scope.userData._id) {
               $scope.draftArray.push(value)
             }
           })
       })
     }
-    $scope.retrieveUsername = function(){
-      $http.get('/loggedin').then(function(response){
-        $scope.firstname = response.data
-      });
-    }
+    // $scope.retrieveUsername = function(){
+    //   $http.get('/loggedin').then(function(response){
+    //     $scope.firstname = response.data
+    //   });
+    // }
     $scope.generateHighchart = function(){
       $('draw-chart').highcharts({
         chart: {
@@ -255,12 +255,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
         if (response.data.firstname) {
+          $scope.userData = response.data;
           $scope.firstname = response.data.firstname;
           $scope.emailData.email = response.data.email;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.attr('disabled', 'disabled');
           $('#tooltip-wrapper').tooltip({ trigger: 'hover', placement: 'right'});
         } else {
+          $scope.userData = response.data;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
           $scope.firstname = response.data.googleName;
