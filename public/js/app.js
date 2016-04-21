@@ -111,6 +111,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       })
     }
     $scope.analyzeTone = function(){
+      // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
+      var raw = $($scope.draftData[0].content).text();
+      console.log(raw);
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
@@ -124,7 +127,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        // $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
           $scope.value = value._id
@@ -257,8 +260,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     });
 
     $scope.tinymceOptions = {
-      plugins: 'link image code',
-      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+      plugins: 'link image code textcolor colorpicker',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | forecolor backcolor | fontsizeselect'
     };
     
     $('#email-form').on('hidden.bs.modal', function (e) {
