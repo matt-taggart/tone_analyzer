@@ -10,19 +10,21 @@
     <link rel="stylesheet" type="text/css" href="css/main_page.css">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/test.js"></script>
-    <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>   
+    <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+    <script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.js'></script>
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
-  <body class="main_page_bkgrd"> 
-    <div ng-controller='inputForm'>
+  <body class="main_page_bkgrd" ng-controller='inputForm'> 
+    <div>
       <div id="wrapper"> 
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
-            <li class="sidebar-brand" ng-init="retrieveUsername()">Welcome {{ firstname.googleName }}  {{ firstname.firstname }}</li>
+            <li class="sidebar-brand" ng-init="getUser()">Welcome {{ firstname }}</li>
             <li class="sidebar-brand">
               Saved Drafts
             </li>
@@ -62,28 +64,28 @@
               </div>
               <div ng-repeat='(key, value) in draftData track by $index'>
                 <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="panel panel-default">
-                    <div class="panel-body">
+                  <div class="panel panel-default panel-shadow text-panel">
+                    <div class="panel-body text-center">
                       <h4>Text for tone analysis</h4>
                       <p> {{value.content}} </p>
                    </div>
                   </div>  
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
-                  <div class="panel panel-default">
-                    <div class="panel-body">
+                  <div class="panel panel-default panel-shadow">
+                    <div class="panel-body text-center">
                       <h4>Social tone data</h4>
                       <p ng-repeat='(key, value) in value.social_tone_data' id="{{value.tone_type}}"> {{value.tone_type}} {{value.tone_score}}</p>
                     </div>
                   </div>
-                  <div class="panel panel-default">
-                    <div class="panel-body">
+                  <div class="panel panel-default panel-shadow">
+                    <div class="panel-body text-center">
                       <h4>Emotional tone data</h4>
                       <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                     </div>
                   </div>
-                  <div class="panel panel-default">
-                    <div class="panel-body">
+                  <div class="panel panel-default panel-shadow">
+                    <div class="panel-body text-center">
                       <h4>Writing tone data</h4>
                       <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
                     </div>
@@ -113,38 +115,41 @@
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg enable" placeholder="To" ng-model="emailData.sendTo">
+                    <label for="recipient">Recipient</label>
+                    <input type="text" id="reciepient" class="form-control input-lg enable" placeholder="Recipient" ng-model="emailData.sendTo">
                   </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                  <div class="form-group">
-                   <input type="text" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
+                   <label for="from">From</label>
+                   <input type="text" id="from" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
                  </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject">               
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject">
                   </div>            
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <textarea type="text" class="form-control enable" rows="9" ng-model="emailData.message"></textarea>          
+                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ message }}'">    
                   </div>            
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" data-dismiss="modal">
+              <button class="btn btn-danger btn-lg" data-dismiss="modal">
                 <i class="fa fa-trash-o" title="Delete" aria-hidden="true"></i>
                 <span class="sr-only">Delete</span>
               </button>
-              <button class="btn btn-primary" type="submit">Send</button>
+              <button class="btn btn-primary btn-lg" id="emailSubmit" type="submit">Send</button>
             </div>
           </div>
         </form>
@@ -158,7 +163,6 @@
     <script type="text/javascript" src="/controllers/loginController.js"></script>
     <script src="http://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript" src="../grouped-categories.js"></script>
-
 
   </body>  
   </html>

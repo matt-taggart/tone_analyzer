@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -100,18 +100,30 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 
 .controller('inputForm', function($scope, $http) {
   //Post content to be processed through API
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
+      })
+    }
     $scope.analyzeTone = function(){
       $http.post('/tonetext', {
         content: $scope.toneText,
-        userId: $scope.firstname._id,
+        userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
-      }).then(function(response){
-        $scope.toneText = '';
+      }).then(function(response) {
         $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
       });
     };
+<<<<<<< HEAD
+=======
+
+>>>>>>> a2601474db9318f6293ccf17921ca373e6f63b5b
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
@@ -148,17 +160,17 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         $scope.drafts = response.data
         $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
-            if (value.userId === $scope.firstname._id) {
+            if (value.userId === $scope.userData._id) {
               $scope.draftArray.push(value)
             }
           })
       })
     }
-    $scope.retrieveUsername = function(){
-      $http.get('/loggedin').then(function(response){
-        $scope.firstname = response.data
-      });
-    }
+    // $scope.retrieveUsername = function(){
+    //   $http.get('/loggedin').then(function(response){
+    //     $scope.firstname = response.data
+    //   });
+    // }
     $scope.generateHighchart = function(){
       $('draw-chart').highcharts({
         chart: {
@@ -213,12 +225,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.getUser = function(){
       $http.get('/loggedin').then(function(response){
         if (response.data.firstname) {
+          $scope.userData = response.data;
           $scope.firstname = response.data.firstname;
           $scope.emailData.email = response.data.email;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.attr('disabled', 'disabled');
           $('#tooltip-wrapper').tooltip({ trigger: 'hover', placement: 'right'});
         } else {
+          $scope.userData = response.data;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
           $scope.firstname = response.data.googleName;
@@ -226,15 +240,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         }
       })
     }
-    $scope.sendEmail = function() {
-      $http({
-        method: 'POST',
-        url: '/send_email',
-        data: $scope.emailData
-      }).then(function(result) {
-        console.log(result.data);
-      })
-    }
+
+    $scope.$watch('toneText', function() {
+      $scope.emailData.message = $scope.toneText;
+    })
+
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
