@@ -226,14 +226,14 @@ p {
  float: right;
 }
 
-.draft_links > button {
+.draft_links > i {
   opacity: 0;
  -webkit-transition: opacity 0.5s;
  -moz-transition: opacity 0.5s;
  -o-transition: opacity 0.5s;
 }
 
-.draft_links:hover > button {
+.draft_links:hover > i {
  opacity: 1;
 }
 
