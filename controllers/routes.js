@@ -104,12 +104,9 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     if (!user) {
-      var errorMessage = req.session.flash.oAuthError[req.session.flash.oAuthError.length-1];
-      return res.json({ authenticated: user, message: errorMessage });
-    }
 
-    if (!user) {
-      console.log(err);
+      return res.redirect('/welcome');
+      // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {

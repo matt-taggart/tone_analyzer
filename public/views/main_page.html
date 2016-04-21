@@ -115,38 +115,41 @@
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg enable" placeholder="To" ng-model="emailData.sendTo">
+                    <label for="recipient">Recipient</label>
+                    <input type="text" id="reciepient" class="form-control input-lg enable" placeholder="Recipient" ng-model="emailData.sendTo">
                   </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                  <div class="form-group">
-                   <input type="text" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
+                   <label for="from">From</label>
+                   <input type="text" id="from" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
                  </div>
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject">               
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject">
                   </div>            
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <textarea type="text" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ message }}'"></textarea>          
+                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ message }}'">    
                   </div>            
                 </div>
               </div>
             </div>
             <div class="modal-footer">
-              <button class="btn btn-danger" data-dismiss="modal">
+              <button class="btn btn-danger btn-lg" data-dismiss="modal">
                 <i class="fa fa-trash-o" title="Delete" aria-hidden="true"></i>
                 <span class="sr-only">Delete</span>
               </button>
-              <button class="btn btn-primary" type="submit">Send</button>
+              <button class="btn btn-primary btn-lg" id="emailSubmit" type="submit">Send</button>
             </div>
           </div>
         </form>
