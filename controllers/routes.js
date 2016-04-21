@@ -104,12 +104,9 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     if (!user) {
-      var errorMessage = req.session.flash.oAuthError[req.session.flash.oAuthError.length-1];
-      return res.json({ authenticated: user, message: errorMessage });
-    }
 
-    if (!user) {
-      console.log(err);
+      return res.redirect('/welcome');
+      // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {
@@ -242,6 +239,14 @@ router.delete('/deletedraft/:id', function(req, res){
 
 router.post('/send_email', function(req, res) {
 
+  transporterObject[0].verify(function(error, success) {
+     if (error) {
+          console.log(error);
+     } else {
+          console.log('Server is ready to take our messages');
+     }
+  });
+
   transporterObject[0].sendMail({
     from: req.body.email,
     to: req.body.sendTo,
@@ -252,14 +257,6 @@ router.post('/send_email', function(req, res) {
       return console.log(err);
     }
     console.log('Message sent: ' + info.response);
-  });
-
-  transporterObject[0].verify(function(error, success) {
-     if (error) {
-          console.log(error);
-     } else {
-          console.log('Server is ready to take our messages');
-     }
   });
 
   res.send('Email Successful!');

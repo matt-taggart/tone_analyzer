@@ -120,10 +120,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         $scope.retrieveDraft();
       });
     };
-<<<<<<< HEAD
-=======
-
->>>>>>> a2601474db9318f6293ccf17921ca373e6f63b5b
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
