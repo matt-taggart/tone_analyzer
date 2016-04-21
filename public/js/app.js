@@ -257,8 +257,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     });
 
     $scope.tinymceOptions = {
-      plugins: 'link image code',
-      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+      plugins: 'link image code textcolor colorpicker',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | forecolor backcolor'
     };
     
     $('#email-form').on('hidden.bs.modal', function (e) {
