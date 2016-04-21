@@ -45,7 +45,7 @@ router.use(passport.session());
 require('../config/passport.js')(passport);
 
 var auth = function(req, res, next) {
-  (!req.isAuthenticated()) ? res.sendStatus(401) : next();
+  (!req.isAuthenticated()) ? res.sendFile(process.cwd() + '/public/views/error_page.html') : next();
 }
 
 router.post('/register', function(req, res, next) {
@@ -104,12 +104,9 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     if (!user) {
-      var errorMessage = req.session.flash.oAuthError[req.session.flash.oAuthError.length-1];
-      return res.json({ authenticated: user, message: errorMessage });
-    }
 
-    if (!user) {
-      console.log(err);
+      return res.redirect('/welcome');
+      // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {
@@ -193,7 +190,8 @@ router.post('/tonetext', function(req, res) {
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
           writing_tone_data: writingToneArray,
-          userId: req.body.userId
+          userId: req.body.userId,
+          drafttitle: req.body.draftTitle
         })
         content.save(function(err, response){
           if (err) {
@@ -232,7 +230,22 @@ router.get('/drafts', function(req, res){
   });
 })
 
+router.delete('/deletedraft/:id', function(req, res){
+  console.log(req.params.id);
+  ContentDB.find({ _id: req.params.id }).remove().then(function(response){
+    console.log(response)
+  });
+})
+
 router.post('/send_email', function(req, res) {
+
+  transporterObject[0].verify(function(error, success) {
+     if (error) {
+          console.log(error);
+     } else {
+          console.log('Server is ready to take our messages');
+     }
+  });
 
   transporterObject[0].sendMail({
     from: req.body.email,
@@ -244,14 +257,6 @@ router.post('/send_email', function(req, res) {
       return console.log(err);
     }
     console.log('Message sent: ' + info.response);
-  });
-
-  transporterObject[0].verify(function(error, success) {
-     if (error) {
-          console.log(error);
-     } else {
-          console.log('Server is ready to take our messages');
-     }
   });
 
   res.send('Email Successful!');

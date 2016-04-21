@@ -3,6 +3,7 @@ var Schema = mongoose.Schema
 
 var contentSchema = new Schema({
   name: String,
+  drafttitle: String,
   content: String,
   emotion_tone_data: [{tone_type: String, tone_score: Number}],
   writing_tone_data: [{tone_type: String, tone_score: Number}],
