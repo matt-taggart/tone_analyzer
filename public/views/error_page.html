@@ -2,21 +2,27 @@
 <html>
 <head>
   <title>Unauthorized</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tone Down For What</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="../css/styles.css">
   <link rel="stylesheet" type="text/css" href="../css/error_page.css">
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
-  <script type="text/javascript" src="/js/app.js"></script>
+  <script type="text/javascript" src="../js/app.js"></script>
+  <script type="text/javascript" src="../controllers/loginController.js"></script>
 </head>
 <body>
-  <div class="container">
+  <div class="container" ng-controller="inputForm">
     <div class="row">
       <div class="col-xs-8 col-xs-offset-2 text-center">
         <h2>Access Denied.</h2>
         <h2>You must be logged in to use this app.</h2>
-        <button class="action btn btn-default startBtn" href="welcome">Home Page</button>
+        <a class="action btn btn-default startBtn" href="/welcome">Home Page</a>
       </div>
     </div>
   </div>
