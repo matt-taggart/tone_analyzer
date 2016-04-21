@@ -10,7 +10,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     //Make an ajax call to check if user is logged in 
     $http({
       method: 'GET',
-      url: '/loggedin'
+      url: '/loggedin',
+      ignoreLoadingBar: true
     }).then(function(user) {
       if (user) {
         deferred.resolve();
@@ -212,17 +213,27 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       });
     }
+
     $scope.deleteDraft = function(id){
-      $http.delete('/deletedraft/' +id).then(function(){
+      $http.delete('/deletedraft/' +id, {
+        ignoreLoadingBar: true
+      }).then(function(){
         console.log('promise is fired')
         $scope.retrieveDraft();
       })
     }
+
+    function capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
+
     $scope.getUser = function(){
-      $http.get('/loggedin').then(function(response){
+      $http.get('/loggedin', {
+        ignoreLoadingBar: true
+      }).then(function(response){
         if (response.data.firstname) {
           $scope.userData = response.data;
-          $scope.firstname = response.data.firstname;
+          $scope.firstname = capitalizeFirstLetter(response.data.firstname);
           $scope.emailData.email = response.data.email;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.attr('disabled', 'disabled');
@@ -231,7 +242,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
           $scope.userData = response.data;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
-          $scope.firstname = response.data.googleName;
+          $scope.firstname = capitalizeFirstLetter(response.data.googleName);
           $scope.emailData.email = response.data.googleEmail;
         }
       })
