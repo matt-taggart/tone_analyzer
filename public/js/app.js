@@ -115,7 +115,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        // $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
           $scope.value = value._id
@@ -205,8 +205,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     }
     $scope.deleteDraft = function(id){
-      $http.delete('/deletedraft').then(function(response){
-        
+      $http.delete('/deletedraft/' +id).then(function(){
+        console.log('promise is fired')
+        $scope.retrieveDraft();
       })
     }
     $scope.getUser = function(){

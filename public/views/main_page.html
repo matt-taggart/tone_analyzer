@@ -27,7 +27,7 @@
               Saved Drafts
             </li>
             <li ng-init="retrieveDraft()">
-              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft.drafttitle }}<i class="fa fa-trash-o" aria-hidden="true" ng-click='deleteDraft(draft._id)'></i></a>
+              <a class="draft_links" ng-click="renderDraftAndData(draft._id)" ng-repeat="draft in draftArray">{{ draft.drafttitle }}<button class="fa fa-trash-o" aria-hidden="true" ng-click='deleteDraft(draft._id);retrieveDraft()'></button></a>
             </li>
           </ul>
         </div>
