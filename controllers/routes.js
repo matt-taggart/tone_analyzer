@@ -45,7 +45,7 @@ router.use(passport.session());
 require('../config/passport.js')(passport);
 
 var auth = function(req, res, next) {
-  (!req.isAuthenticated()) ? res.sendStatus(401) : next();
+  (!req.isAuthenticated()) ? res.sendFile(process.cwd() + '/public/views/error_page.html') : next();
 }
 
 router.post('/register', function(req, res, next) {
