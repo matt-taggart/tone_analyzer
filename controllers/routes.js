@@ -251,7 +251,7 @@ router.post('/send_email', function(req, res) {
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,
-    html: req.body.message
+    text: req.body.message
   }, function(err, info) {
     if (err) {
       return console.log(err);
