@@ -277,9 +277,10 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       })
     }
 
-    $scope.$watch('toneText', function() {
+    $scope.getText = function() {
       $scope.emailData.message = $scope.toneText;
-    })
+      console.log($scope.toneText)
+    }
 
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
