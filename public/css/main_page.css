@@ -305,6 +305,14 @@ tspan {
   color: #fff ;
 }
 
+.logout {
+  margin-left: 15px;
+  background-color: transparent;
+  border: none;
+}
 
+.logout:focus {
+  outline: none;
+}
 
 
