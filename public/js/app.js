@@ -10,7 +10,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     //Make an ajax call to check if user is logged in 
     $http({
       method: 'GET',
-      url: '/loggedin'
+      url: '/loggedin',
+      ignoreLoadingBar: true
     }).then(function(user) {
       if (user) {
         deferred.resolve();
@@ -110,6 +111,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       })
     }
     $scope.analyzeTone = function(){
+      // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
+      var raw = $($scope.draftData[0].content).text();
+      console.log(raw);
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
@@ -120,11 +124,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         $scope.retrieveDraft();
       });
     };
-
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        console.log($($scope.draftData[0].content).text())
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
@@ -150,50 +152,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
           $scope.toneScoreArray = socialToneScore.concat(emotionToneScore, writingToneScore)
           console.log($scope.toneScoreArray)
           $scope.generateHighchart();
-
-          // $('draw-chart').highcharts({
-          //   chart: {
-          //       type: 'column',
-          //       shadow: true
-          //     },
-          //     plotOptions: {
-          //       series: {
-          //         colorByPoint: true
-          //       }
-          //     },
-          //      colors: [
-          //       '#7cb5ec',
-          //       '#434348',
-          //       '#90ed7d',
-          //       '#f7a35c',
-          //       '#8085e9', 
-          //       '#f15c80', 
-          //       '#e4d354', 
-          //       '#2b908f', 
-          //       '#f45b5b', 
-          //       '#91e8e1', 
-          //       '#00cc99', 
-          //       '#00c46d', 
-          //       '#cc66ff'
-          //   ],
-          //   title: {
-          //       text: 'Tone Analysis'
-          //   },
-          //   xAxis: [{
-          //       categories: ['Openness', 'Conscientiousness', 'Extraversion', 'Agreeableness', 'Emotional Range', 'Anger', 'Disgust', 'Fear', 'Joy', 'Sadness', 'Analytical', 'Confident', 'Tentative']
-          //     }],
-          //   yAxis: {
-          //       title: {
-          //           text: 'Tone Score'
-          //       }
-          //   },
-          //   series: [{
-          //       data: $scope.toneScoreArray,
-          //     }],
-          //   legend: {
-          //     enabled: false
-          //   }
-          // });
         })
       })
     }
@@ -258,11 +216,26 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       });
     }
+
+    $scope.deleteDraft = function(id){
+      $http.delete('/deletedraft/' +id, {
+        ignoreLoadingBar: true
+      }).then(function(){
+        $scope.retrieveDraft();
+      })
+    }
+
+    function capitalizeFirstLetter(string) {
+        return string[0].toUpperCase() + string.slice(1);
+    }
+
     $scope.getUser = function(){
-      $http.get('/loggedin').then(function(response){
+      $http.get('/loggedin', {
+        ignoreLoadingBar: true
+      }).then(function(response){
         if (response.data.firstname) {
           $scope.userData = response.data;
-          $scope.firstname = response.data.firstname;
+          $scope.firstname = capitalizeFirstLetter(response.data.firstname);
           $scope.emailData.email = response.data.email;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.attr('disabled', 'disabled');
@@ -271,15 +244,15 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
           $scope.userData = response.data;
           var el = angular.element(document.querySelector('#emailBtn'));
           el.removeAttr('disabled');
-          $scope.firstname = response.data.googleName;
+          $scope.firstname = capitalizeFirstLetter(response.data.googleName);
           $scope.emailData.email = response.data.googleEmail;
         }
       })
     }
 
-    $scope.$watch('toneText', function() {
+    $scope.getText = function() {
       $scope.emailData.message = $scope.toneText;
-    })
+    }
 
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
@@ -287,8 +260,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     });
 
     $scope.tinymceOptions = {
-      plugins: 'link image code',
-      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
+      plugins: 'link image code textcolor colorpicker',
+      toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | forecolor backcolor | fontsizeselect'
     };
     
     $('#email-form').on('hidden.bs.modal', function (e) {

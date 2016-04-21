@@ -45,7 +45,7 @@ router.use(passport.session());
 require('../config/passport.js')(passport);
 
 var auth = function(req, res, next) {
-  (!req.isAuthenticated()) ? res.sendStatus(401) : next();
+  (!req.isAuthenticated()) ? res.sendFile(process.cwd() + '/public/views/error_page.html') : next();
 }
 
 router.post('/register', function(req, res, next) {
@@ -94,7 +94,7 @@ router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'] }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
@@ -104,12 +104,9 @@ router.get('/auth/google/callback', function(req, res, next) {
     }
 
     if (!user) {
-      var errorMessage = req.session.flash.oAuthError[req.session.flash.oAuthError.length-1];
-      return res.json({ authenticated: user, message: errorMessage });
-    }
 
-    if (!user) {
-      console.log(err);
+      return res.redirect('/welcome');
+      // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {
@@ -233,6 +230,13 @@ router.get('/drafts', function(req, res){
   });
 })
 
+router.delete('/deletedraft/:id', function(req, res){
+  console.log(req.params.id);
+  ContentDB.find({ _id: req.params.id }).remove().then(function(response){
+    res.json({});
+  })
+})
+
 router.post('/send_email', function(req, res) {
 
   transporterObject[0].verify(function(error, success) {
@@ -247,7 +251,7 @@ router.post('/send_email', function(req, res) {
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,
-    text: req.body.message
+    html: req.body.message
   }, function(err, info) {
     if (err) {
       return console.log(err);
