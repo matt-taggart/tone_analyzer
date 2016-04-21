@@ -218,7 +218,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       $http.delete('/deletedraft/' +id, {
         ignoreLoadingBar: true
       }).then(function(){
-        console.log('promise is fired')
         $scope.retrieveDraft();
       })
     }
