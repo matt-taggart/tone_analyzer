@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
