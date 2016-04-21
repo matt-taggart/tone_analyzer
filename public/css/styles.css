@@ -18,8 +18,12 @@ h1 {
 
 a {
   margin-top: 40px;
-
  }
+
+a:hover {
+  text-decoration: none;
+  color: #fff;
+}
 
 .startBtn {
   background: transparent;
@@ -195,70 +199,41 @@ input::-webkit-input-placeholder {
   border: none;
 }
 
-/*.nav-container
-{
-    display:table;
-    width: 100%;
-    padding: 0;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-.nav-row
-{
-    height: 100%;
-    display: table-row;
-}
-
-.col-xs-3.no-float, .col-xs-9.no-float {
-    float: none;
-}
-.col-xs-3
-{
-    display: table-cell;
-}
-.col-xs-9
-{
-    display: table-cell;
-      float: none;
-}*/
-
 .strike {
-    display: block;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap; 
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap; 
 }
 
 .strike > span {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .strike > span:before,
 .strike > span:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 9999px;
-    height: 1px;
-    background: #fff;
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: #fff;
 }
 
 .strike > span:before {
-    right: 100%;
-    margin-right: 15px;
+  right: 100%;
+  margin-right: 15px;
 }
 
 .strike > span:after {
-    left: 100%;
-    margin-left: 15px;
+  left: 100%;
+  margin-left: 15px;
 }
 
 span, a {
   color: #fff;
 }
-
 
 .form-signin p {
   color: #fff;
@@ -268,5 +243,7 @@ span, a {
                0px 18px 23px rgba(0,0,0,0.1);
   letter-spacing: 0.2em;
   font-family: 'Lato', sans-serif;
-
 }
+
+
+
