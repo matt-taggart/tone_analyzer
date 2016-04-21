@@ -237,6 +237,18 @@ p {
  opacity: 1;
 }
 
+
+.text-center > a {
+   opacity: 0;
+-webkit-transition: opacity 0.5s;
+-moz-transition: opacity 0.5s;
+-o-transition: opacity 0.5s;
+}
+
+.text-center:hover > a {
+ opacity: 1;
+}
+
 .mce-menubar .mce-menubtn button span {
     color: #fff !important;
 }

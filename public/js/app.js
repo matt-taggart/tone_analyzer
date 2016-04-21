@@ -112,13 +112,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
-      var raw = $($scope.draftData[0].content).text();
-      console.log(raw);
+      // var raw = $($scope.draftData[0].content).text();
+      // console.log(raw);
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
       }).then(function(response) {
+        $scope.toneText = '';
         $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
