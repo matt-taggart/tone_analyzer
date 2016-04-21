@@ -233,8 +233,8 @@ router.get('/drafts', function(req, res){
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);
   ContentDB.find({ _id: req.params.id }).remove().then(function(response){
-    console.log(response)
-  });
+    res.json({});
+  })
 })
 
 router.post('/send_email', function(req, res) {
@@ -251,7 +251,7 @@ router.post('/send_email', function(req, res) {
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,
-    text: req.body.message
+    html: req.body.message
   }, function(err, info) {
     if (err) {
       return console.log(err);
