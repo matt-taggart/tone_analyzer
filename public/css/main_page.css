@@ -297,5 +297,14 @@ tspan {
   color: #fff ;
 }
 
+.toggle:focus {
+  color: #01579b; 
+}
+
+.toggle:focus:hover {
+  color: #fff ;
+}
+
+
 
 
