@@ -99,15 +99,15 @@ router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profi
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
-    console.log('GOOGLE RESPONDED';)
+    console.log('GOOGLE RESPONDED');
     if (err) {
-      console.log('INITIAL ERROR MESSAGE: ')
+      console.log('INITIAL ERROR MESSAGE: ');
       console.log(err);
       return next(err); // will generate a 500 error
     }
 
     if (!user) {
-      console.log('USER ERROR: ')
+      console.log('USER ERROR: ');
       console.log(user);
       return res.redirect('/welcome');
       // return res.json({ authenticated: user });
