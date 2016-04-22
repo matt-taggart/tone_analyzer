@@ -157,9 +157,9 @@ router.post('/tonetext', function(req, res) {
 
   tone_analyzer.tone({ text: req.body.content },
     function(err, tone) {
-      console.log(tone)
+      // console.log(tone)
       if (err) {
-        console.log(err);
+        return err
       } else {
         var emotionToneArray = []
         var writingToneArray = []
@@ -230,9 +230,11 @@ router.get('/drafts', function(req, res){
   });
 })
 
-// router.post('/updatetext/:id', function(req, res){
-//   ContentDB.findOneAndUpdate()
-// })
+router.post('/updatetext/:id/:text', function(req, res){
+  var text = req.params.text
+  console.log(text)
+  // ContentDB.findOneAndUpdate({_id: id})
+})
 
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);
