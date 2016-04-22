@@ -217,7 +217,17 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       });
     }
-
+    $scope.updateText = function(id){
+      console.log('hello')
+      console.log(id)
+      $http.post('/updatetext/' + id).then(function(response){
+        console.log('update works')
+      })
+    }
+    $scope.toggle = false;
+    $scope.toggleEdit = function(){
+      $scope.toggle = $scope.toggle === true ? false: true;
+    };
     $scope.deleteDraft = function(id){
       $http.delete('/deletedraft/' +id, {
         ignoreLoadingBar: true

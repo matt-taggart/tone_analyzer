@@ -66,9 +66,12 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="panel panel-default panel-shadow text-panel">
                     <div class="panel-body text-center">
-                      <a class='pull-right'>edit</a>
+                      <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
-                      <p> {{value.content}} </p>
+                      <p contenteditable='{{toggle}}'> {{value.content}} </p>
+                      <br />
+                      <div ng-show='toggle'>Click on the text to edit it!</div>
+                      <button ng-show='toggle' ng-click='updateText(value._id);'>Update!</button>
                    </div>
                   </div>  
                 </div>

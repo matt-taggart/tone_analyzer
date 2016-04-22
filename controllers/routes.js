@@ -230,6 +230,10 @@ router.get('/drafts', function(req, res){
   });
 })
 
+// router.post('/updatetext/:id', function(req, res){
+//   ContentDB.findOneAndUpdate()
+// })
+
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);
   ContentDB.find({ _id: req.params.id }).remove().then(function(response){
