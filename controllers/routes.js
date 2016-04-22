@@ -71,8 +71,9 @@ router.post('/register', function(req, res, next) {
 
 router.post('/login', function(req, res, next) {
   passport.authenticate('login', function(err, user, info) {
-    
+    console.log("authentication method began");
     if (err) {
+      console.log("authentication method began");
       return next(err); // will generate a 500 error
     }
     // Generate a JSON response reflecting authentication status
@@ -98,22 +99,28 @@ router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profi
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
-
+    console.log('GOOGLE RESPONDED';)
     if (err) {
+      console.log('INITIAL ERROR MESSAGE: ')
+      console.log(err);
       return next(err); // will generate a 500 error
     }
 
     if (!user) {
-
+      console.log('USER ERROR: ')
+      console.log(user);
       return res.redirect('/welcome');
       // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {
+      console.log('LOGIN FUNCTION HIT');
+      console.log(user);
       if (err) {
+        console.log('LOGIN ERROR MESSAGE: ');
+        console.log(err);
         return next(err);
       }
-
       var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
@@ -126,6 +133,8 @@ router.get('/auth/google/callback', function(req, res, next) {
           }) 
         }
       });
+
+      console.log(transporter);
 
       transporterObject.push(transporter);
 
