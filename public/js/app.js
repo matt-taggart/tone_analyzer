@@ -128,7 +128,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
-        $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        // $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         angular.forEach($scope.draftData, function(value, key){
           $scope.value = value._id
@@ -219,8 +219,10 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     }
     $scope.updateText = function(id, text){
       console.log(id)
-      ignoreLoadingBar: true
-      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+      $http.post('/updatetext/' + id + '/' + text, {
+        ignoreLoadingBar: true
+      }).then(function(response){
+        console.log(response)
         console.log('update works')
       })
     }

@@ -231,10 +231,62 @@ router.get('/drafts', function(req, res){
 })
 
 router.post('/updatetext/:id/:text', function(req, res){
-  var text = req.params.text
+
+  var text = req.params.text;
+  var id = req.params.id;
+  console.log(id)
   console.log(text)
-  // ContentDB.findOneAndUpdate({_id: id})
-})
+
+  tone_analyzer.tone({ text: req.params.text },
+    function(err, tone) {
+      // console.log(tone)
+      if (err) {
+        return err
+      } else {
+        var emotionToneArray = []
+        var writingToneArray = []
+        var socialToneArray = []
+
+        for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
+          emotionToneArray.push({
+            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+          })
+        };
+
+        for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
+          writingToneArray.push({
+            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+          })
+        };
+
+        for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
+          socialToneArray.push({
+            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+          })
+        };
+        ContentDB.findOneAndUpdate(
+          {_id: req.params.id},
+          {$set:
+            {content: req.params.text,
+            emotion_tone_data: emotionToneArray,
+            social_tone_data: socialToneArray,
+            writing_tone_data: writingToneArray}
+          },
+          function(err, response){
+            if (err) {
+              console.log(err)
+            } else {
+              console.log(response)
+            }
+          }
+        )
+
+      }
+  });
+});
 
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);
