@@ -217,8 +217,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       });
     }
-    $scope.updateText = function(id){
+    $scope.updateText = function(id, text){
       console.log(id)
+      console.log(text)
       $http.post('/updatetext/' + id).then(function(response){
         console.log('update works')
       })
