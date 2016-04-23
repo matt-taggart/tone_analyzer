@@ -333,4 +333,8 @@ tspan {
   outline: none;
 }
 
+#updateTextarea {
+  width: 800px;
+  height: auto;
+}
 

@@ -69,7 +69,7 @@
                       <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
                       <p ng-hide='toggle'> {{value.content}} </p>
-                      <textarea ng-show='toggle' type='text' ng-model='value.content'></textarea>
+                      <textarea id='updateTextarea' ng-show='toggle' type='text' ng-bind='value.content'></textarea>
                       <br />
                       <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
                    </div>
