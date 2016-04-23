@@ -81,20 +81,19 @@ module.exports = function(passport) {
   passport.use('google-auth', new GoogleStrategy({
     clientID: googleCredentials.clientId,
     clientSecret: googleCredentials.clientSecret,
-    callbackURL: 'https://toneanalyzer.herokuapp.com/auth/google/callback',
-    passReqToCallback: true
-  }, function(request, accessToken, refreshToken, profile, done) {
+    callbackURL: 'https://toneanalyzer.herokuapp.com/auth/google/callback'
+  }, function(accessToken, refreshToken, profile, done) {
     User.findOne({ googleId: profile.id }, function(err, user) {
-      if (err) {
-        return err;
-      }
+      // if (err) {
+      //   return err;
+      // }
 
-      if (!user) {
-        return err;
-      }
+      // if (!user) {
+      //   return err;
+      // }
 
       if (user) {
-        return done(null, user);
+        done(null, user);
       } else {
 
         var newUser = new User({
@@ -109,7 +108,7 @@ module.exports = function(passport) {
           if (err) {
             return err;
           } else {
-            return done(null, userData)
+            done(null, userData)
           }
         });
       }
