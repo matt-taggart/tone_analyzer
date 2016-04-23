@@ -218,9 +218,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       });
     }
     $scope.updateText = function(id, text){
-      console.log(id)
       $http.post('/updatetext/' + id + '/' + text, {
-        ignoreLoadingBar: true
       }).then(function(response){
         console.log(response)
         console.log('update works')
