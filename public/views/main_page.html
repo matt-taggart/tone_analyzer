@@ -46,7 +46,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control tone_textarea" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
+                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
@@ -75,19 +75,19 @@
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Social tone data</h4>
-                      <p ng-repeat='(key, value) in value.social_tone_data' id="{{value.tone_type}}"> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.social_tone_data' class="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Emotional tone data</h4>
-                      <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.emotion_tone_data' id="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Writing tone data</h4>
-                      <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.writing_tone_data' id="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                 </div>
