@@ -81,7 +81,7 @@ module.exports = function(passport) {
   passport.use('google-auth', new GoogleStrategy({
     clientID: googleCredentials.clientId,
     clientSecret: googleCredentials.clientSecret,
-    callbackURL: callbackURL,
+    callbackURL: 'https://toneanalyzer.herokuapp.com/auth/google/callback',
     passReqToCallback: true
   }, function(request, accessToken, refreshToken, profile, done) {
     User.findOne({ googleId: profile.id }, function(err, user) {
