@@ -112,13 +112,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
-      var raw = $($scope.draftData[0].content).text();
-      console.log(raw);
+      // var raw = $($scope.draftData[0].content).text();
+      // console.log(raw);
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
       }).then(function(response) {
+        $scope.toneText = '';
         $scope.draftTitle = '';
         $scope.renderDraftAndData(response.data._id);
         $scope.retrieveDraft();
@@ -166,11 +167,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           })
       })
     }
-    // $scope.retrieveUsername = function(){
-    //   $http.get('/loggedin').then(function(response){
-    //     $scope.firstname = response.data
-    //   });
-    // }
     $scope.generateHighchart = function(){
       $('draw-chart').highcharts({
         chart: {
@@ -216,7 +212,16 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         }
       });
     }
-
+    $scope.updateText = function(id, text){
+      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+        $scope.renderDraftAndData(response.data._id);
+        $scope.toggle = false;
+      })
+    }
+    $scope.toggle = false;
+    $scope.toggleEdit = function(){
+      $scope.toggle = $scope.toggle === true ? false: true;
+    };
     $scope.deleteDraft = function(id){
       $http.delete('/deletedraft/' +id, {
         ignoreLoadingBar: true
