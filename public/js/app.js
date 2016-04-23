@@ -167,11 +167,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           })
       })
     }
-    // $scope.retrieveUsername = function(){
-    //   $http.get('/loggedin').then(function(response){
-    //     $scope.firstname = response.data
-    //   });
-    // }
     $scope.generateHighchart = function(){
       $('draw-chart').highcharts({
         chart: {
@@ -218,10 +213,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     }
     $scope.updateText = function(id, text){
-      $http.post('/updatetext/' + id + '/' + text, {
-      }).then(function(response){
-        console.log(response)
-        console.log('update works')
+      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+        console.log(response.data)
+        $scope.renderDraftAndData(response.data._id);
       })
     }
     $scope.toggle = false;

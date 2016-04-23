@@ -71,7 +71,7 @@
                       <p ng-hide='toggle'> {{value.content}} </p>
                       <textarea ng-show='toggle' type='text' ng-model='value.content'></textarea>
                       <br />
-                      <button ng-show='toggle' ng-click='updateText(value._id, value.content);'>Update text</button>
+                      <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
                    </div>
                   </div>  
                 </div>

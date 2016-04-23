@@ -214,10 +214,6 @@ router.post('/tonetext', function(req, res) {
   });
 })
 
-router.get('/demobox', function(req, res){
-  res.sendFile(__dirname+ '/public/input_demo.html')
-})
-
 router.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     console.log(response);
@@ -225,6 +221,8 @@ router.get('/calldata', function(req, res){
   });
 })
 
+
+//Get a specific draft
 router.get('/textdata/:id', function(req, res){
   var id = req.params.id
   ContentDB.find({_id: id}).exec().then(function(response) {
@@ -233,22 +231,21 @@ router.get('/textdata/:id', function(req, res){
   });
 })
 
+//Get drafts on page load
 router.get('/drafts', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
   });
 })
 
+//Update a post
 router.post('/updatetext/:id/:text', function(req, res){
 
   var text = req.params.text;
   var id = req.params.id;
-  console.log(id)
-  console.log(text)
 
   tone_analyzer.tone({ text: req.params.text },
     function(err, tone) {
-      // console.log(tone)
       if (err) {
         return err
       } else {
@@ -283,19 +280,12 @@ router.post('/updatetext/:id/:text', function(req, res){
             emotion_tone_data: emotionToneArray,
             social_tone_data: socialToneArray,
             writing_tone_data: writingToneArray}
-          },
-          function(err, response){
-            if (err) {
-              console.log(err)
-            } else {
-              console.log(response)
-            }
-          }
-        )
-
+          }).then(function(response){
+            res.json(response)
+          })
       }
+    });
   });
-});
 
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);
