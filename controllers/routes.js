@@ -95,7 +95,7 @@ router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {

@@ -8,10 +8,12 @@ var bcrypt = require('bcryptjs');
 module.exports = function(passport) {
 
   passport.serializeUser(function(user, done) {
+    console.log('USER ID: ' + user.id);
     done(null, user.id);
   });
 
   passport.deserializeUser(function(id, done) {
+    console.log('ID:' + id)
     User.findById(id, function(err, user) {
       done(err, user);
     });
@@ -81,8 +83,10 @@ module.exports = function(passport) {
   passport.use('google-auth', new GoogleStrategy({
     clientID: googleCredentials.clientId,
     clientSecret: googleCredentials.clientSecret,
-    callbackURL: 'https://toneanalyzer.herokuapp.com/auth/google/callback'
+    callbackURL: callbackURL
   }, function(accessToken, refreshToken, profile, done) {
+    console.log('PROFILE: ' + profile);
+    console.log('PROFILE ID: ' + profile.id)
     User.findOne({ googleId: profile.id }, function(err, user) {
       // if (err) {
       //   return err;
@@ -91,6 +95,11 @@ module.exports = function(passport) {
       // if (!user) {
       //   return err;
       // }
+
+      console.log('PROFILE: ' + profile);
+      console.log('USER: ' + user);
+      console.log('GOOGLENAME: ' + profile.name);
+      console.log('GOOGLENAME: ' + profile.name.givenName);
 
       if (user) {
         done(null, user);
