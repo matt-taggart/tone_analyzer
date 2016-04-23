@@ -14,6 +14,11 @@ h3 {
   font-family: 'Lato', sans-serif;
 }
 
+h4 {
+  font-weight: bold;
+  color: #01579b;
+}
+
 .navbar {
   background-color: #01579b;
 }
@@ -98,11 +103,20 @@ h3 {
 }
 
 .tone_textarea, .tone_textarea:focus {
-  border: 1px solid #fff !important;
+  border: 3px solid #01579b !important;
   border-radius: 0px !important;
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  font-size: 15px;
+}
+
+.title-text input[type="text"] {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  color: #01579b !important;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -121,7 +135,6 @@ h3 {
 }
 
 /* Sidebar Styles */
-
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -156,22 +169,22 @@ h3 {
 }
 
 .sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
+  font-size: 18px;
 }
 
 .sidebar-nav > .sidebar-brand .draft_links {
-    color: #999999;
+  color: #999999;
 }
 
 .sidebar-nav > .sidebar-brand .draft_links:hover {
-    color: #fff;
-    background: none;
+  color: #fff;
+  background: none;
 }
 
 .draft_links {
-  margin-top: 0px;
+`margin-top: 0px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .mainpge-title {
@@ -208,12 +221,9 @@ h3 {
     }
 }
 
-#socialTones {
-  list-style-type: none;
-}
-
 p { 
   margin: 0; 
+  font-size: 15px;
 }
 
 .toggle{
@@ -250,7 +260,7 @@ p {
 }
 
 .mce-menubar .mce-menubtn button span {
-    color: #fff !important;
+  color: #fff !important;
 }
 
 #mceu_9-body, #mceu_17-body, #mceu_16, #mceu_23  {
@@ -258,7 +268,7 @@ p {
 }
 
 .mce-menubar {
-    border: 0px !important;
+  border: 0px !important;
 }
 
 .mce-btn {
@@ -269,9 +279,9 @@ p {
     background-color: #01579b;
 }*/
 .mce-btn i {
-    text-shadow: 1px 1px none;
-    color: #fff;
-    background-color: transparent; 
+  text-shadow: 1px 1px none;
+  color: #fff;
+  background-color: transparent; 
 }
 
 #mceu_8 {
@@ -287,6 +297,40 @@ p {
   border-top-color: #fff !important;
 }
 
-#Anger {
-  color: red;
+.mce-content-body  {
+  font-size: 20px;
 }
+
+tspan {
+  font-size: 15px;
+}
+
+.send_btn:focus {
+  outline: none;
+  color: #01579b ;
+}
+
+.send_btn:focus:hover {
+  outline: none;
+  color: #fff ;
+}
+
+.toggle:focus {
+  color: #01579b; 
+}
+
+.toggle:focus:hover {
+  color: #fff ;
+}
+
+.logout {
+  margin-left: 15px;
+  background-color: transparent;
+  border: none;
+}
+
+.logout:focus {
+  outline: none;
+}
+
+
