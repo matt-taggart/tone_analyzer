@@ -115,7 +115,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       // var raw = $($scope.draftData[0].content).text();
       // console.log(raw);
       $http.post('/tonetext', {
-        content: $scope.toneText,
+        htmlContent: $scope.toneText,
+        content: $($scope.toneText).text(),
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
       }).then(function(response) {
@@ -126,9 +127,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     };
     $scope.renderDraftAndData = function(id){
-      $http.get('/textdata/' + id).then(function(response){
+      $http.get('/textdata/' + id).then(function(response){ 
         $scope.draftData = response.data
-        $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        // $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
         $scope.toggle = false;
         angular.forEach($scope.draftData, function(value, key){
