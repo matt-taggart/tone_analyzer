@@ -254,25 +254,8 @@ p {
  opacity: 1;
 }
 
-<<<<<<< HEAD
-
-.text-center > a {
-   opacity: 0;
--webkit-transition: opacity 0.5s;
--moz-transition: opacity 0.5s;
--o-transition: opacity 0.5s;
-}
-
-.text-center:hover > a {
- opacity: 1;
-}
-
-.mce-menubar .mce-menubtn button span {
-  color: #fff !important;
-=======
 #mceu_12-body, #mceu_20-body, #mceu_19, #mceu_28-body, .mce-i-backcolor {
   background-color: #01579b !important;
->>>>>>> 4e1792eb28e6492fcaa6d045e7578dfba0bcf9c7
 }
 
 .mce-custom-color-btn {
@@ -443,6 +426,19 @@ tspan {
 
 .logout:focus {
   outline: none;
+}
+
+.text-center > a {
+opacity: 0;
+-webkit-transition: opacity 0.5s;
+-moz-transition: opacity 0.5s;
+-o-transition: opacity 0.5s;
+cursor: pointer;
+text-decoration: none;
+}
+
+.text-center:hover > a {
+ opacity: 1;
 }
 
 #updateTextarea {
