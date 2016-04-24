@@ -11,7 +11,7 @@ var xoauth2 = require('xoauth2');
 var watson = require('watson-developer-cloud');
 var googleCredentials = require('../config/google-credentials.js');
 var ContentDB = require('../models/contentAnalysisModel.js');
-var transporterObject = [];
+var transporterObject;
 
 var router = express.Router();
 
@@ -127,9 +127,7 @@ router.get('/auth/google/callback', function(req, res, next) {
         }
       });
 
-      console.log(transporter);
-
-      transporterObject.push(transporter);
+      transporterObject = transporter;
 
       res.redirect('/welcome');
     });  
@@ -139,6 +137,22 @@ router.get('/auth/google/callback', function(req, res, next) {
 });
 
 router.get('/main_page', auth, function(req, res) {
+  if (req.user.googleEmail) {
+    var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        xoauth2: xoauth2.createXOAuth2Generator({
+          user: req.user.googleEmail,
+          clientId: googleCredentials.clientId,
+          clientSecret: googleCredentials.clientSecret,
+          refreshToken: req.user.googleRefreshToken,
+          accessToken: req.user.googleAccessToken
+        }) 
+      }
+    });
+    transporterObject = transporter;
+  }
+
   res.sendFile(process.cwd() + '/public/views/main_page.html');
 });
 
@@ -289,7 +303,7 @@ router.delete('/deletedraft/:id', function(req, res){
 
 router.post('/send_email', function(req, res) {
 
-  transporterObject[0].verify(function(error, success) {
+  transporterObject.verify(function(error, success) {
      if (error) {
           console.log(error);
      } else {
@@ -297,11 +311,11 @@ router.post('/send_email', function(req, res) {
      }
   });
 
-  transporterObject[0].sendMail({
+  transporterObject.sendMail({
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,
-    text: req.body.message
+    html: req.body.message
   }, function(err, info) {
     if (err) {
       return console.log(err);
