@@ -167,11 +167,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           })
       })
     }
-    // $scope.retrieveUsername = function(){
-    //   $http.get('/loggedin').then(function(response){
-    //     $scope.firstname = response.data
-    //   });
-    // }
     $scope.generateHighchart = function(){
       $('draw-chart').highcharts({
         chart: {
@@ -185,16 +180,16 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           },
            colors: [
             '#7cb5ec',
-            '#434348',
+            '#000066',
             '#90ed7d',
             '#f7a35c',
             '#8085e9', 
-            '#f15c80', 
+            '#e60000', 
             '#e4d354', 
             '#2b908f', 
             '#f45b5b', 
             '#91e8e1', 
-            '#00cc99', 
+            '#0000ff', 
             '#00c46d', 
             '#cc66ff'
         ],
@@ -217,7 +212,16 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         }
       });
     }
-
+    $scope.updateText = function(id, text){
+      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+        $scope.renderDraftAndData(response.data._id);
+        $scope.toggle = false;
+      })
+    }
+    $scope.toggle = false;
+    $scope.toggleEdit = function(){
+      $scope.toggle = $scope.toggle === true ? false: true;
+    };
     $scope.deleteDraft = function(id){
       $http.delete('/deletedraft/' +id, {
         ignoreLoadingBar: true
