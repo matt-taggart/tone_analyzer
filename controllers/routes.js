@@ -159,9 +159,9 @@ router.post('/tonetext', function(req, res) {
 
   tone_analyzer.tone({ text: req.body.content },
     function(err, tone) {
-      console.log(tone)
+      // console.log(tone)
       if (err) {
-        console.log(err);
+        return err
       } else {
         var emotionToneArray = []
         var writingToneArray = []
@@ -207,10 +207,6 @@ router.post('/tonetext', function(req, res) {
   });
 })
 
-router.get('/demobox', function(req, res){
-  res.sendFile(__dirname+ '/public/input_demo.html')
-})
-
 router.get('/calldata', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     console.log(response);
@@ -218,6 +214,8 @@ router.get('/calldata', function(req, res){
   });
 })
 
+
+//Get a specific draft
 router.get('/textdata/:id', function(req, res){
   var id = req.params.id
   ContentDB.find({_id: id}).exec().then(function(response) {
@@ -226,11 +224,61 @@ router.get('/textdata/:id', function(req, res){
   });
 })
 
+//Get drafts on page load
 router.get('/drafts', function(req, res){
   ContentDB.find({}).exec().then(function(response) {
     res.json(response);
   });
 })
+
+//Update a post
+router.post('/updatetext/:id/:text', function(req, res){
+
+  var text = req.params.text;
+  var id = req.params.id;
+
+  tone_analyzer.tone({ text: req.params.text },
+    function(err, tone) {
+      if (err) {
+        return err
+      } else {
+        var emotionToneArray = []
+        var writingToneArray = []
+        var socialToneArray = []
+
+        for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
+          emotionToneArray.push({
+            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+          })
+        };
+
+        for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
+          writingToneArray.push({
+            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+          })
+        };
+
+        for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
+          socialToneArray.push({
+            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
+            tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+          })
+        };
+        ContentDB.findOneAndUpdate(
+          {_id: req.params.id},
+          {$set:
+            {content: req.params.text,
+            emotion_tone_data: emotionToneArray,
+            social_tone_data: socialToneArray,
+            writing_tone_data: writingToneArray}
+          }).then(function(response){
+            res.json(response)
+          })
+      }
+    });
+  });
 
 router.delete('/deletedraft/:id', function(req, res){
   console.log(req.params.id);

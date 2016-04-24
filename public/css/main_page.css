@@ -194,31 +194,38 @@ h4 {
 }
 
 @media(min-width:768px) {
-    #wrapper {
-        padding-left: 250px;
-    }
+  #wrapper {
+      padding-left: 250px;
+  }
 
-    #wrapper.toggled {
-        padding-left: 0;
-    }
+  #wrapper.toggled {
+      padding-left: 0;
+  }
 
-    #sidebar-wrapper {
-        width: 250px;
-    }
+  #sidebar-wrapper {
+      width: 250px;
+  }
 
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
+  #wrapper.toggled #sidebar-wrapper {
+      width: 0;
+  }
 
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
+  #page-content-wrapper {
+      padding: 20px;
+      position: relative;
+  }
 
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
+  #wrapper.toggled #page-content-wrapper {
+      position: relative;
+      margin-right: 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .analyzeBtn {
+    padding: 10px;
+    margin-left: 5px;
+  }
 }
 
 p { 
@@ -247,46 +254,146 @@ p {
  opacity: 1;
 }
 
-.mce-menubar .mce-menubtn button span {
-  color: #fff !important;
+#mceu_12-body, #mceu_20-body, #mceu_19, #mceu_28-body, .mce-i-backcolor {
+  background-color: #01579b !important;
 }
 
-#mceu_9-body, #mceu_17-body, #mceu_16, #mceu_23  {
-  background-color: #01579b;
+.mce-custom-color-btn {
+  background-color: #fff !important;
 }
 
 .mce-menubar {
   border: 0px !important;
 }
 
-.mce-btn {
-  background-color: #01579b !important;
-}
-/*.mce-flow-layout {
-    white-space: normal;
-    background-color: #01579b;
-}*/
-.mce-btn i {
-  text-shadow: 1px 1px none;
-  color: #fff;
-  background-color: transparent; 
-}
-
-#mceu_8 {
-  border: 1px solid #fff !important;
-  border-radius: 0px !important;
-  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
-  border: 0px !important;
+.mce-menubar .mce-menubtn button span {
+  color: #fff !important;
 }
 
 .mce-caret {
   border-top-color: #fff !important;
 }
 
+.mce-btn i {
+  text-shadow: 1px 1px none;
+  color: #fff;
+  background-color: transparent; 
+}
+
+.mce-btn .mce-txt {
+  color: #fff !important;
+}
+
+.mce-custom-color-btn {
+  color: #fff !important;
+}
+
+/*.mce-container, .mce-container *,*/ .mce-widget, .mce-widget *, .mce-reset {
+  color: #fff !important;
+}
+
+/*.mce-flow-layout {
+    white-space: normal;
+    background-color: #01579b;
+}
+*/
+.mce-menubar .mce-menubtn button span {
+  color: #fff !important;
+}
+
+/*#mceu_9-body, #mceu_17-body, #mceu_16, #mceu_23  {
+  background-color: #01579b;
+}*/
+
+/*.mce-menubar {
+  border: 0px !important;
+}
+*/
+.mce-btn {
+  background-color: #01579b !important;
+}
+
+/*.mce-btn i {
+  text-shadow: 1px 1px none;
+  color: #fff;
+  background-color: transparent; 
+}
+*/
+/*#mceu_8 {
+  border: 1px solid #fff !important;
+  border-radius: 0px !important;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  border: 0px !important;
+}*/
+
+.mce-caret {
+  border-top-color: #fff !important;
+}
+
 .mce-content-body  {
-  font-size: 20px;
+  font-size: 20px !important;
+}
+
+.mce-panel {
+  border: 0px !important;
+  -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+  box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
+}
+
+.Openness {
+  color: #7cb5ec;
+}
+
+.Conscientiousness {
+  color: #000066;
+}
+
+.Extraversion {
+  color: #90ed7d
+}
+
+.Agreeableness {
+  color: #f7a35c;
+}
+
+.Emotional.Range {
+  color: #8085e9;
+}
+
+#Anger {
+  color: #e60000
+;
+}
+
+#Disgust {
+  color: #e4d354;
+}
+
+#Fear {
+  color: #2b908f;
+}
+
+#Joy {
+  color: #f45b5b;
+}
+
+#Sadness {
+  color: #91e8e1;
+}
+
+#Analytical {
+  color: #0000ff;
+}
+
+#Confident {
+  color: #00c46d;
+}
+
+#Tentative {
+  color: #cc66ff;
 }
 
 tspan {
@@ -321,4 +428,20 @@ tspan {
   outline: none;
 }
 
+.text-center > a {
+opacity: 0;
+-webkit-transition: opacity 0.5s;
+-moz-transition: opacity 0.5s;
+-o-transition: opacity 0.5s;
+cursor: pointer;
+text-decoration: none;
+}
 
+.text-center:hover > a {
+ opacity: 1;
+}
+
+#updateTextarea {
+  width: 800px;
+  height: auto;
+}

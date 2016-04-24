@@ -7,7 +7,6 @@
                0px 18px 23px rgba(0,0,0,0.1);
 }
 
-
 h1 {
   font-weight: 700;
   font-size: 5em;
@@ -41,6 +40,10 @@ a:hover {
   text-shadow: none;
   cursor: pointer;
  }
+
+.btn:focus {
+  outline: none !important;
+}
 
 .btn:hover {
   background-color: white;
@@ -243,6 +246,12 @@ span, a {
                0px 18px 23px rgba(0,0,0,0.1);
   letter-spacing: 0.2em;
   font-family: 'Lato', sans-serif;
+}
+
+@media only screen and (max-width: 500px) {
+   #welcome {
+    font-size: 2em;
+  }
 }
 
 
