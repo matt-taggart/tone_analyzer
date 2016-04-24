@@ -46,28 +46,32 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control tone_textarea" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
+                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
                 </div>                  
                 <div class="col-xs-6 text-left">
                   <div id="tooltip-wrapper" title="Must be logged in with Gmail to use this feature.">
-                    <button class="btn send_btn analyzeBtn hover-button" data-toggle="modal" data-target="#email-form" id="emailBtn"><i class="fa fa-envelope fa-lg"></i> Send</button>
+                    <button class="btn send_btn analyzeBtn hover-button" data-toggle="modal" data-target="#email-form" id="emailBtn" ng-click="getText()"><i class="fa fa-envelope fa-lg"></i> Send</button>
                   </div>
                 </div>
               </div>
               <div class="panel">
                 <div class="panel-body">
-              The tone data is reported on a scale of 0 to 1 for ease of interpretation. A score of 0 means that the specific tone of interest is not present in your text, whereas a score of 1 indicates the most extreme case of that tone.  This data will help you become aware of the tone of your email with quantified data before sending it.
+                The tone data is reported on a scale of 0 to 1 for ease of interpretation. A score of 0 means that the specific tone of interest is not present in your text, whereas a score of 1 indicates the most extreme case of that tone.  This data will help you become aware of the tone of your email with quantified data before sending it.
                 </div>
               </div>
               <div ng-repeat='(key, value) in draftData track by $index'>
                 <div class="col-lg-12 col-md-12 col-sm-12">
                   <div class="panel panel-default panel-shadow text-panel">
                     <div class="panel-body text-center">
+                      <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
-                      <p> {{value.content}} </p>
+                      <p ng-hide='toggle'> {{value.content}} </p>
+                      <textarea id='updateTextarea' ng-show='toggle' type='text' ng-bind='value.content'></textarea>
+                      <br />
+                      <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
                    </div>
                   </div>  
                 </div>
@@ -75,19 +79,19 @@
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Social tone data</h4>
-                      <p ng-repeat='(key, value) in value.social_tone_data' id="{{value.tone_type}}"> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.social_tone_data' class="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Emotional tone data</h4>
-                      <p ng-repeat='(key, value) in value.emotion_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.emotion_tone_data' id="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                   <div class="panel panel-default panel-shadow">
                     <div class="panel-body text-center">
                       <h4>Writing tone data</h4>
-                      <p ng-repeat='(key, value) in value.writing_tone_data'> {{value.tone_type}} {{value.tone_score}}</p>
+                      <p ng-repeat='(key, value) in value.writing_tone_data' id="{{value.tone_type}}"> {{value.tone_type}}: {{value.tone_score}}</p>
                     </div>
                   </div>
                 </div>
@@ -104,7 +108,7 @@
     <!-- Modal -->
     <div id="email-form" class="modal fade" role="dialog">
       <div class="modal-dialog">
-        <form ng-submit="sendEmail()">
+        <form ng-submit="sendEmail()" name="userForm" novalidate>
         <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
@@ -116,7 +120,8 @@
                 <div class="col-xs-12">
                   <div class="form-group">
                     <label for="recipient">Recipient</label>
-                    <input type="text" id="reciepient" class="form-control input-lg enable" placeholder="Recipient" ng-model="emailData.sendTo">
+                    <input type="text" name="recipient" id="recipient" class="form-control input-lg enable" placeholder="Recipient" ng-model="emailData.sendTo" required>
+                    <span ng-show="userForm.recipient.$invalid && !userForm.recipient.$pristine" class="text-danger bg-danger">You must enter a recipient.</span>
                   </div>
                 </div>
               </div>              
@@ -124,7 +129,8 @@
                 <div class="col-xs-12">
                  <div class="form-group">
                    <label for="from">From</label>
-                   <input type="text" id="from" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'">               
+                   <input type="text" id="from" name="from" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'" required>       
+                   <span ng-show="userForm.from.$invalid && !userForm.from.$pristine" class="text-danger bg-danger">You must enter a recipient.</span>        
                  </div>
                 </div>
               </div>              
@@ -132,14 +138,15 @@
                 <div class="col-xs-12">
                   <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject">
+                    <input type="text" id="subject" name="subject" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject" required>
+                    <span ng-show="userForm.subject.$invalid && !userForm.subject.$pristine" class="text-danger bg-danger">You must enter a subject.</span>
                   </div>            
                 </div>
               </div>              
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ message }}'">    
+                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ toneText }}'" required>                      
                   </div>            
                 </div>
               </div>
@@ -155,7 +162,6 @@
         </form>
       </div>
     </div>
-  
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/controllers/loginController.js"></script>
