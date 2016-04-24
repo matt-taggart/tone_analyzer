@@ -130,6 +130,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         $scope.draftData = response.data
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
+        $scope.toggle = false;
         angular.forEach($scope.draftData, function(value, key){
           $scope.value = value._id
           $scope.idArray.push({id: value._id, social_tone_data: value.social_tone_data, emotion_tone_data: value.emotion_tone_data, writing_tone_data: value.writing_tone_data})
