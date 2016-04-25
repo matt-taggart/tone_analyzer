@@ -101,16 +101,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 
 .controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
-    $scope.sendEmail = function() {
-      $http({
-        method: 'POST',
-        url: '/send_email',
-        data: $scope.emailData
-      }).then(function(result) {
-        $scope.isSuccessful = result.data.success;
-        $scope.emailSuccessMsg = result.data.message;
-      })
-    }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
       // var raw = $($scope.draftData[0].content).text();
@@ -259,6 +249,21 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 
     $scope.getText = function() {
       $scope.emailData.message = $scope.toneText;
+    }
+
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        $scope.isSuccessful = result.data.success;
+        $scope.emailSuccessMsg = result.data.message;
+      })
+    }
+
+    $scope.resetModal = function() {
+      $scope.isSuccessful = false;
     }
 
     $scope.logout = function() {
