@@ -11,7 +11,7 @@ var xoauth2 = require('xoauth2');
 var watson = require('watson-developer-cloud');
 var googleCredentials = require('../config/google-credentials.js');
 var ContentDB = require('../models/contentAnalysisModel.js');
-var transporterObject = [];
+var transporterObject;
 
 var router = express.Router();
 
@@ -95,29 +95,22 @@ router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 });
 
-router.get('/auth/google', passport.authenticate('google-auth', { scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
+router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
 
 router.get('/auth/google/callback', function(req, res, next) {
   passport.authenticate('google-auth', function(err, user, info) {
-    console.log('GOOGLE RESPONDED');
     if (err) {
-      console.log('INITIAL ERROR MESSAGE: ');
       console.log(err);
       return next(err); // will generate a 500 error
     }
 
     if (!user) {
-      console.log('USER ERROR: ');
-      console.log(user);
       return res.redirect('/welcome');
       // return res.json({ authenticated: user });
     }
 
     req.login(user, function(err) {
-      console.log('LOGIN FUNCTION HIT');
-      console.log(user);
       if (err) {
-        console.log('LOGIN ERROR MESSAGE: ');
         console.log(err);
         return next(err);
       }
@@ -134,9 +127,7 @@ router.get('/auth/google/callback', function(req, res, next) {
         }
       });
 
-      console.log(transporter);
-
-      transporterObject.push(transporter);
+      transporterObject = transporter;
 
       res.redirect('/welcome');
     });  
@@ -146,6 +137,22 @@ router.get('/auth/google/callback', function(req, res, next) {
 });
 
 router.get('/main_page', auth, function(req, res) {
+  if (req.user.googleEmail) {
+    var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+        xoauth2: xoauth2.createXOAuth2Generator({
+          user: req.user.googleEmail,
+          clientId: googleCredentials.clientId,
+          clientSecret: googleCredentials.clientSecret,
+          refreshToken: req.user.googleRefreshToken,
+          accessToken: req.user.googleAccessToken
+        }) 
+      }
+    });
+    transporterObject = transporter;
+  }
+
   res.sendFile(process.cwd() + '/public/views/main_page.html');
 });
 
@@ -296,7 +303,7 @@ router.delete('/deletedraft/:id', function(req, res){
 
 router.post('/send_email', function(req, res) {
 
-  transporterObject[0].verify(function(error, success) {
+  transporterObject.verify(function(error, success) {
      if (error) {
           console.log(error);
      } else {
@@ -304,7 +311,7 @@ router.post('/send_email', function(req, res) {
      }
   });
 
-  transporterObject[0].sendMail({
+  transporterObject.sendMail({
     from: req.body.email,
     to: req.body.sendTo,
     subject: req.body.subject,

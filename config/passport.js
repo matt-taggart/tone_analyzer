@@ -81,20 +81,13 @@ module.exports = function(passport) {
   passport.use('google-auth', new GoogleStrategy({
     clientID: googleCredentials.clientId,
     clientSecret: googleCredentials.clientSecret,
-    callbackURL: callbackURL,
-    passReqToCallback: true
-  }, function(request, accessToken, refreshToken, profile, done) {
-    User.findOne({ googleId: profile.id }, function(err, user) {
-      if (err) {
-        return err;
-      }
+    callbackURL: callbackURL
+  }, function(accessToken, refreshToken, profile, done) {
 
-      if (!user) {
-        return err;
-      }
+    User.findOne({ googleId: profile.id }, function(err, user) {
 
       if (user) {
-        return done(null, user);
+        done(null, user);
       } else {
 
         var newUser = new User({
@@ -109,7 +102,7 @@ module.exports = function(passport) {
           if (err) {
             return err;
           } else {
-            return done(null, userData)
+            done(null, userData)
           }
         });
       }
