@@ -111,13 +111,13 @@
         <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <button type="button" class="close" data-dismiss="modal" ng-click="resetModal()">&times;</button>
               <h4 class="modal-title">Email</h4>
             </div>
-            <div class="modal-body" ng-show="isSuccessful">
+            <div class="modal-body" ng-show="isSuccessful" ng-class="{ 'add-padding' : isSuccessful}">
               <div class="row">
-                <div class="col-xs-8 col-xs-offset-2">
-                  <span class="text-success bg-success text-center"><i class="fa fa-check-square" aria-hidden="true"></i>
+                <div class="col-xs-8 col-xs-offset-2 text-center">
+                  <span class="text-success bg-success"><i class="fa fa-check-square" aria-hidden="true"></i>
  {{ emailSuccessMsg }}</span>
                 </div>
               </div>
