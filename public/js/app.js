@@ -107,7 +107,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         url: '/send_email',
         data: $scope.emailData
       }).then(function(result) {
-        console.log(result.data);
+        $scope.isSuccessful = result.data.success;
+        $scope.emailSuccessMsg = result.data.message;
       })
     }
     $scope.analyzeTone = function(){

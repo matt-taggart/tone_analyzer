@@ -316,7 +316,7 @@ router.post('/send_email', function(req, res) {
     console.log('Message sent: ' + info.response);
   });
 
-  res.send('Email Successful!');
+  res.send({ success: true, message: 'Email Successful!'});
 });
 
 router.get('*', function(req, res) {

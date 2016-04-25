@@ -13,7 +13,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
-    <script type="text/javascript" src="/bower_components/tinymce-dist/test.js"></script>
     <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
@@ -115,7 +114,18 @@
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">Email</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" ng-show="isSuccessful">
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <span class="text-success bg-success text-center"><i class="fa fa-check-square" aria-hidden="true"></i>
+ {{ emailSuccessMsg }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer" ng-show="isSuccessful">
+              <button class="btn btn-default btn-lg" data-dismiss="modal" ng-click="resetModal()">Close</button>
+            </div>
+            <div class="modal-body" ng-show="!isSuccessful">
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
@@ -151,7 +161,7 @@
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" ng-show="!isSuccessful">
               <button class="btn btn-danger btn-lg" data-dismiss="modal">
                 <i class="fa fa-trash-o" title="Delete" aria-hidden="true"></i>
                 <span class="sr-only">Delete</span>
