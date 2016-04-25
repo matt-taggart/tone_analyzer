@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main_page.css">
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
@@ -17,9 +17,9 @@
     <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
   </head>
-  <body class="main_page_bkgrd" ng-controller='inputForm'> 
+  <body class="main_page_bkgrd" ng-controller='inputForm'>
     <div>
-      <div id="wrapper"> 
+      <div id="wrapper">
         <div id="sidebar-wrapper">
           <ul class="sidebar-nav">
             <li class="sidebar-brand" ng-init="getUser()">Welcome {{ firstname }}</li>
@@ -46,11 +46,11 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
+                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
-                </div>                  
+                </div>
                 <div class="col-xs-6 text-left">
                   <div id="tooltip-wrapper" title="Must be logged in with Gmail to use this feature.">
                     <button class="btn send_btn analyzeBtn hover-button" data-toggle="modal" data-target="#email-form" id="emailBtn" ng-click="getText()"><i class="fa fa-envelope fa-lg"></i> Send</button>
@@ -73,7 +73,7 @@
                       <br />
                       <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
                    </div>
-                  </div>  
+                  </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12">
                   <div class="panel panel-default panel-shadow">
@@ -120,34 +120,34 @@
                 <div class="col-xs-12">
                   <div class="form-group">
                     <label for="recipient">Recipient</label>
-                    <input type="text" name="recipient" id="recipient" class="form-control input-lg enable" placeholder="Recipient" ng-model="emailData.sendTo" required>
+                    <input type="text" name="recipient" id="recipient" class="form-control input-lg enable emailInput" placeholder="Recipient" ng-model="emailData.sendTo" required>
                     <span ng-show="userForm.recipient.$invalid && !userForm.recipient.$pristine" class="text-danger bg-danger">You must enter a recipient.</span>
                   </div>
                 </div>
-              </div>              
+              </div>
               <div class="row">
                 <div class="col-xs-12">
                  <div class="form-group">
                    <label for="from">From</label>
-                   <input type="text" id="from" name="from" class="form-control input-lg disable" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'" required>       
-                   <span ng-show="userForm.from.$invalid && !userForm.from.$pristine" class="text-danger bg-danger">You must enter a recipient.</span>        
+                   <input type="text" id="from" name="from" class="form-control input-lg disable emailInput" placeholder="From" disabled="disabled" ng-model="emailData.email" ng-init="emailData.email='{{ email }}'" required>
+                   <span ng-show="userForm.from.$invalid && !userForm.from.$pristine" class="text-danger bg-danger">You must enter a recipient.</span>
                  </div>
                 </div>
-              </div>              
+              </div>
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" class="form-control input-lg enable" placeholder="Subject" ng-model="emailData.subject" required>
+                    <input type="text" id="subject" name="subject" class="form-control input-lg enable emailInput" placeholder="Subject" ng-model="emailData.subject" required>
                     <span ng-show="userForm.subject.$invalid && !userForm.subject.$pristine" class="text-danger bg-danger">You must enter a subject.</span>
-                  </div>            
+                  </div>
                 </div>
-              </div>              
+              </div>
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ toneText }}'" required>                      
-                  </div>            
+                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ toneText }}'" required>
+                  </div>
                 </div>
               </div>
             </div>
@@ -167,5 +167,5 @@
     <script type="text/javascript" src="/controllers/loginController.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript" src="../grouped-categories.js"></script>
-  </body>  
+  </body>
   </html>
