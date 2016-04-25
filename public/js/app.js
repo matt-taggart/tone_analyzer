@@ -7,7 +7,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     //Initialize a new promise
     var deferred = $q.defer();
 
-    //Make an ajax call to check if user is logged in 
+    //Make an ajax call to check if user is logged in
     $http({
       method: 'GET',
       url: '/loggedin',
@@ -99,7 +99,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 //   }
 // })
 
-.controller('inputForm', function($scope, $http) {
+.controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
     $scope.sendEmail = function() {
       $http({
@@ -139,7 +139,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           var emotionToneScore = [];
           var writingToneScore = [];
           $scope.toneScoreArray = [];
-        
+
           angular.forEach($scope.idArray, function(value, key) {
             angular.forEach(value.social_tone_data, function(value, key){
               socialToneScore.push(value.tone_score)
@@ -184,14 +184,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
             '#000066',
             '#90ed7d',
             '#f7a35c',
-            '#8085e9', 
-            '#e60000', 
-            '#e4d354', 
-            '#2b908f', 
-            '#f45b5b', 
-            '#91e8e1', 
-            '#0000ff', 
-            '#00c46d', 
+            '#8085e9',
+            '#e60000',
+            '#e4d354',
+            '#2b908f',
+            '#f45b5b',
+            '#91e8e1',
+            '#0000ff',
+            '#00c46d',
             '#cc66ff'
         ],
         title: {
@@ -260,6 +260,15 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       $scope.emailData.message = $scope.toneText;
     }
 
+    $scope.logout = function() {
+      $http({
+        method: 'POST',
+        url: '/logout'
+      }).then(function(result) {
+        $window.location.href = '/welcome';
+      });
+    }
+
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -269,11 +278,10 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       plugins: 'link image code textcolor colorpicker',
       toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | forecolor backcolor | fontsizeselect'
     };
-    
+
     $('#email-form').on('hidden.bs.modal', function (e) {
       $(this)
         .find(".enable")
            .val('')
     });
   })
-
