@@ -133,7 +133,8 @@ angular.module('toneAnalyzer', ['ngSanitize', 'ui.router', 'ui.tinymce'])
     $scope.renderDraftAndData = function(id){
       $http.get('/textdata/' + id).then(function(response){ 
         $scope.draftData = response.data
-        $scope.htmlRender = $scope.draftData[0].htmlContent //render html to the DOM
+        console.log($scope.draftData)
+        $scope.htmlRender = $scope.draftData[0].content //render html to the DOM
         $scope.idArray = [];
         $scope.toggle = false;
         angular.forEach($scope.draftData, function(value, key){
