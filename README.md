@@ -1,5 +1,5 @@
 
-# Grouped Categories - Highcharts module
+# Tone Done For What
 
 Go to project page to see this module in action: [http://blacklabel.github.io/grouped_categories/](http://blacklabel.github.io/grouped_categories/)
 
