@@ -4,6 +4,26 @@
   font-family: 'Lato', sans-serif;
 }
 
+.emailInput {
+  margin-bottom: 20px;
+}
+
+.text-danger {
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.text-success {
+  font-size: 20px;
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.add-padding {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 h3 {
   color: #fff;
   text-align: center;
@@ -228,8 +248,8 @@ h4 {
   }
 }
 
-p { 
-  margin: 0; 
+p {
+  margin: 0;
   font-size: 15px;
 }
 
@@ -277,7 +297,7 @@ p {
 .mce-btn i {
   text-shadow: 1px 1px none;
   color: #fff;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 .mce-btn .mce-txt {
@@ -316,7 +336,7 @@ p {
 /*.mce-btn i {
   text-shadow: 1px 1px none;
   color: #fff;
-  background-color: transparent; 
+  background-color: transparent;
 }
 */
 /*#mceu_8 {
@@ -411,7 +431,7 @@ tspan {
 }
 
 .toggle:focus {
-  color: #01579b; 
+  color: #01579b;
 }
 
 .toggle:focus:hover {
