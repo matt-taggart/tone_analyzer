@@ -135,13 +135,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       });
     };
     $scope.renderDraftAndData = function(id){
-<<<<<<< HEAD
-      $http.get('/textdata/' + id).then(function(response){ 
-=======
       $http.get('/textdata/' + id, {
         ignoreLoadingBar: true
       }).then(function(response){
->>>>>>> 5d800a3f68fbf18ba8ac6c66ca8d0e36f2659cf9
         $scope.draftData = response.data
         console.log($scope.draftData)
         $scope.htmlRender = $scope.draftData[0].htmlContent //render html to the DOM
