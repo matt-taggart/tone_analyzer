@@ -270,6 +270,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
 
     $scope.resetModal = function() {
       $scope.isSuccessful = false;
+      $scope.userForm.$setPristine();
     }
 
     $scope.logout = function() {
