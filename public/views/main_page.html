@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.js'></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/test.js"></script>
     <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
@@ -46,7 +47,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
+                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' ng-model='htmlRender' required></textarea>  
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
@@ -68,7 +69,7 @@
                     <div class="panel-body text-center">
                       <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
-                      <p ng-hide='toggle'> {{value.content}} </p>
+                      <p ng-hide='toggle' ng-bind-html='htmlRender'> </p>
                       <textarea id='updateTextarea' ng-show='toggle' type='text' ng-model='value.content'></textarea>
                       <br />
                       <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
