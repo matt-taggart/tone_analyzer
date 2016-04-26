@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -108,7 +108,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
-        draftTitle: $scope.draftTitle
+        draftTitle: $scope.draftTitle,
+        ignoreLoadingBar: true
       }).then(function(response) {
         $scope.toneText = '';
         $scope.draftTitle = '';
@@ -117,7 +118,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     };
     $scope.renderDraftAndData = function(id){
-      $http.get('/textdata/' + id).then(function(response){
+      $http.get('/textdata/' + id, {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.draftData = response.data
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
@@ -149,7 +152,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       })
     }
     $scope.retrieveDraft = function(){
-      $http.get('/drafts').then(function(response){
+      $http.get('/drafts', {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.drafts = response.data
         $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
@@ -255,7 +260,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       $http({
         method: 'POST',
         url: '/send_email',
-        data: $scope.emailData
+        data: $scope.emailData,
+        ignoreLoadingBar: true
       }).then(function(result) {
         $scope.isSuccessful = result.data.success;
         $scope.emailSuccessMsg = result.data.message;
@@ -269,7 +275,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     $scope.logout = function() {
       $http({
         method: 'POST',
-        url: '/logout'
+        url: '/logout',
+        ignoreLoadingBar: true
       }).then(function(result) {
         $window.location.href = '/welcome';
       });

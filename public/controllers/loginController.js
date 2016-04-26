@@ -40,7 +40,6 @@ angular.module('toneAnalyzer')
       });
     }
 
-
     $scope.googleLogin = function() {
       $window.open('/auth/google', '_self');
     }
