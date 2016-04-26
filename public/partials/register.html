@@ -3,9 +3,7 @@
       <div class="panel panel-default" id="register-panel" ng-controller="loginController">
         <div class="panel-body">
           <div class="row">
-            <form ng-submit="register()" class="form-signin" name="registrationForm" autocomplete="off" ng-show="!registerSuccess" novalidate>
-              <h3 ng-show="registerSuccess">"Registration successful!"</h3>
-              <button class="btn btn-lg login_signup-button btn-block" ng-show="registerSuccess">Sign Up</button>
+            <form ng-submit="register()" class="form-signin" name="registrationForm" autocomplete="off" novalidate>
               <h2 class="form-signin-heading">Sign Up</h2>
               <button ng-click="googleLogin()" class="btn btn-lg login_signup-button btn-block" type="button">Login With Gmail</button>
               <div class="strike">
@@ -24,6 +22,7 @@
               <p ng-show="registrationForm.password.$invalid && !registrationForm.password.$pristine">This field is required</p>
               <br>
               <button class="btn btn-lg login_signup-button btn-block" type="submit">Sign Up</button>
+              <h3 ng-show="registerSuccess">Registration successful!</h3>
               <p>{{ registrationError }}</p>
               <a href="welcome">cancel</a>
             </form>

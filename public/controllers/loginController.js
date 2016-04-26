@@ -1,5 +1,5 @@
 angular.module('toneAnalyzer')
-  .controller('loginController', function($scope, $http, $window, $location, $rootScope) {
+  .controller('loginController', function($scope, $http, $window, $location, $timeout, $rootScope) {
     $scope.register = function() {
       $http({
         method: 'POST',
@@ -7,8 +7,10 @@ angular.module('toneAnalyzer')
         data: $scope.registration
       }).then(function(result) {
         if (result.data === 'success') {
-          $location.path('/welcome');
           $scope.registerSuccess = result.data;
+          $timeout(function () {
+            $location.path('welcome');
+          }, 2200);
         } else {
           if (result.data.message.username) {
             var userLengthError = result.data.message.username.message;
