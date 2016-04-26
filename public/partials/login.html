@@ -6,6 +6,11 @@
           <div class="row">
             <form ng-submit="login()" class="form-signin" autocomplete="off">
               <h2 class="form-signin-heading">Log In</h2>
+                <button ng-click="googleLogin()" class="btn btn-lg login_signup-button btn-block" type="button">Login With Gmail</button>  
+                <div class="strike">
+                  <span>OR</span>
+                </div>
+                <br>
                 <input type="text" class="form-control" ng-model="user.username" placeholder="Username" required/>
                 <input type="password" class="form-control" ng-model="user.password" placeholder="Password" required/>
                 <button class="btn btn-lg login_signup-button btn-block" type="submit">Login</button>  
