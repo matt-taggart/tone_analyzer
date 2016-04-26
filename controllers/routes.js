@@ -57,12 +57,14 @@ router.post('/register', function(req, res, next) {
 
     if (!user) {
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
-      return res.json({ registered: user, message: errorMessage });
+      if (errorMessage.email) {
+        return res.json({ registered: user, message: errorMessage.email.message });
+      } else {
+        return res.json({ registered: user, message: errorMessage });
+      }
     }
 
     if (user) {
-      var successMessage = req.session.flash.successMessage[req.session.flash.successMessage.length-1];
-      console.log(successMessage);
       return res.json('success');
     }
 

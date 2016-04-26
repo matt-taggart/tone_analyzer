@@ -8,6 +8,7 @@ angular.module('toneAnalyzer')
       }).then(function(result) {
         if (result.data === 'success') {
           $location.path('/welcome');
+          $scope.registerSuccess = result.data;
         } else {
           if (result.data.message.username) {
             var userLengthError = result.data.message.username.message;

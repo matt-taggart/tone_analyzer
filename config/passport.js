@@ -57,7 +57,7 @@ module.exports = function(passport) {
       if (!userData) {
         console.log(err);
         return done(null, false, req.flash('loginMessage', 'Username or password is invalid.'));
-      } 
+      }
 
      if (userData) {
       bcrypt.compare(password, userData.password, function(err, user) {
@@ -112,6 +112,3 @@ module.exports = function(passport) {
   }));
 
 };
-
-
-
