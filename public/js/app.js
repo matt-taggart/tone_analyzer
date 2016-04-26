@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -7,7 +7,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
     //Initialize a new promise
     var deferred = $q.defer();
 
-    //Make an ajax call to check if user is logged in 
+    //Make an ajax call to check if user is logged in
     $http({
       method: 'GET',
       url: '/loggedin',
@@ -99,17 +99,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
 //   }
 // })
 
-.controller('inputForm', function($scope, $http) {
+.controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
-    $scope.sendEmail = function() {
-      $http({
-        method: 'POST',
-        url: '/send_email',
-        data: $scope.emailData
-      }).then(function(result) {
-        console.log(result.data);
-      })
-    }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
       // var raw = $($scope.draftData[0].content).text();
@@ -117,7 +108,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       $http.post('/tonetext', {
         content: $scope.toneText,
         userId: $scope.userData._id,
-        draftTitle: $scope.draftTitle
+        draftTitle: $scope.draftTitle,
+        ignoreLoadingBar: true
       }).then(function(response) {
         $scope.toneText = '';
         $scope.draftTitle = '';
@@ -126,7 +118,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     };
     $scope.renderDraftAndData = function(id){
-      $http.get('/textdata/' + id).then(function(response){
+      $http.get('/textdata/' + id, {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.draftData = response.data
         $scope.draftData[0].content = $($scope.draftData[0].content).text()
         $scope.idArray = [];
@@ -139,7 +133,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
           var emotionToneScore = [];
           var writingToneScore = [];
           $scope.toneScoreArray = [];
-        
+
           angular.forEach($scope.idArray, function(value, key) {
             angular.forEach(value.social_tone_data, function(value, key){
               socialToneScore.push(value.tone_score)
@@ -158,7 +152,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       })
     }
     $scope.retrieveDraft = function(){
-      $http.get('/drafts').then(function(response){
+      $http.get('/drafts', {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.drafts = response.data
         $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
@@ -184,14 +180,14 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
             '#000066',
             '#90ed7d',
             '#f7a35c',
-            '#8085e9', 
-            '#e60000', 
-            '#e4d354', 
-            '#2b908f', 
-            '#f45b5b', 
-            '#91e8e1', 
-            '#0000ff', 
-            '#00c46d', 
+            '#8085e9',
+            '#e60000',
+            '#e4d354',
+            '#2b908f',
+            '#f45b5b',
+            '#91e8e1',
+            '#0000ff',
+            '#00c46d',
             '#cc66ff'
         ],
         title: {
@@ -260,6 +256,32 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       $scope.emailData.message = $scope.toneText;
     }
 
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData,
+        ignoreLoadingBar: true
+      }).then(function(result) {
+        $scope.isSuccessful = result.data.success;
+        $scope.emailSuccessMsg = result.data.message;
+      })
+    }
+
+    $scope.resetModal = function() {
+      $scope.isSuccessful = false;
+    }
+
+    $scope.logout = function() {
+      $http({
+        method: 'POST',
+        url: '/logout',
+        ignoreLoadingBar: true
+      }).then(function(result) {
+        $window.location.href = '/welcome';
+      });
+    }
+
     $("#menu-toggle").click(function(e) {
      e.preventDefault();
     $("#wrapper").toggleClass("toggled");
@@ -269,11 +291,10 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       plugins: 'link image code textcolor colorpicker',
       toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code | forecolor backcolor | fontsizeselect'
     };
-    
+
     $('#email-form').on('hidden.bs.modal', function (e) {
       $(this)
         .find(".enable")
            .val('')
     });
   })
-
