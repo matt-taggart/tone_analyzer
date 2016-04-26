@@ -47,7 +47,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='htmlRender' placeholder='Enter Text Here' required></textarea>  
+                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>  
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
@@ -147,11 +147,7 @@
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-<<<<<<< HEAD
-                    <input type="visible" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ message }}'">    
-=======
-                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ toneText }}'" required>                      
->>>>>>> 4b7e6adfc779d8046d2790aa8d881b8a70c15002
+                    <textarea type="visible" class="form-control disable" rows="9" ng-bind-html="htmlRender" required></textarea>                     
                   </div>            
                 </div>
               </div>

@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ngSanitize', 'ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -264,7 +264,7 @@ angular.module('toneAnalyzer', ['ngSanitize', 'ui.router', 'ui.tinymce'])
     }
 
     $scope.getText = function() {
-      $scope.emailData.message = $scope.toneText;
+      $scope.emailData.message = $scope.htmlRender;
     }
 
     $("#menu-toggle").click(function(e) {
