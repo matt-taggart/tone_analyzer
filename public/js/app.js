@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
+angular.module('toneAnalyzer', ['ngSanitize', 'ui.router', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -110,11 +110,16 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         console.log(result.data);
       })
     }
+    $scope.analyzeOrUpdate = function(title){
+      console.log(title)
+      // $http.get('/decision/' + title)
+    }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
       // var raw = $($scope.draftData[0].content).text();
       // console.log(raw);
       $http.post('/tonetext', {
+        // htmlContent: $scope.toneText,
         content: $scope.toneText,
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle
@@ -126,9 +131,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
       });
     };
     $scope.renderDraftAndData = function(id){
-      $http.get('/textdata/' + id).then(function(response){
+      $http.get('/textdata/' + id).then(function(response){ 
         $scope.draftData = response.data
-        $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        $scope.htmlRender = $scope.draftData[0].htmlContent //render html to the DOM
         $scope.idArray = [];
         $scope.toggle = false;
         angular.forEach($scope.draftData, function(value, key){
@@ -157,6 +162,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce'])
         })
       })
     }
+
     $scope.retrieveDraft = function(){
       $http.get('/drafts').then(function(response){
         $scope.drafts = response.data

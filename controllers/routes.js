@@ -203,6 +203,7 @@ router.post('/tonetext', function(req, res) {
         };
         var content = new ContentDB ({
           content: req.body.content,
+          htmlContent: req.body.htmlContent,
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
           writing_tone_data: writingToneArray,
@@ -251,6 +252,8 @@ router.post('/updatetext/:id/:text', function(req, res){
   var text = req.params.text;
   var id = req.params.id;
 
+  console.log(text)
+
   tone_analyzer.tone({ text: req.params.text },
     function(err, tone) {
       if (err) {
@@ -288,6 +291,7 @@ router.post('/updatetext/:id/:text', function(req, res){
             social_tone_data: socialToneArray,
             writing_tone_data: writingToneArray}
           }).then(function(response){
+            console.log(response)
             res.json(response)
           })
       }
