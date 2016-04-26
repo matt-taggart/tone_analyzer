@@ -101,7 +101,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
 
 .controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
-<<<<<<< HEAD
     $scope.sendEmail = function() {
       $http({
         method: 'POST',
@@ -115,8 +114,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       console.log(title)
       // $http.get('/decision/' + title)
     }
-=======
->>>>>>> 5d800a3f68fbf18ba8ac6c66ca8d0e36f2659cf9
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
       // var raw = $($scope.draftData[0].content).text();
@@ -228,8 +225,13 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
         }
       });
     }
-    $scope.updateText = function(id, text){
-      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+    $scope.updateText = function(id, htmlText){
+      var text = $(htmlText).text()
+      console.log(text)
+      console.log(htmlText)
+      $http.post('/updatetext/' + id, {htmlText: htmlText, text: text}, {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.renderDraftAndData(response.data._id);
         $scope.toggle = false;
       })
