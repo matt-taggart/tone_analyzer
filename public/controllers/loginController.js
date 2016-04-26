@@ -9,6 +9,7 @@ angular.module('toneAnalyzer')
       }).then(function(result) {
         if (result.data === 'success') {
           $scope.registerSuccess = result.data;
+          $scope.registrationError = "";
           $timeout(function () {
             $location.path('welcome');
           }, 2200);
