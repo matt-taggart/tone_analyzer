@@ -147,7 +147,7 @@
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <textarea ui-tinymce="tinymceOptions" type="hidden" class="form-control disable" rows="9" ng-model='htmlRender' required></textarea>                     
+                    <textarea ui-tinymce="tinymceOptions" type="hidden" class="form-control disable" rows="9" ng-model='emailData.message' ng-init="emailData.message = '{{ htmlRender }}' "required></textarea>                     
                   </div>            
                 </div>
               </div>

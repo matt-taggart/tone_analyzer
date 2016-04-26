@@ -252,7 +252,8 @@ router.post('/updatetext/:id/:text', function(req, res){
   var text = req.params.text;
   var id = req.params.id;
 
-  console.log(text)
+  console.log('html text being logged here')
+  console.log(htmlText)
 
   tone_analyzer.tone({ text: req.params.text },
     function(err, tone) {
