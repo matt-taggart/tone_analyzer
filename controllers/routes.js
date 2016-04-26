@@ -23,8 +23,8 @@ router.use(bodyParser.urlencoded({
 
 var LOCAL_DB = 'mongodb://localhost/users';
 
-var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };  
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
 if (process.env.NODE_ENV === 'production') {
   mongoose.connect(process.env.MONGODB_URI, options);
@@ -57,12 +57,14 @@ router.post('/register', function(req, res, next) {
 
     if (!user) {
       var errorMessage = req.session.flash.registerMessage[req.session.flash.registerMessage.length-1];
-      return res.json({ registered: user, message: errorMessage });
+      if (errorMessage.email) {
+        return res.json({ registered: user, message: errorMessage.email.message });
+      } else {
+        return res.json({ registered: user, message: errorMessage });
+      }
     }
 
     if (user) {
-      var successMessage = req.session.flash.successMessage[req.session.flash.successMessage.length-1];
-      console.log(successMessage);
       return res.json('success');
     }
 
@@ -87,13 +89,30 @@ router.post('/login', function(req, res, next) {
         return next(err);
       }
       return res.json({ authenticated: user });
-    });      
+    });
   })(req, res, next);
 });
 
 router.get('/loggedin', function(req, res) {
   res.json(req.isAuthenticated() ? req.user : '0');
 });
+
+function createTransporter(user, clientId, clientSecret, refreshToken, accessToken) {
+  var transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      xoauth2: xoauth2.createXOAuth2Generator({
+        user: user,
+        clientId: clientId,
+        clientSecret: clientSecret,
+        refreshToken: refreshToken,
+        accessToken: accessToken
+      })
+    }
+  })
+
+  transporterObject = transporter;
+}
 
 router.get('/auth/google', passport.authenticate('google-auth', { scope: ['profile', 'email', 'https://mail.google.com'], accessType: 'offline', approvalPrompt: 'force' }));
 
@@ -114,23 +133,11 @@ router.get('/auth/google/callback', function(req, res, next) {
         console.log(err);
         return next(err);
       }
-      var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          xoauth2: xoauth2.createXOAuth2Generator({
-            user: user.googleEmail,
-            clientId: googleCredentials.clientId,
-            clientSecret: googleCredentials.clientSecret,
-            refreshToken: user.googleRefreshToken,
-            accessToken: user.googleAccessToken
-          }) 
-        }
-      });
 
-      transporterObject = transporter;
+      createTransporter(user.googleEmail, googleCredentials.clientId, googleCredentials.clientSecret, user.googleRefreshToken, user.googleAccessToken);
 
       res.redirect('/welcome');
-    });  
+    });
 
 
   })(req, res, next);
@@ -138,19 +145,7 @@ router.get('/auth/google/callback', function(req, res, next) {
 
 router.get('/main_page', auth, function(req, res) {
   if (req.user.googleEmail) {
-    var transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      auth: {
-        xoauth2: xoauth2.createXOAuth2Generator({
-          user: req.user.googleEmail,
-          clientId: googleCredentials.clientId,
-          clientSecret: googleCredentials.clientSecret,
-          refreshToken: req.user.googleRefreshToken,
-          accessToken: req.user.googleAccessToken
-        }) 
-      }
-    });
-    transporterObject = transporter;
+    createTransporter(req.user.googleEmail, googleCredentials.clientId, googleCredentials.clientSecret, req.user.googleRefreshToken, req.user.googleAccessToken);
   }
 
   res.sendFile(process.cwd() + '/public/views/main_page.html');
@@ -183,22 +178,22 @@ router.post('/tonetext', function(req, res) {
 
         for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
           emotionToneArray.push({
-            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[0].tones[i].score
           })
         };
 
         for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
           writingToneArray.push({
-            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[1].tones[i].score
           })
         };
 
         for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
           socialToneArray.push({
-            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[2].tones[i].score
           })
         };
         var content = new ContentDB ({
@@ -216,7 +211,7 @@ router.post('/tonetext', function(req, res) {
             console.log('content saved into db')
             res.json(response);
           }
-        }) 
+        })
       }
   });
 })
@@ -262,22 +257,22 @@ router.post('/updatetext/:id/:text', function(req, res){
 
         for (var i = 0; i < tone.document_tone.tone_categories[0].tones.length; i++) {
           emotionToneArray.push({
-            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[0].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[0].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[0].tones[i].score
           })
         };
 
         for (var i = 0; i < tone.document_tone.tone_categories[1].tones.length; i++) {
           writingToneArray.push({
-            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[1].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[1].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[1].tones[i].score
           })
         };
 
         for (var i = 0; i < tone.document_tone.tone_categories[2].tones.length; i++) {
           socialToneArray.push({
-            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name, 
-            tone_score: tone.document_tone.tone_categories[2].tones[i].score 
+            tone_type: tone.document_tone.tone_categories[2].tones[i].tone_name,
+            tone_score: tone.document_tone.tone_categories[2].tones[i].score
           })
         };
         ContentDB.findOneAndUpdate(
@@ -323,7 +318,7 @@ router.post('/send_email', function(req, res) {
     console.log('Message sent: ' + info.response);
   });
 
-  res.send('Email Successful!');
+  res.send({ success: true, message: 'Email Successful!'});
 });
 
 router.get('*', function(req, res) {
