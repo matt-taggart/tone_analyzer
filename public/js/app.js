@@ -291,6 +291,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
 
     $scope.resetModal = function() {
       $scope.isSuccessful = false;
+      $scope.userForm.$setPristine();
     }
 
     $scope.logout = function() {
