@@ -274,7 +274,7 @@ p {
  opacity: 1;
 }
 
-#mceu_12-body, #mceu_20-body, #mceu_19, #mceu_28-body, .mce-i-backcolor {
+#mceu_12-body, #mceu_20-body, #mceu_19, #mceu_28-body, .mce-flow-layout, .mce-i-backcolor, .mce-toolbar-grp {
   background-color: #01579b !important;
 }
 
@@ -356,12 +356,14 @@ p {
   font-size: 20px !important;
 }
 
-.mce-panel {
+#mceu_11 .mce-panel {
   border: 0px !important;
   -webkit-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
   box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.32);
 }
+
+
 
 .Openness {
   color: #7cb5ec;
