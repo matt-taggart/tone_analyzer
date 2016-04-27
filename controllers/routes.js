@@ -198,6 +198,7 @@ router.post('/tonetext', function(req, res) {
         };
         var content = new ContentDB ({
           content: req.body.content,
+          htmlContent: req.body.htmlContent,
           emotion_tone_data: emotionToneArray,
           social_tone_data: socialToneArray,
           writing_tone_data: writingToneArray,
@@ -241,12 +242,13 @@ router.get('/drafts', function(req, res){
 })
 
 //Update a post
-router.post('/updatetext/:id/:text', function(req, res){
+router.post('/updatetext/:id', function(req, res){
 
-  var text = req.params.text;
   var id = req.params.id;
+  console.log(req.body.text)
+  console.log(req.body.htmlText)
 
-  tone_analyzer.tone({ text: req.params.text },
+  tone_analyzer.tone({ text: req.body.text },
     function(err, tone) {
       if (err) {
         return err
@@ -278,11 +280,13 @@ router.post('/updatetext/:id/:text', function(req, res){
         ContentDB.findOneAndUpdate(
           {_id: req.params.id},
           {$set:
-            {content: req.params.text,
+            {content: req.body.text,
+             htmlContent: req.body.htmlText, 
             emotion_tone_data: emotionToneArray,
             social_tone_data: socialToneArray,
             writing_tone_data: writingToneArray}
           }).then(function(response){
+            console.log(response)
             res.json(response)
           })
       }
