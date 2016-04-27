@@ -106,14 +106,14 @@
 
 
     <!-- Modal -->
-    <div id="email-form" class="modal fade" role="dialog">
+    <div id="email-form" class="modal fade" role="dialog" data-backdrop="static">
       <div class="modal-dialog">
         <form ng-submit="sendEmail()" name="userForm" novalidate>
         <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" ng-click="resetModal()">&times;</button>
-              <h4 class="modal-title">Email</h4>
+              <h4 class="modal-title">Email </h4>
             </div>
             <div class="modal-body" ng-show="isSuccessful" ng-class="{ 'add-padding' : isSuccessful}">
               <div class="row">
@@ -124,7 +124,7 @@
               </div>
             </div>
             <div class="modal-footer" ng-show="isSuccessful">
-              <button class="btn btn-default btn-lg" data-dismiss="modal" ng-click="resetModal()">Close</button>
+              <button type="button" class="btn btn-default btn-lg" class="close" data-dismiss="modal" ng-click="resetModal()">Close</button>
             </div>
             <div class="modal-body" ng-show="!isSuccessful">
               <div class="row">
@@ -163,7 +163,7 @@
               </div>
             </div>
             <div class="modal-footer" ng-show="!isSuccessful">
-              <button class="btn btn-danger btn-lg" data-dismiss="modal">
+              <button class="btn btn-danger btn-lg" class="close" data-dismiss="modal" ng-click="resetModal()">
                 <i class="fa fa-trash-o" title="Delete" aria-hidden="true"></i>
                 <span class="sr-only">Delete</span>
               </button>

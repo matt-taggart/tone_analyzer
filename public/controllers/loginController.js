@@ -4,10 +4,12 @@ angular.module('toneAnalyzer')
       $http({
         method: 'POST',
         url: '/register',
-        data: $scope.registration
+        data: $scope.registration,
+        ignoreLoadingBar: true
       }).then(function(result) {
         if (result.data === 'success') {
           $scope.registerSuccess = result.data;
+          $scope.registrationError = "";
           $timeout(function () {
             $location.path('welcome');
           }, 2200);
@@ -30,7 +32,8 @@ angular.module('toneAnalyzer')
       $http({
         method: 'POST',
         url: '/login',
-        data: $scope.user
+        data: $scope.user,
+        ignoreLoadingBar: true
       }).then(function(result) {
         if (!result.data.authenticated) {
           $scope.loginError = result.data.message;
@@ -51,7 +54,8 @@ angular.module('toneAnalyzer')
     $scope.logout = function() {
       $http({
         method: 'POST',
-        url: '/logout'
+        url: '/logout',
+        ignoreLoadingBar: true
       }).then(function(result) {
         $rootScope.isAuthenticated = result.data;
         $location.path('/welcome');
