@@ -5,6 +5,7 @@ var contentSchema = new Schema({
   name: String,
   drafttitle: String,
   content: String,
+  htmlContent: String,
   emotion_tone_data: [{tone_type: String, tone_score: Number}],
   writing_tone_data: [{tone_type: String, tone_score: Number}],
   social_tone_data: [{tone_type: String, tone_score: Number}],
