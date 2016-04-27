@@ -47,7 +47,7 @@
                 <br/>
               </div>
               <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <textarea ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>
+                <textarea id="yo" ui-tinymce="tinymceOptions" class="form-control" rows="15" ng-model='toneText' placeholder='Enter Text Here' required></textarea>
               </div>
                 <div class="col-xs-6 text-right">
                   <a class="action btn analyzeBtn hover-button btn-large" ng-click='analyzeTone()'>Analyze</a>
@@ -70,7 +70,7 @@
                       <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
                       <p ng-hide='toggle' ng-bind-html='htmlRender'> </p>
-                      <textarea ui-tinymce="tinymceOptions" id='updateTextarea' ng-if='toggle' type='text' ng-model='value.htmlContent'></textarea>
+                      <textarea class="hide-shadow" ui-tinymce="tinymceOptions" id='updateTextarea' ng-if='toggle' type='text' ng-model='value.htmlContent'></textarea>
                       <br />
                       <button ng-show='toggle' ng-click='updateText(value._id, value.htmlContent);retrieveDraft();'>Update text</button>
                    </div>
