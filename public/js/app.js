@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angular-loading-bar'])
+angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -10,8 +10,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
     //Make an ajax call to check if user is logged in
     $http({
       method: 'GET',
-      url: '/loggedin',
-      ignoreLoadingBar: true
+      url: '/loggedin'
     }).then(function(user) {
       if (user) {
         deferred.resolve();
@@ -83,22 +82,6 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
   });
 })
 
-// .service('sharedProperties', function() {
-//   var username;
-
-//   return {
-//     setUsername: function(name) {
-//       username = $rootScope.name;
-//     }
-//   }
-
-//   return {
-//     getUsername: function() {
-//       return username;
-//     }
-//   }
-// })
-
 .controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
     $scope.sendEmail = function() {
@@ -122,8 +105,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
         htmlContent: $scope.toneText,
         content: $($scope.toneText).text(),
         userId: $scope.userData._id,
-        draftTitle: $scope.draftTitle,
-        ignoreLoadingBar: true
+        draftTitle: $scope.draftTitle
       }).then(function(response) {
         $scope.toneText = '';
         $scope.draftTitle = '';
@@ -132,9 +114,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       });
     };
     $scope.renderDraftAndData = function(id){
-      $http.get('/textdata/' + id, {
-        ignoreLoadingBar: true
-      }).then(function(response){
+      $http.get('/textdata/' + id).then(function(response){
         $scope.draftData = response.data
         console.log($scope.draftData)
         $scope.htmlRender = $scope.draftData[0].htmlContent //render html to the DOM
@@ -168,9 +148,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
     }
 
     $scope.retrieveDraft = function(){
-      $http.get('/drafts', {
-        ignoreLoadingBar: true
-      }).then(function(response){
+      $http.get('/drafts').then(function(response){
         $scope.drafts = response.data
         $scope.draftArray = [];
           angular.forEach($scope.drafts, function(value, key) {
@@ -229,9 +207,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       var text = $(htmlText).text()
       console.log(text)
       console.log(htmlText)
-      $http.post('/updatetext/' + id, {htmlText: htmlText, text: text}, {
-        ignoreLoadingBar: true
-      }).then(function(response){
+      $http.post('/updatetext/' + id, {htmlText: htmlText, text: text}).then(function(response){
         $scope.renderDraftAndData(response.data._id);
         $scope.toggle = false;
       })
@@ -241,9 +217,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       $scope.toggle = $scope.toggle === true ? false: true;
     };
     $scope.deleteDraft = function(id){
-      $http.delete('/deletedraft/' +id, {
-        ignoreLoadingBar: true
-      }).then(function(){
+      $http.delete('/deletedraft/' +id).then(function(){
         $scope.retrieveDraft();
       })
     }
@@ -253,9 +227,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
     }
 
     $scope.getUser = function(){
-      $http.get('/loggedin', {
-        ignoreLoadingBar: true
-      }).then(function(response){
+      $http.get('/loggedin').then(function(response){
         if (response.data.firstname) {
           $scope.userData = response.data;
           $scope.firstname = capitalizeFirstLetter(response.data.firstname);
@@ -281,8 +253,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
       $http({
         method: 'POST',
         url: '/send_email',
-        data: $scope.emailData,
-        ignoreLoadingBar: true
+        data: $scope.emailData
       }).then(function(result) {
         $scope.isSuccessful = result.data.success;
         $scope.emailSuccessMsg = result.data.message;
@@ -297,8 +268,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angula
     $scope.logout = function() {
       $http({
         method: 'POST',
-        url: '/logout',
-        ignoreLoadingBar: true
+        url: '/logout'
       }).then(function(result) {
         $window.location.href = '/welcome';
       });
