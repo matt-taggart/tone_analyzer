@@ -13,6 +13,7 @@
     <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-sanitize.js'></script>
     <script type="text/javascript" src="/bower_components/tinymce-dist/tinymce.js"></script>
     <script type="text/javascript" src="/bower_components/angular-ui-tinymce/src/tinymce.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
@@ -68,10 +69,10 @@
                     <div class="panel-body text-center">
                       <a class='pull-right' ng-click='toggleEdit();'>edit</a>
                       <h4>Text for tone analysis</h4>
-                      <p ng-hide='toggle'> {{value.content}} </p>
-                      <textarea id='updateTextarea' ng-show='toggle' type='text' ng-bind='value.content'></textarea>
+                      <p ng-hide='toggle' ng-bind-html='htmlRender'> </p>
+                      <textarea ui-tinymce="tinymceOptions" id='updateTextarea' ng-if='toggle' type='text' ng-model='value.htmlContent'></textarea>
                       <br />
-                      <button ng-show='toggle' ng-click='updateText(value._id, value.content);retrieveDraft();'>Update text</button>
+                      <button ng-show='toggle' ng-click='updateText(value._id, value.htmlContent);retrieveDraft();'>Update text</button>
                    </div>
                   </div>
                 </div>
@@ -157,8 +158,8 @@
               <div class="row">
                 <div class="col-xs-12">
                   <div class="form-group">
-                    <input type="hidden" class="form-control disable" rows="9" ng-model="emailData.message" ng-init="emailData.message='{{ toneText }}'" required>
-                  </div>
+                    <textarea style="display:none;" ui-tinymce="tinymceOptions" type="hidden" class="form-control disable" rows="9" ng-model='emailData.message' ng-init="emailData.message = '{{ htmlRender }}' "required></textarea>                     
+                  </div>            
                 </div>
               </div>
             </div>

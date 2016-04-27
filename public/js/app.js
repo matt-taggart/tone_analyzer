@@ -1,4 +1,4 @@
-angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'])
+angular.module('toneAnalyzer', ['ui.router', 'ngSanitize', 'ui.tinymce', 'angular-loading-bar'])
 .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
   $urlRouterProvider.otherwise('/welcome');
 
@@ -101,12 +101,26 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
 
 .controller('inputForm', function($scope, $http, $window) {
   //Post content to be processed through API
+    $scope.sendEmail = function() {
+      $http({
+        method: 'POST',
+        url: '/send_email',
+        data: $scope.emailData
+      }).then(function(result) {
+        console.log(result.data);
+      })
+    }
+    $scope.analyzeOrUpdate = function(title){
+      console.log(title)
+      // $http.get('/decision/' + title)
+    }
     $scope.analyzeTone = function(){
       // var raw = tinyMCE.activeEditor.getContent({format : 'raw'});
       // var raw = $($scope.draftData[0].content).text();
       // console.log(raw);
       $http.post('/tonetext', {
-        content: $scope.toneText,
+        htmlContent: $scope.toneText,
+        content: $($scope.toneText).text(),
         userId: $scope.userData._id,
         draftTitle: $scope.draftTitle,
         ignoreLoadingBar: true
@@ -122,7 +136,8 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         ignoreLoadingBar: true
       }).then(function(response){
         $scope.draftData = response.data
-        $scope.draftData[0].content = $($scope.draftData[0].content).text()
+        console.log($scope.draftData)
+        $scope.htmlRender = $scope.draftData[0].htmlContent //render html to the DOM
         $scope.idArray = [];
         $scope.toggle = false;
         angular.forEach($scope.draftData, function(value, key){
@@ -151,6 +166,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         })
       })
     }
+
     $scope.retrieveDraft = function(){
       $http.get('/drafts', {
         ignoreLoadingBar: true
@@ -209,8 +225,11 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
         }
       });
     }
-    $scope.updateText = function(id, text){
-      $http.post('/updatetext/' + id + '/' + text, {
+    $scope.updateText = function(id, htmlText){
+      var text = $(htmlText).text()
+      console.log(text)
+      console.log(htmlText)
+      $http.post('/updatetext/' + id, {htmlText: htmlText, text: text}, {
         ignoreLoadingBar: true
       }).then(function(response){
         $scope.renderDraftAndData(response.data._id);
@@ -255,7 +274,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
     }
 
     $scope.getText = function() {
-      $scope.emailData.message = $scope.toneText;
+      $scope.emailData.message = $scope.htmlRender;
     }
 
     $scope.sendEmail = function() {
