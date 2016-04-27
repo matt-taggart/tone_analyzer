@@ -210,7 +210,9 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
       });
     }
     $scope.updateText = function(id, text){
-      $http.post('/updatetext/' + id + '/' + text).then(function(response){
+      $http.post('/updatetext/' + id + '/' + text, {
+        ignoreLoadingBar: true
+      }).then(function(response){
         $scope.renderDraftAndData(response.data._id);
         $scope.toggle = false;
       })
@@ -270,6 +272,7 @@ angular.module('toneAnalyzer', ['ui.router', 'ui.tinymce', 'angular-loading-bar'
 
     $scope.resetModal = function() {
       $scope.isSuccessful = false;
+      $scope.userForm.$setPristine();
     }
 
     $scope.logout = function() {
