@@ -8,7 +8,7 @@ var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var nodemailer = require('nodemailer');
 var xoauth2 = require('xoauth2');
-var watson = require('watson-developer-cloud');
+var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 var googleCredentials = require('../config/google-credentials.js');
 var ContentDB = require('../models/contentAnalysisModel.js');
 var transporterObject;
@@ -156,12 +156,12 @@ router.post('/logout', function(req, res) {
   res.json(req.isAuthenticated());
 });
 
-var tone_analyzer = watson.tone_analyzer({
+var tone_analyzer = new ToneAnalyzerV3({
   url: "https://gateway.watsonplatform.net/tone-analyzer/api",
   password: "L1UkyZynb5Dr",
-  username: "v3",
+  username: "66e59ce0-1c42-4f0d-836d-0352d6d6ffb2",
   version: "2016-02-01",
-  version_date: "66e59ce0-1c42-4f0d-836d-0352d6d6ffb2"
+  version_date: "2016-05-19"
 });
 
 router.post('/tonetext', function(req, res) {
