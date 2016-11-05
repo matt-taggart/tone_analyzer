@@ -8,7 +8,7 @@ var MongoStore = require('connect-mongo')(session);
 var flash = require('connect-flash');
 var nodemailer = require('nodemailer');
 var xoauth2 = require('xoauth2');
-var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
+var ToneAnalyzerV3 = require('watson-developer-cloud');
 var googleCredentials = require('../config/google-credentials.js');
 var ContentDB = require('../models/contentAnalysisModel.js');
 var transporterObject;
