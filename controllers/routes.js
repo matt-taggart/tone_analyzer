@@ -157,11 +157,11 @@ router.post('/logout', function(req, res) {
 });
 
 var tone_analyzer = watson.tone_analyzer({
-  url: PROCESS.ENV.WATSON_URL,
-  password: PROCESS.ENV.PASSWORD,
-  username: PROCESS.ENV.USERNAME,
-  version: PROCESS.ENV.VERSION,
-  version_date: PROCESS.ENV.VERSION_DATE
+  url: process.env.WATSON_URL,
+  password: process.env.PASSWORD,
+  username: process.env.USERNAME,
+  version: process.env.VERSION,
+  version_date: process.env.VERSION_DATE
 });
 
 router.post('/tonetext', function(req, res) {
