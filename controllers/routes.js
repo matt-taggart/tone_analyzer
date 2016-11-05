@@ -158,11 +158,11 @@ router.post('/logout', function(req, res) {
 });
 
 var tone_analyzer = watson.tone_analyzer({
-  url: process.env.WATSON_URL,
-  password: process.env.PASSWORD,
-  username: process.env.USERNAME,
-  version: process.env.VERSION,
-  version_date: process.env.VERSION_DATE
+  url: "https://gateway.watsonplatform.net/tone-analyzer/api",
+  password: "L1UkyZynb5Dr",
+  username: "v3",
+  version: "2016-02-01",
+  version_date: "66e59ce0-1c42-4f0d-836d-0352d6d6ffb2"
 });
 
 router.post('/tonetext', function(req, res) {
