@@ -157,9 +157,9 @@ router.post('/logout', function(req, res) {
 });
 
 var tone_analyzer = watson.tone_analyzer({
-  url: "https://gateway.watsonplatform.net/tone-analyzer-beta/api",
-  password: "B0jj6n5i9NXZ",
-  username: "a52b4d31-5e94-4acb-bbbe-7de263677456",
+  url: "https://gateway.watsonplatform.net/tone-analyzer/api",
+  password: "L1UkyZynb5Dr",
+  username: "66e59ce0-1c42-4f0d-836d-0352d6d6ffb2",
   version: 'v3-beta',
   version_date: '2016-02-11'
 })
@@ -281,7 +281,7 @@ router.post('/updatetext/:id', function(req, res){
           {_id: req.params.id},
           {$set:
             {content: req.body.text,
-             htmlContent: req.body.htmlText, 
+             htmlContent: req.body.htmlText,
             emotion_tone_data: emotionToneArray,
             social_tone_data: socialToneArray,
             writing_tone_data: writingToneArray}
